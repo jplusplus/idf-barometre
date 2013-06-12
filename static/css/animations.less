@@ -1,0 +1,22 @@
+.slide-enter,
+.slide-leave {
+  .transition(0.6s all);
+}
+
+.slide-enter {
+  .translate(-800px, 0);
+  opacity:0;
+}
+.slide-enter.slide-enter-active {
+   .translate(0px, 0);
+    opacity:1;
+}
+
+.slide-leave {
+    .translate(0px, 0); 
+    opacity:1;
+}
+.slide-leave.slide-leave-active {
+    .translate(800px, 0);
+    opacity:0;
+}

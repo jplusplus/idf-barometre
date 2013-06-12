@@ -1,0 +1,56 @@
+[
+    {
+        "label": "Lorem ipsum dolor si amet",
+        "indicator": "13",
+        "type": "percentage",
+        "layout": "normal"
+    },
+    {
+        "label": "Lorem ipsum dolor si amet",
+        "indicator": "13",
+        "type": "percentage",
+        "layout": "normal"
+    },
+    {
+        "label": "Lorem ipsum dolor si amet",
+        "indicator": "13",
+        "type": "percentage",
+        "layout": "x2"
+    },
+    {
+        "label": "Lorem ipsum dolor si amet",
+        "indicator": "13",
+        "type": "percentage",
+        "layout": "normal"
+    },
+    {
+        "label": "Lorem ipsum dolor si amet",
+        "indicator": "13",
+        "type": "percentage",
+        "layout": "normal"
+    },
+    {
+        "label": "Lorem ipsum dolor si amet",
+        "indicator": "13",
+        "type": "percentage",
+        "layout": "normal"
+    },
+    {
+        "label": "Lorem ipsum dolor si amet",
+        "indicator": "13",
+        "type": "percentage",
+        "layout": "y2"
+    },
+    {
+        "label": "Lorem ipsum dolor si amet",
+        "indicator": "13",
+        "type": "percentage",
+        "layout": "normal"
+    },
+    {
+        "label": "Lorem ipsum dolor si amet",
+        "indicator": "13",
+        "type": "percentage",
+        "layout": "normal"
+    }
+]

@@ -1,0 +1,128 @@
+<div class="container centered graph question-[question]]">
+    <div class="select-question">
+        <div class="row-fluid">
+            <label class="span4 select-question-economique vr">
+                Situation économique
+                <input type="radio" ng-model="question" value="economique" name="question" />
+            </label>
+            <label class="span4 select-question-transport vr">
+                Transports en commun
+                <input type="radio" ng-model="question" value="transport" name="question" />
+            </label>
+            <label class="span4 select-question-environement">
+                Qualité de l'environement
+                <input type="radio" ng-model="question" value="environement" name="question" />
+            </label>
+        </div>
+    </div>
+
+    <div class="select-sample">
+        <div class="hr select select-all">
+            <label>
+                Tous
+                <input type="radio" name="sample" ng-model="sample" value="all" />
+            </label>
+        </div>
+
+        <div class="hr select select-age">
+            <label>
+                18-24<br /><small>ans</small>
+                <input type="radio" name="sample" ng-model="sample" value="18-24" />
+            </label>
+            <label>
+                25-34<br /><small>ans</small>
+                <input type="radio" name="sample" ng-model="sample" value="25-34" />
+            </label>
+            <label>
+                35-49<br /><small>ans</small>
+                <input type="radio" name="sample" ng-model="sample" value="35-49" />
+            </label>
+            <label>
+                50-64<br /><small>ans</small>
+                <input type="radio" name="sample" ng-model="sample" value="50-64" />
+            </label>
+            <label>
+                65+<br /><small>ans</small>
+                <input type="radio" name="sample" ng-model="sample" value="65+" />
+            </label>
+        </div>
+
+        <div class="hr select select-sex">
+            <label>
+                Homme
+                <input type="radio" name="sample" ng-model="sample" value="Homme" />
+            </label>
+            <label>
+                Femme
+                <input type="radio" name="sample" ng-model="sample" value="Femme" />
+            </label>
+        </div>
+
+        <div class="hr select select-job">            
+            <label>
+                Cadre
+                <input type="radio" value="cadre" />
+            </label name="sample" ng-model="sample">
+            <label>
+                Employé
+                <input type="radio" name="sample" ng-model="sample" value="employe" />
+            </label>
+            <label>
+                Ouvrier
+                <input type="radio" name="sample" ng-model="sample" value="ouvrier" />
+            </label>
+            <label>
+                Technicien
+                <input type="radio" name="sample" ng-model="sample" value="technicien" />
+            </label>
+            <label>
+                Retraité
+                <input type="radio" name="sample" ng-model="sample" value="retraite" />
+            </label>
+        </div>
+
+        <div class="row-fluid select select-dept">
+            <div class="span6">
+                <label>
+                    <i>75</i> Paris
+                    <input type="radio" name="sample" ng-model="sample" value="75" />
+                </label>
+                <label>
+                    <i>77</i> Seine et Marne
+                    <input type="radio" name="sample" ng-model="sample" value="77" />
+                </label>
+                <label>
+                    <i>78</i> Yvelines
+                    <input type="radio" name="sample" ng-model="sample" value="78" />
+                </label>
+                <label>
+                    <i>91</i> Essonne
+                    <input type="radio" name="sample" ng-model="sample" value="91" />
+                </label>
+            </div>
+            <div class="span6">
+                <label>
+                    <i>92</i> Hauts-de-seine
+                    <input type="radio" name="sample" ng-model="sample" value="92" />
+                </label>
+                <label>
+                    <i>93</i> Seine-Saint-Denis
+                    <input type="radio" name="sample" ng-model="sample" value="93" />
+                </label>
+                <label>
+                    <i>94</i> Val-de-Marne
+                    <input type="radio" name="sample" ng-model="sample" value="94" />
+                </label>
+                <label>
+                    <i>95</i> Val d'Oise
+                    <input type="radio" name="sample" ng-model="sample" value="95" />
+                </label>
+            </div>
+        </div>
+
+    </div>
+    <div class="render">
+        [[question]]
+        [[sample]]
+    </div>
+</div>

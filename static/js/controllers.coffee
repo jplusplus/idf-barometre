@@ -7,6 +7,8 @@ QuestionListCtrl.$inject = ['$scope', '$http', '$rootElement'];
 
 
 AnswerGraphCtrl = ($scope, $http, $rootElement)->
+    $scope.question = "economique"
+    $scope.sample   = "all"
     $http.get('/static/answers.json').success (data)-> 
         $scope.answers = data
 

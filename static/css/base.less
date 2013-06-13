@@ -37,18 +37,6 @@ body {
 /* ---------------------------------------------------------- */
 /* INTRO */
 
-.titre {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    color:#545454;
-}
-
-.titre {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    color:#9B9B9B;
-}
-
 .questions {
     .box-shadow(0 0 20px 0 fade(black, 20) );
     height:582px;
@@ -183,9 +171,32 @@ body {
             padding-top:70px;
             padding-bottom:70px;
             height:30px;
+            position:relative;
             
-            &.vr {
-                position:relative;            
+            .icon {
+                display:block;
+                width:150px;
+                height:75px;
+                background:0 0 no-repeat;
+                position:absolute;
+                top:-10px;
+                left:50%;
+                margin-left:150px/-2px;
+            }
+            
+            &.radio-environnement .icon { 
+                background-image:url("/static/img/common/pictos/picto_environnement.png"); 
+            }
+
+            &.radio-economique  .icon { 
+                background-image:url("/static/img/common/pictos/picto_situation_economique.png"); 
+            }
+
+            &.radio-transport  .icon { 
+                background-image:url("/static/img/common/pictos/picto_transports.png"); 
+            }
+
+            &.vr { 
                 background:url("/static/img/graph/pointilles_horizontal.png") repeat-y right 0;       
             }
         }
@@ -203,43 +214,140 @@ body {
 
             .clearfix();
             padding:0;
-            padding-bottom:10px;
+            padding-bottom:15px;
             margin:0;
             margin-bottom:10px;
             text-align:center;
             position:relative;
             white-space:nowrap;
-
-            label {
-                padding-top:45px;
-                padding-bottom:0px;
-                line-height:10px;
-                height:20px;
-                width:45px;
-                float:none !important;
-                float:left;
-                display:inline-block !important;
-                display:inline;
-                background:url("/static/img/graph/point_over.png") no-repeat center 0;
-            }
-
-            &.select-job label {
-                font-size:11px;
-            }
             
             &.hr {
                 background:url("/static/img/graph/pointilles_vertical.png") repeat-x bottom;         
             }
         }
+
+        .select label {
+            padding-top:45px;
+            padding-bottom:0px;
+            line-height:10px;
+            height:10px;
+            width:41px;
+            margin:0;
+            margin-right:6px;    
+            
+            /* inline-block hack for ie */
+            float:none !important;
+            float:left;
+            display:inline-block !important;
+            display:inline;
+            
+            background:no-repeat 0 0;
+        }
+            
+        label.radio-all {
+            padding-top:55px;
+            width:76px;
+            background-image:url("/static/img/common/pictos/picto_all.png");
+        }
+
+        .select-age label {                  
+
+            &.radio-18_24 {
+                background-image:url("/static/img/common/pictos/picto_age_18_24.png");                
+            }
+            &.radio-25_34 {
+                background-image:url("/static/img/common/pictos/picto_age_25_34.png");
+            }
+            &.radio-35_49 {
+                background-image:url("/static/img/common/pictos/picto_age_35_49.png");
+            }
+            &.radio-50_64 {
+                background-image:url("/static/img/common/pictos/picto_age_50_64.png");
+            }
+            &.radio-65_plus {
+                background-image:url("/static/img/common/pictos/picto_age_65_plus.png");
+            }                                                
+        }
+
+
+        .select-sex label {    
+            margin:0 8px;        
+            &.radio-femme {
+                background-image:url("/static/img/common/pictos/picto_femme.png");                
+            }
+            &.radio-homme {
+                background-image:url("/static/img/common/pictos/picto_homme.png");                
+            }
+        }
+
+
+        .select-job label {  
+            font-size:9px;
+            &.radio-cadre {
+                background-image:url("/static/img/common/pictos/picto_cadre.png");
+            }
+            &.radio-employe {
+                background-image:url("/static/img/common/pictos/picto_employe.png");
+            }
+            &.radio-ouvrier {
+                background-image:url("/static/img/common/pictos/picto_ouvrier.png");
+            }
+            &.radio-retraite {
+                background-image:url("/static/img/common/pictos/picto_retraite.png");
+            }
+            &.radio-technicien {
+                background-image:url("/static/img/common/pictos/picto_technicien.png");
+            }
+        }    
+        
+        .select-dept label {
+            
+            display:block;
+            clear:left;
+            text-align:left;
+            font-size:12px;
+            line-height:27px;
+            height:27px;
+            white-space:nowrap;
+            
+            i {
+                font-style:normal;
+                display:block;
+                float:left;
+                height:27px;
+                width:27px;
+                margin-right:5px;
+                background:white;
+                line-height:27px;
+                font-size: 16px;
+                text-align:center;
+            }
+        }
     }
 
     .render {
-        width:645px;
-        height:505px;
-        background:fade(green, 10);   
+        width:646px;
+        height:506px;
+        background:url("/static/img/graph/fond.png") no-repeat;
         position:absolute;
-        bottom:0;
-        right:0;     
+        bottom:-20px;
+        right:-15px;     
+        
+        .border-top {
+            width:668px;
+            height:30px;
+            position:absolute;
+            bottom:100%;
+            left:-24px; 
+        }
+
+        .border-left {
+            width:34px;
+            height:504px;
+            position:absolute;
+            top:0;
+            right:100%; 
+        }
     }
 
     label {
@@ -253,83 +361,154 @@ body {
             display:none;
         }        
     }
-}
 
-.labels_1 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight:bold;
-    font-size: 13px;
-    color:#545454;
-}
 
-.labels_2 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight:bold;
-    font-size: 11px;
-    color:#545454;
-}
+    &.question-environnement {
+        
+        @activeColor:#BAD809;
+        .active { color:@activeColor; }
+        
+        .radio-environnement .icon {
+            background-position:-150px*2px 0;
+        }
 
-.labels_3 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight:bold;
-    font-size: 10px;
-    color:#545454;
-}
+        &.sample-18_24      .radio-18_24      { background-position:-100px 0; }
+        &.sample-25_34      .radio-25_34      { background-position:-100px 0; }
+        &.sample-35_49      .radio-35_49      { background-position:-100px 0; }
+        &.sample-50_64      .radio-50_64      { background-position:-100px 0; }
+        &.sample-65_plus    .radio-65_plus    { background-position:-100px 0; }
+        &.sample-femme      .radio-femme      { background-position:-100px 0; }
+        &.sample-homme      .radio-homme      { background-position:-100px 0; }
+        &.sample-cadre      .radio-cadre      { background-position:-100px 0; }
+        &.sample-employe    .radio-employe    { background-position:-100px 0; }
+        &.sample-ouvrier    .radio-ouvrier    { background-position:-100px 0; }
+        &.sample-retraite   .radio-retraite   { background-position:-100px 0; }
+        &.sample-technicien .radio-technicien { background-position:-100px 0; }
+        &.sample-75 .radio-75 i { color:@activeColor; }
+        &.sample-77 .radio-77 i { color:@activeColor; }
+        &.sample-78 .radio-78 i { color:@activeColor; }
+        &.sample-91 .radio-91 i { color:@activeColor; }
+        &.sample-92 .radio-92 i { color:@activeColor; }
+        &.sample-93 .radio-93 i { color:@activeColor; }
+        &.sample-94 .radio-94 i { color:@activeColor; }
+        &.sample-95 .radio-95 i { color:@activeColor; }
 
-.titre_graph {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight:bold;
-    font-size: 19px;
-    color:#FFF;
-}
+        .border-top { 
+            background-image:url("/static/img/graph/fond_haut_p3.png");
+        }
+    }
 
-.titre_graph_rub1 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight:bold;
-    font-size: 19px;
-    color:#BAD809;
-}
+    &.question-transport {
 
-.titre_graph_rub2 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight:bold;
-    font-size: 19px;
-    color:#07C5D8;
-}
+        @activeColor:#06C5D8;
+        .active { color:@activeColor; }
 
-.titre_graph_rub3 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight:bold;
-    font-size: 19px;
-    color:#ED9906;
-}
+        .radio-transport .icon  {
+            background-position:-150px*2px 0;
+        }        
 
-.tips {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight:bold;
-    font-size: 13px;
-    color:#CCCCCC;
-}
+        &.sample-18_24      .radio-18_24      { background-position:-150px 0; }
+        &.sample-25_34      .radio-25_34      { background-position:-150px 0; }
+        &.sample-35_49      .radio-35_49      { background-position:-150px 0; }
+        &.sample-50_64      .radio-50_64      { background-position:-150px 0; }
+        &.sample-65_plus    .radio-65_plus    { background-position:-150px 0; }
+        &.sample-femme      .radio-femme      { background-position:-150px 0; }
+        &.sample-homme      .radio-homme      { background-position:-150px 0; }
+        &.sample-cadre      .radio-cadre      { background-position:-150px 0; }
+        &.sample-employe    .radio-employe    { background-position:-150px 0; }
+        &.sample-ouvrier    .radio-ouvrier    { background-position:-150px 0; }
+        &.sample-retraite   .radio-retraite   { background-position:-150px 0; }
+        &.sample-technicien .radio-technicien { background-position:-150px 0; }
+        &.sample-75 .radio-75 i { color:@activeColor; }
+        &.sample-77 .radio-77 i { color:@activeColor; }
+        &.sample-78 .radio-78 i { color:@activeColor; }
+        &.sample-91 .radio-91 i { color:@activeColor; }
+        &.sample-92 .radio-92 i { color:@activeColor; }
+        &.sample-93 .radio-93 i { color:@activeColor; }
+        &.sample-94 .radio-94 i { color:@activeColor; }
+        &.sample-95 .radio-95 i { color:@activeColor; }
 
-.graph_legende {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight:normal;
-    font-size: 11px;
-    color:#5B5B5B;
-}
+        .border-top { 
+            background-image:url("/static/img/graph/fond_haut_p2.png");
+        }
+    }
 
-.titre_graph_overPt {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight:bold;
-    font-size: 19px;
-    color:#545454;
-}
+    &.question-economique {
 
-.titre_graph_overPt_per {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: normal;
-    font-size: 10px;
-    color:#545454;
+        @activeColor:#ED9906;
+        .active { color:@activeColor; }
+
+        .radio-economique .icon  {
+            background-position:-150px*2px 0;
+        }
+
+        &.sample-18_24      .radio-18_24      { background-position:-200px 0; }
+        &.sample-25_34      .radio-25_34      { background-position:-200px 0; }
+        &.sample-35_49      .radio-35_49      { background-position:-200px 0; }
+        &.sample-50_64      .radio-50_64      { background-position:-200px 0; }
+        &.sample-65_plus    .radio-65_plus    { background-position:-200px 0; }
+        &.sample-femme      .radio-femme      { background-position:-200px 0; }
+        &.sample-homme      .radio-homme      { background-position:-200px 0; }
+        &.sample-cadre      .radio-cadre      { background-position:-200px 0; }
+        &.sample-employe    .radio-employe    { background-position:-200px 0; }
+        &.sample-ouvrier    .radio-ouvrier    { background-position:-200px 0; }
+        &.sample-retraite   .radio-retraite   { background-position:-200px 0; }
+        &.sample-technicien .radio-technicien { background-position:-200px 0; }
+        &.sample-75 .radio-75 i { color:@activeColor; }
+        &.sample-77 .radio-77 i { color:@activeColor; }
+        &.sample-78 .radio-78 i { color:@activeColor; }
+        &.sample-91 .radio-91 i { color:@activeColor; }
+        &.sample-92 .radio-92 i { color:@activeColor; }
+        &.sample-93 .radio-93 i { color:@activeColor; }
+        &.sample-94 .radio-94 i { color:@activeColor; }
+        &.sample-95 .radio-95 i { color:@activeColor; }
+
+        .border-top { 
+            background-image:url("/static/img/graph/fond_haut_p1.png");
+        }
+    }
+
+    &.sample-all {    
+        &.question-environnement .radio-all {
+            background-position:-76px*2px 0;
+        }
+
+        &.question-transport .radio-all {
+            background-position:-76px*3px 0;
+        }
+
+        &.question-economique .radio-all {
+            background-position:-76px*4px 0;
+        }
+        .border-left {
+            background-image:url("/static/img/graph/fond_gauche_p1.png");            
+        }
+    }
+
+    &.sample-18_24, &.sample-25_34, &.sample-35_49, &.sample-50_64, &.sample-65_plus {        
+        .border-left {
+            background-image:url("/static/img/graph/fond_gauche_p2.png");            
+        }
+    }
+
+    &.sample-femme, &.sample-homme{        
+        .border-left {
+            background-image:url("/static/img/graph/fond_gauche_p3.png");            
+        }
+    }
+
+    &.sample-cadre, &.sample-employe, &.sample-ouvrier, &.sample-retraite, &.sample-technicien {        
+        .border-left {
+            background-image:url("/static/img/graph/fond_gauche_p4.png");            
+        }
+    }
+
+    &.sample-75, &.sample-77, &.sample-78, &.sample-91, &.sample-92, &.sample-93, &.sample-94, &.sample-95 {        
+        .border-left {
+            background-image:url("/static/img/graph/fond_gauche_p5.png");            
+        }
+    }
+
 }
 
 

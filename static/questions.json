@@ -3,54 +3,72 @@
         "label": "Lorem ipsum dolor si amet",
         "indicator": "13",
         "type": "percentage",
-        "layout": "normal"
+        "layout": "normal",
+        "question": "economique",
+        "sample": "65_plus"
     },
     {
         "label": "Lorem ipsum dolor si amet",
         "indicator": "13",
         "type": "percentage",
-        "layout": "normal"
+        "layout": "normal",
+        "question": "economique",
+        "sample": "65_plus"
     },
     {
         "label": "Lorem ipsum dolor si amet",
         "indicator": "13",
         "type": "percentage",
-        "layout": "x2"
+        "layout": "x2",
+        "question": "economique",
+        "sample": "65_plus"
     },
     {
         "label": "Lorem ipsum dolor si amet",
         "indicator": "13",
         "type": "percentage",
-        "layout": "normal"
+        "layout": "normal",
+        "question": "economique",
+        "sample": "65_plus"
     },
     {
         "label": "Lorem ipsum dolor si amet",
         "indicator": "13",
         "type": "percentage",
-        "layout": "normal"
+        "layout": "normal",
+        "question": "economique",
+        "sample": "65_plus"
     },
     {
         "label": "Lorem ipsum dolor si amet",
         "indicator": "13",
         "type": "percentage",
-        "layout": "normal"
+        "layout": "normal",
+        "question": "economique",
+        "sample": "65_plus"
     },
     {
         "label": "Lorem ipsum dolor si amet",
         "indicator": "13",
         "type": "percentage",
-        "layout": "y2"
+        "layout": "y2",
+        "question": "economique",
+        "sample": "65_plus"
     },
     {
         "label": "Lorem ipsum dolor si amet",
         "indicator": "13",
         "type": "percentage",
-        "layout": "normal"
+        "layout": "normal",
+        "question": "economique",
+        "sample": "65_plus"
     },
     {
         "label": "Lorem ipsum dolor si amet",
         "indicator": "13",
         "type": "percentage",
-        "layout": "normal"
+        "layout": "normal",
+        "question": "economique",
+        "sample": "65_plus"
     }
 ]

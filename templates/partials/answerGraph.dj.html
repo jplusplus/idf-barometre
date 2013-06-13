@@ -126,7 +126,14 @@
     <div class="render">
         <div class="border-top"></div>        
         <div class="border-left"></div>        
-        [[question]]
-        [[sample]]
+        <h2>
+            Ce que pense 
+            <span ng:bind-html="sample | alias"></span> 
+            <span ng:bind-html="question | alias"></span> 
+        </h2>
+        <div class="wrapper">
+            <div class="chart">
+            </div>
+        </div>
     </div>
 </div>

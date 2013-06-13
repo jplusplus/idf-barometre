@@ -1,7 +1,7 @@
 <div class="container centered">
     <ul class="questions unstyled">
         <li ng-repeat="question in questions" class="question case-[[$index+1]]">
-            <a class="wrapper" href="#/answers/">
+            <a class="wrapper" href="#/[[question.question]]-[[question.sample]]">
                 [[question.label]]
             </a>
         </li>

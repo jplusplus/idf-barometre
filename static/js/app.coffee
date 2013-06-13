@@ -1,5 +1,5 @@
 angular
-    .module('barometre', [])
+    .module('barometre', ['barometreFilters', 'ngSanitize'])
     .config(
         [
             '$interpolateProvider', 
@@ -12,7 +12,7 @@ angular
                 # Bind routes to the controllers
                 $routeProvider
                     .when('/', {controller: QuestionListCtrl, templateUrl: "/partial/questionList.html"})
-                    .when('/answers/', {controller: AnswerGraphCtrl,  templateUrl: "/partial/answerGraph.html"})
+                    .when('/:question-:sample', {controller: AnswerGraphCtrl,  templateUrl: "/partial/answerGraph.html"})
                     .otherwise redirectTo: '/'
 
 

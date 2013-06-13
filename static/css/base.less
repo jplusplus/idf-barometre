@@ -1,9 +1,12 @@
 @import-once 'vendor/bootstrap/bootstrap.less';
 @import-once 'tools.less';
 @import-once 'animations.less';
+@import-once 'jscrollpane.less';
 
-@zIndexPage : 100;
-@zIndexLogo : @zIndexPage+100;
+@zIndexPage    : 100;
+@zIndexOptions : @zIndexPage+100;
+@zIndexGraph   : @zIndexOptions+100;
+@zIndexLogo    : @zIndexGraph+100;
 
 
 body {
@@ -163,6 +166,7 @@ body {
         display:block;
         height:100px;
         position:absolute;
+        z-index:@zIndexOptions;
         top:15px;
         left:275px;
         right:0;
@@ -206,6 +210,7 @@ body {
         display:block;
         width:255px;
         position:absolute;
+        z-index:@zIndexOptions;
         top:155px;
         bottom:0;
         left:0;
@@ -233,7 +238,9 @@ body {
             height:10px;
             width:41px;
             margin:0;
-            margin-right:6px;    
+            margin-right:4px;  
+            position:relative;
+            left:-5px;  
             
             /* inline-block hack for ie */
             float:none !important;
@@ -305,7 +312,7 @@ body {
             display:block;
             clear:left;
             text-align:left;
-            font-size:12px;
+            font-size:11px;
             line-height:27px;
             height:27px;
             white-space:nowrap;
@@ -321,22 +328,33 @@ body {
                 line-height:27px;
                 font-size: 16px;
                 text-align:center;
+                .border-radius(15px);
             }
         }
     }
 
     .render {
-        width:646px;
-        height:506px;
-        background:url("/static/img/graph/fond.png") no-repeat;
-        position:absolute;
-        bottom:-20px;
-        right:-15px;     
         
+        width:619px;        
+        height:478px;
+        
+        background:url("/static/img/graph/fond.png") no-repeat;
+        position:absolute;        
+        z-index:@zIndexGraph;
+        bottom:-20px;
+        right:-15px;   
+        
+        padding-right:30px;  
+        padding-bottom:30px;  
+        
+        .border-top, .border-left {
+            position:absolute;
+            z-index:-1;
+        }
+
         .border-top {
             width:668px;
             height:30px;
-            position:absolute;
             bottom:100%;
             left:-24px; 
         }
@@ -344,9 +362,21 @@ body {
         .border-left {
             width:34px;
             height:504px;
-            position:absolute;
             top:0;
             right:100%; 
+        }
+
+        h2 {
+            background:#323c45;
+            font-size: 19px;
+            color:white;
+            margin:-5px;
+            padding:15px 0;
+            text-align:center;
+        }
+
+        .chart {
+            height:420px;
         }
     }
 
@@ -366,7 +396,7 @@ body {
     &.question-environnement {
         
         @activeColor:#BAD809;
-        .active { color:@activeColor; }
+        .active, h2 strong { color:@activeColor; }
         
         .radio-environnement .icon {
             background-position:-150px*2px 0;
@@ -401,7 +431,7 @@ body {
     &.question-transport {
 
         @activeColor:#06C5D8;
-        .active { color:@activeColor; }
+        .active, h2 strong { color:@activeColor; }
 
         .radio-transport .icon  {
             background-position:-150px*2px 0;
@@ -436,7 +466,7 @@ body {
     &.question-economique {
 
         @activeColor:#ED9906;
-        .active { color:@activeColor; }
+        .active, h2 strong { color:@activeColor; }
 
         .radio-economique .icon  {
             background-position:-150px*2px 0;

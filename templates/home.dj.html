@@ -8,16 +8,20 @@
 {% endblock %}
 
 {% block extrajs %}
+    <script type="text/javascript"   src="/static/js/vendor/modernizr.custom.js"></script>
     <script type="text/javascript"   src="/static/js/vendor/angular/angular.js"></script>
+    <script type="text/javascript"   src="/static/js/vendor/angular/angular-sanitize.js"></script>
     <script type="text/javascript"   src="/static/js/vendor/angular/angular-resource.js"></script>
     <script type="text/javascript"   src="/static/js/vendor/jquery.isotope.js"></script>
     <script type="text/javascript"   src="/static/js/vendor/jquery.animate-enhanced.min.js"></script>
     <script type="text/javascript"   src="/static/js/vendor/jquery.transform2d.js"></script>
+    <script type="text/javascript"   src="/static/js/vendor/jquery.jscrollpane.min.js"></script>
+    <script type="text/javascript"   src="/static/js/vendor/underscore-min.js"></script>    
     <script type="text/coffeescript" src="/static/js/controllers.coffee"></script>
     <script type="text/coffeescript" src="/static/js/directives.coffee"></script>
     <script type="text/coffeescript" src="/static/js/filters.coffee"></script>
     <script type="text/coffeescript" src="/static/js/services.coffee"></script>
-    <script type="text/coffeescript" src="/static/js/app.coffee"></script>
+    <script type="text/coffeescript" src="/static/js/app.coffee"></script>    
 {% endblock %}
 
 {% block content %}
@@ -25,8 +29,14 @@
         <div class="container relative">
             <a href="#/" class="logo">Baromètre Ile-de-France</a>
         </div>
-        <div id="content" ng-view  ng-animate="'slide'">
-
-        </div>
+        <div id="content" ng-view  ng-animate="'slide'"></div>
     </div>
+
+    <!--[if lte IE 8]>    
+        <script type="text/javascript"   src="/static/js/vendor/r2d3.min.js"></script>
+        <script type="text/javascript"   src="/static/js/vendor/raphael-min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->    
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+    <!--<![endif]-->
 {% endblock %}

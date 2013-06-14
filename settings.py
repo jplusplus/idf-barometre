@@ -125,14 +125,19 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
     # External added
     'compressor', # Compresses linked and inline JavaScript or CSS into a single cached file.
-    # Internal added    
+    # Internal added   
+    'barometre'
 )
+
+SERIALIZATION_MODULES = {
+    'json': 'wadofstuff.django.serializers.json',
+    'python': 'wadofstuff.django.serializers.python'
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

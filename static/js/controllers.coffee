@@ -57,7 +57,7 @@ AnswerGraphCtrl = ($scope, $http, $rootElement, $routeParams, $location, $filter
         # Sort by date
         values = _.sortBy(values, (d)-> d.date) 
 
-        p         = [0, 0, 60, 0]
+        p         = [0, 5, 60, 5]
         minGap    = if $("html").hasClass("lt-ie9") then 80 else 40
         dotGap    = Math.max(minGap, wrapperWidth / (values.length - 1))
         w         = (dotGap * (values.length - 1)) - p[1] - p[3]

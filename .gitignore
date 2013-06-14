@@ -21,3 +21,4 @@ venv
 
 # Generated files
 static/CACHE
+media/*

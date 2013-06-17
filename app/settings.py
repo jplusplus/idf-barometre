@@ -105,7 +105,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = 'app.wsgi.application'
 
 TEMPLATE_DIRS = (
     here('templates'),
@@ -131,7 +131,7 @@ INSTALLED_APPS = (
     # External added
     'compressor', # Compresses linked and inline JavaScript or CSS into a single cached file.
     # Internal added   
-    'barometre'
+    'app.barometre'
 )
 
 SERIALIZATION_MODULES = {

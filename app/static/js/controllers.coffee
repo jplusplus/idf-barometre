@@ -21,6 +21,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     # Wrapper that container the graph and a scrollbar
     wrapper = $rootElement.find(".wrapper")
     chart   = $rootElement.find(".chart")
+    # Saves wrap
     wrapperWidth  = wrapper.innerWidth()
     wrapperHeight = wrapper.innerHeight() - 20
     # Add customise scrollbar
@@ -29,30 +30,71 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
     x = d3.time.scale()
     y = d3.scale.linear()
-    insertLinebreaks = (d) ->
-      el = d3.select(this)
-      words = dateFormat(d).split(" ")
-      el.text ""
-      i = 0
-
-      while i < words.length
-        tspan = el.append("tspan").text(words[i])
-        tspan.attr("x", 0).attr "dy", "18"  if i > 0
-        i++
 
     # Methods
     update = -> 
         params = profil: $scope.sample, question: $scope.question
         $scope.answers = Answer.query params, render
+
+    mouse = (ev) ->
+        ev = ev or event
+        x: event.clientX + (document.documentElement.scrollLeft or document.body.scrollLeft)
+        y: event.clientY + (document.documentElement.scrollTop or document.body.scrollTop)
+
+    createPointTips = (d, index) ->
+        $tips = $(".point-tips[data-point=" + index + "]")
+        $point = $(svg.selectAll(".data-point")[0][index])      
+        # tips doenst exist yet
+        if $tips.length is 0        
+            # Create the tips
+            $tips = $("<div class='point-tips hidden' data-point='" + index + "' />")        
+            # Positionate the tips to under the mouse
+            $tips.css
+                left: (if $point.offset() then $point.offset().left else mouse().x)
+                top: (if $point.offset() then $point.offset().top else mouse().y)
+            # Appends the tips to the bodu
+            $tips.appendTo "body"      
+        # tips exists
+        else        
+            # Positionate the tips to under the mouse
+            $tips.css(
+                left: (if $point.offset() then $point.offset().left else mouse().x)
+                top: (if $point.offset() then $point.offset().top else mouse().y)
+            ).removeClass "hidden"
+      
+        # In any case, change the content of the tip
+        $tips.html "<div class='content'>" + ~~d.ratio + "%</div>"
+
+    closePointTips = (d, index) ->
+        $point = $(svg.selectAll(".data-point")[0][index])    
+        # Do not close active point      
+        # Just add a class hidden to the right tips
+        $(".point-tips[data-point=" + index + "]").addClass "hidden"  unless $point.hasClass("active")
+
+    insertLinebreaks = (d) ->
+        el = d3.select(this)
+        words = dateFormat(d).split(" ")
+        el.text ""
+        i = 0
+
+        while i < words.length
+            tspan = el.append("tspan").text(words[i])
+            tspan.attr("x", 0).attr "dy", "18"  if i > 0
+            i++
+
     render = ()-> 
         chart.empty()   
         # Do we stop
         return if $scope.answers.length == 0
         # Parse dates and numbers. We assume $scope.answers is sorted by date.
-        _.each $scope.answers, (d) -> return d.date = parse(d.date)            
+        _.each $scope.answers, (d) ->
+            try 
+                return d.date = parse(d.date)  
+            # Some parsings fail          
+            catch error
+                return null
 
-
-        p         = [0, 5, 60, 5]
+        p         = [0, 15, 60, 15]
         minGap    = if $("html").hasClass("lt-ie9") then 80 else 40
         dotGap    = Math.max(minGap, wrapperWidth / ($scope.answers.length - 1))
         w         = (dotGap * ($scope.answers.length - 1)) - p[1] - p[3]
@@ -145,8 +187,8 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                 .attr("stroke-width", 3)
                 .attr("stroke", "#ffffff")
                 .attr("r", 5)
-                # .on("mousemove", createPointTips)
-                # .on("mouseleave", closePointTips)
+                .on("mousemove", createPointTips)
+                .on("mouseleave", closePointTips)
                 # .on "click", togglePoint
 
         # Add the x-axis.

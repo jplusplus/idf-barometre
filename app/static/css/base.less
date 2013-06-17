@@ -7,6 +7,7 @@
 @zIndexOptions : @zIndexPage+100;
 @zIndexGraph   : @zIndexOptions+100;
 @zIndexLogo    : @zIndexGraph+100;
+@zIndexTips    : @zIndexGraph+100;
 
 
 body {
@@ -397,6 +398,8 @@ body {
         
         @activeColor:#BAD809;
         .active, h2 strong { color:@activeColor; }
+        .jspDrag { background:@activeColor; }
+
         
         .radio-environnement .icon {
             background-position:-150px*2px 0;
@@ -432,6 +435,7 @@ body {
 
         @activeColor:#06C5D8;
         .active, h2 strong { color:@activeColor; }
+        .jspDrag { background:@activeColor; }
 
         .radio-transport .icon  {
             background-position:-150px*2px 0;
@@ -467,6 +471,8 @@ body {
 
         @activeColor:#ED9906;
         .active, h2 strong { color:@activeColor; }
+        .jspDrag { background:@activeColor; }
+
 
         .radio-economique .icon  {
             background-position:-150px*2px 0;
@@ -540,6 +546,49 @@ body {
     }
 
 }
+
+
+/* ---------------------------------------------------------- */
+/* POINT TIPS */
+
+.point-tips {
+    z-index:@zIndexTips;
+    position:absolute;
+    width:0px;
+    height:0px;
+    /*  Center of the point */
+    margin-left:5px;
+    margin-top:0;
+    
+    &.hidden {
+        display:none;
+    }
+
+    &.hidden .content {
+        .opacity(0);
+        .translate(0, -20px);
+    }
+
+    .content {
+        position:absolute;
+        left:0;
+        bottom:0px;
+        background:#eee;
+        font-weight:bold;
+        font-size:16px;
+        text-align:center;
+        width:63px;
+        height:50px-10px;        
+        padding-top:10px;
+        margin-left:-63px/2px;
+        background:url("/static/img/graph/bulle_normal.png") no-repeat center 0;          
+        .opacity(100);         
+        .transition(transform opacity 0.6s);            
+        .translate(0, 0);
+    }
+
+}
+
 
 
 /* ---------------------------------------------------------- */

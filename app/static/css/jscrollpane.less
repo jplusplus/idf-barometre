@@ -5,112 +5,83 @@
  * may not operate correctly without them.
  */
 
-.jspContainer
-{
-	overflow: hidden;
-	position: relative;
+.jspContainer {
+    overflow: hidden;
+    position: relative;
 }
-
-.jspPane
-{
-	position: absolute;
+.jspDrag {
+    background: #ddd;
+    position: relative;
+    top: 0;
+    left: 0;
+    cursor: pointer;
 }
-
-.jspVerticalBar
-{
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 16px;
-	height: 100%;
-	background: transparent;
+.jspPane {
+    position: absolute;
 }
-
-.jspHorizontalBar
-{
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 16px;
-	background: transparent;
+.jspHorizontalBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 16px;
+    background: transparent;
+    .jspCap {
+        float: left;
+    }
+    .jspArrow {
+        width: 16px;
+        float: left;
+        height: 100%;
+    }
 }
-
-.jspVerticalBar *,
-.jspHorizontalBar *
-{
-	margin: 0;
-	padding: 0;
+.jspCorner {
+    background: #eeeef4;
+    float: left;
+    height: 100%;
 }
-
-.jspCap
-{
-	display: none;
+.jspCap {
+    display: none;
 }
-
-.jspHorizontalBar .jspCap
-{
-	float: left;
+.jspVerticalBar *,.jspHorizontalBar * {
+    margin: 0;
+    padding: 0;
+}
+.jspArrow.jspDisabled {
+    cursor: default;
+    background: #80808d;
+}
+.jspArrow {
+    background: #50506d;
+    text-indent: -20000px;
+    display: block;
+    cursor: pointer;
+}
+.jspHorizontalBar .jspTrack,.jspHorizontalBar .jspDrag {
+    float: left;
+    height: 100%;
+}
+.jspVerticalBar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 100%;
+    background: transparent;
+    .jspArrow:focus {
+        outline: none;
+    }
+    .jspArrow {
+        height: 16px;
+    }
 }
 
 .jspTrack {
-	background: #ededed;
-	position: relative;
+    background: #ededed;
+    position: relative;
 }
 
-.jspDrag
-{
-	background: #EE9807;
-	position: relative;
-	top: 0;
-	left: 0;
-	cursor: pointer;
-}
 
-.jspHorizontalBar .jspTrack,
-.jspHorizontalBar .jspDrag
-{
-	float: left;
-	height: 100%;
-}
-
-.jspArrow
-{
-	background: #50506d;
-	text-indent: -20000px;
-	display: block;
-	cursor: pointer;
-}
-
-.jspArrow.jspDisabled
-{
-	cursor: default;
-	background: #80808d;
-}
-
-.jspVerticalBar .jspArrow
-{
-	height: 16px;
-}
-
-.jspHorizontalBar .jspArrow
-{
-	width: 16px;
-	float: left;
-	height: 100%;
-}
-
-.jspVerticalBar .jspArrow:focus
-{
-	outline: none;
-}
-
-.jspCorner
-{
-	background: #eeeef4;
-	float: left;
-	height: 100%;
-}
 
 /* Yuk! CSS Hack for IE6 3 pixel bug :( */
 * html .jspCorner

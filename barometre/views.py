@@ -26,16 +26,16 @@ def partial(request, partial_name=None):
     except TemplateDoesNotExist:
         raise Http404
 
-def data(request, format='json'):    
+def answers(request, format='json'):    
     # Build filters
-    filters = {};
+    filters = {}
     if "question" in request.GET:
         filters["question__slug"] = request.GET["question"]
     if "profil" in request.GET:
         filters["profil__slug"] = request.GET["profil"]
 
-    # Get the answers
-    answers = Answer.objects.filter(**filters)
+    # Get the answers ordering by date
+    answers = Answer.objects.exclude(ratio__lte=0).filter(**filters).order_by("date")
 
     if format == 'json':                
         # this gives you a list of dicts
@@ -43,7 +43,9 @@ def data(request, format='json'):
         # now extract the inner `fields` dicts
         actual_data = [d['fields'] for d in raw_data]
         # now extract the inner 'fields' into profil and question
+        # and simplify the date field
         for index, row in enumerate(actual_data):
+            row["date"]     = row["date"].strftime("%m/%Y")
             row["profil"]   = row["profil"]["fields"]["display"]
             row["question"] = row["question"]["fields"]["display"]
         # and now dump to JSON

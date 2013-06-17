@@ -1,9 +1,9 @@
 angular
-    .module('barometre', ['barometreFilters', 'ngSanitize'])
+    .module('barometre', ['barometreFilters', 'barometreServices', 'ngSanitize'])
     .config(
         [
             '$interpolateProvider', 
-            '$routeProvider', 
+            '$routeProvider',              
             ($interpolateProvider, $routeProvider)->    
                 # Avoid a conflict with Django Template's tags
                 $interpolateProvider.startSymbol '[['

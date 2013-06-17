@@ -6,7 +6,7 @@ QuestionListCtrl = ($scope, $http, $rootElement )->
 QuestionListCtrl.$inject = ['$scope', '$http', '$rootElement'];
 
 
-AnswerGraphCtrl = ($scope, $http, $rootElement, $routeParams, $location, $filter)->
+AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filter)->
     # Models attributes
     $scope.question = $routeParams.question or "economique"
     $scope.sample   = $routeParams.sample   or "all"
@@ -16,12 +16,12 @@ AnswerGraphCtrl = ($scope, $http, $rootElement, $routeParams, $location, $filter
 
     # Graph attributes
     svg        = {}    
-    parse      = d3.time.format("%d/%m/%Y").parse
+    parse      = d3.time.format("%m/%Y").parse
     dateFormat = d3.time.format("%b %y")
     # Wrapper that container the graph and a scrollbar
     wrapper = $rootElement.find(".wrapper")
     chart   = $rootElement.find(".chart")
-    wrapperWidth = wrapper.innerWidth()
+    wrapperWidth  = wrapper.innerWidth()
     wrapperHeight = wrapper.innerHeight() - 20
     # Add customise scrollbar
     wrapper.jScrollPane hideFocus: true
@@ -41,28 +41,23 @@ AnswerGraphCtrl = ($scope, $http, $rootElement, $routeParams, $location, $filter
         i++
 
     # Methods
-    update = -> $http.get('/static/answers.json').success render
-    render = (values)-> 
-        chart.empty()
-        # Filter to one symbol; the S&P 500.
-        values = _.filter(values, (d)-> 
-            d.question.toLowerCase() == $scope.question && d.profil.toLowerCase() == $scope.sample
-        )       
+    update = -> 
+        params = profil: $scope.sample, question: $scope.question
+        $scope.answers = Answer.query params, render
+    render = ()-> 
+        chart.empty()   
         # Do we stop
-        return if values.length == 0
-        # Parse dates and numbers. We assume values are sorted by date.
-        _.each values, (d) ->
-            d.date  = parse(d.date)                      
-            d.ratio = parseFloat(d.ratio)
-        # Sort by date
-        values = _.sortBy(values, (d)-> d.date) 
+        return if $scope.answers.length == 0
+        # Parse dates and numbers. We assume $scope.answers is sorted by date.
+        _.each $scope.answers, (d) -> return d.date = parse(d.date)            
+
 
         p         = [0, 5, 60, 5]
         minGap    = if $("html").hasClass("lt-ie9") then 80 else 40
-        dotGap    = Math.max(minGap, wrapperWidth / (values.length - 1))
-        w         = (dotGap * (values.length - 1)) - p[1] - p[3]
+        dotGap    = Math.max(minGap, wrapperWidth / ($scope.answers.length - 1))
+        w         = (dotGap * ($scope.answers.length - 1)) - p[1] - p[3]
         h         = wrapperHeight - p[0] - p[2]        
-        gradientW = (w / (values.length - 1)) * 2    
+        gradientW = (w / ($scope.answers.length - 1)) * 2    
 
 
         # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
@@ -86,10 +81,10 @@ AnswerGraphCtrl = ($scope, $http, $rootElement, $routeParams, $location, $filter
 
 
         # Compute the minimum and maximum date, and the maximum price.
-        minDate  = d3.min values, (d)-> d.date
-        maxDate  = d3.max values, (d)-> d.date        
-        minValue = d3.min values, (d)-> d.ratio
-        maxValue = d3.max values, (d)-> d.ratio        
+        minDate  = d3.min $scope.answers, (d)-> d.date
+        maxDate  = d3.max $scope.answers, (d)-> d.date        
+        minValue = d3.min $scope.answers, (d)-> d.ratio
+        maxValue = d3.max $scope.answers, (d)-> d.ratio        
         offset   = (maxValue - minValue) * 0.3
         x.domain([minDate, maxDate])
         y.domain([minValue - offset, maxValue + offset]).nice()
@@ -109,7 +104,7 @@ AnswerGraphCtrl = ($scope, $http, $rootElement, $routeParams, $location, $filter
                 .append("svg:path")
                     .attr("class", "area bg")
                     .attr("fill", "#ee9807")
-                    .attr("d", area(values))
+                    .attr("d", area($scope.answers))
         # Add stripes
         else            
             svg
@@ -136,11 +131,11 @@ AnswerGraphCtrl = ($scope, $http, $rootElement, $routeParams, $location, $filter
             svg.append("svg:path")
                 .attr("class", "area bg")
                 .attr("fill", "url(#sequence-gradient)")
-                .attr("d", area(values))
+                .attr("d", area($scope.answers))
 
         # Add line dots
         svg.selectAll(".data-point")
-            .data(values)
+            .data($scope.answers)
             .enter()
             .append("svg:circle")
                 .attr("class", "data-point")
@@ -169,4 +164,4 @@ AnswerGraphCtrl = ($scope, $http, $rootElement, $routeParams, $location, $filter
     update()
             
 
-AnswerGraphCtrl.$inject = ['$scope', '$http', '$rootElement', '$routeParams', '$location', '$filter'];
+AnswerGraphCtrl.$inject = ['$scope', 'Answer', '$rootElement', '$routeParams', '$location', '$filter'];

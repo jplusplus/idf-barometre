@@ -102,7 +102,7 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'app.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'app.wsgi.application'
@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     # External added
-    'compressor', # Compresses linked and inline JavaScript or CSS into a single cached file.
+    'compressor', # Compresses linked and inline JavaScript or CSS into a single cached file.    
     # Internal added   
     'app.barometre'
 )

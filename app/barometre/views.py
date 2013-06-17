@@ -6,7 +6,7 @@ from django.template.loader import get_template
 from django.shortcuts       import render_to_response, redirect
 from django.http            import Http404, HttpResponse
 from django.core            import serializers
-from barometre.models       import Answer
+from app.barometre.models   import Answer
 import csv
 import json
 import datetime

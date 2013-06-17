@@ -10,7 +10,7 @@ Thumbs.db
 *.pyc
 
 # Users media
-server/media/*
+app/media/*
 
 # Binary files and database
 *.db
@@ -20,5 +20,5 @@ venv
 .env
 
 # Generated files
-static/CACHE
-media
+app/static/CACHE
+app/media

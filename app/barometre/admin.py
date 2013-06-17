@@ -3,7 +3,7 @@ from django import forms
 from django.db import models
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin 
-from barometre.models import Answer, Taxonomy, Import
+from app.barometre.models import Answer, Taxonomy, Import
 
 class TaxonomyAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("display",)}

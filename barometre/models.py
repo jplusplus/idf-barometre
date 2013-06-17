@@ -45,7 +45,7 @@ class Answer(models.Model):
         return  u'%s: Question "%s" selon %s' % (date, self.question, self.profil) 
 
 class Import(models.Model):
-    model_name  = models.CharField(max_length=255, blank=False, choices=IMPORT_MODELS)
+    model_name  = models.CharField(max_length=255, blank=False, choices=IMPORT_MODELS, default='barometre.Answer')
     upload_file = models.FileField(upload_to='csv', storage=fs)
     file_name   = models.CharField(max_length=255, blank=True)
     encoding    = models.CharField(max_length=32, blank=True)  

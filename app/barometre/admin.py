@@ -3,7 +3,8 @@ from django import forms
 from django.db import models
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin 
-from app.barometre.models import Answer, Profil, Question, Import
+from app.barometre.models import Answer, Profil, Question, Import, Introduction
+from redactor.widgets import RedactorEditor
 
 class TaxonomyAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("display",)}
@@ -11,6 +12,10 @@ class TaxonomyAdmin(admin.ModelAdmin):
 
 class AnswerAdmin(admin.ModelAdmin):
     pass
+
+class IntroductionAdmin(admin.ModelAdmin):
+    pass
+
 
 class ImportAdmin(ModelAdmin):
     fields = ['model_name','upload_file']
@@ -57,4 +62,5 @@ class ImportAdmin(ModelAdmin):
 admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Profil, TaxonomyAdmin)
 admin.site.register(Question, TaxonomyAdmin)
+admin.site.register(Introduction, IntroductionAdmin)    
 admin.site.register(Import, ImportAdmin)    

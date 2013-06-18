@@ -1,8 +1,11 @@
 <div class="container centered">
-    <ul class="questions unstyled">
-        <li ng-repeat="question in questions" class="question case-[[$index+1]]">
-            <a class="wrapper" href="#/[[question.question]]-[[question.sample]]">
-                [[question.label]]
+    <ul class="introductions unstyled">
+        <li ng-repeat="introduction in introductions" class="introduction case-[[$index+1]]" ng-class="'type-' + introduction.format">
+            <a class="wrapper" href="#/[[introduction.question.slug]]-[[introduction.profil.slug]]">
+                <div class="indicator" ng-switch-when="introduction.indicator.value">
+                    [[introduction.indicator.value]]
+                </div>
+                [[introduction.sentence]]
             </a>
         </li>
     </ul>

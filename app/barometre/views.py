@@ -60,14 +60,15 @@ def introductions(request):
     # Get the introductions ordering by date
     introductions = Introduction.objects.all()
     # Serialize data
-    raw_data = serializers.serialize('python', introductions, relations=('profil','question',))
-    # now extract the inner `fields` dicts
-    actual_data = [d['fields'] for d in raw_data]
-    # now extract the inner 'fields' into profil and question
-    # and simplify the date field
-    for index, row in enumerate(actual_data):        
-        row["profil"]   = row["profil"]["fields"]
-        row["question"] = row["question"]["fields"]
+    raw_data = serializers.serialize('python', introductions, relations=('profil','question'), extras=("indicator",))
+    # now extract the inner 'fields' and 'extras' dicts
+    actual_data = [dict(d['fields'].items() + d['extras'].items()) for d in raw_data]
+    # and simplify some field
+    for index, row in enumerate(actual_data):                   
+        row["profil"]    = row["profil"]["fields"]
+        row["question"]  = row["question"]["fields"]     
+        row["indicator"] = eval(row["indicator"])   
+            
     # and now dump to JSON
     output = json.dumps(actual_data, default=dthandler)    
 

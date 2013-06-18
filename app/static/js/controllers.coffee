@@ -1,9 +1,8 @@
 
-QuestionListCtrl = ($scope, $http, $rootElement )->
-    $http.get('/static/questions.json').success (data)-> 
-        $scope.questions = data
+QuestionListCtrl = ($scope, Introduction, $rootElement )->    
+    $scope.introductions = Introduction.query()
 
-QuestionListCtrl.$inject = ['$scope', '$http', '$rootElement'];
+QuestionListCtrl.$inject = ['$scope', 'Introduction', '$rootElement'];
 
 
 AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filter)->

@@ -97,7 +97,7 @@ class Introduction(models.Model):
             # Do we found an answer ?
             if answer:
                 # Aake the first row and add a percentage 
-                indicator["value"] = str(int(answer[0].ratio)) + "%"
+                indicator["value"] = Answer.float( answer[0].ratio, "%")
         # Find the quantity
         elif self.format == 'number':
             # Get the answer
@@ -105,7 +105,7 @@ class Introduction(models.Model):
             # Do we found an answer ?
             if answer:
                 # Aake the first row and add a percentage 
-                indicator["value"] = str(round(NB_FRANCILIENS_M*answer[0].ratio/100,1))
+                indicator["value"] = Answer.float( NB_FRANCILIENS_M*answer[0].ratio/100 )
         # Find a trend
         elif self.format == 'trend':
             # Current answer
@@ -124,14 +124,11 @@ class Introduction(models.Model):
                 previousAnswer = Answer.objects.order_by("-date").filter(**filters) 
                 # The revious answer exists
                 if previousAnswer:
-                    indicator["value"]    = str(currentAnswer[0].ratio - previousAnswer[0].ratio) + "%"
-                    indicator["current"]  = currentAnswer[0]
-                    indicator["previous"] = previousAnswer[0]
-
-
+                    indicator["value"]    = Answer.float( currentAnswer[0].ratio - previousAnswer[0].ratio, "%")
+                    indicator["current"]  = Answer.float( currentAnswer[0].ratio, "%")
+                    indicator["previous"] = Answer.float( previousAnswer[0].ratio, "%")
                 
         return indicator
-
 
 
 class Answer(models.Model):
@@ -145,9 +142,14 @@ class Answer(models.Model):
     class Meta:
         verbose_name        = u"réponse"
         verbose_name_plural = u"réponses"
+
     def __unicode__(self):
         date = self.date.strftime("%m/%Y")
         return  u'%s: Question "%s" selon %s' % (date, self.question.display, self.profil.display) 
+
+    @staticmethod    
+    def float(val, suffix=''):
+        return str( round(val, 1) ).replace('.', ',') + suffix
 
 class Import(models.Model):
     model_name  = models.CharField(max_length=255, blank=False, choices=IMPORT_MODELS, default='barometre.Answer')

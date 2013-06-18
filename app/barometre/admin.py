@@ -3,11 +3,11 @@ from django import forms
 from django.db import models
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin 
-from app.barometre.models import Answer, Taxonomy, Import
+from app.barometre.models import Answer, Profil, Question, Import
 
 class TaxonomyAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("display",)}
-    list_display = ('display', 'what')
+    list_display = ('display', 'slug',)
 
 class AnswerAdmin(admin.ModelAdmin):
     pass
@@ -27,7 +27,7 @@ class ImportAdmin(ModelAdmin):
             since then file wont be found for reopening via right charset
         """
         form.save()
-        from barometre.management.csvimport import Command
+        from app.barometre.management.csvimport import Command
         cmd = Command()
         if obj.upload_file:
             obj.file_name = obj.upload_file.name
@@ -55,5 +55,6 @@ class ImportAdmin(ModelAdmin):
         return defaults
 
 admin.site.register(Answer, AnswerAdmin)
-admin.site.register(Taxonomy, TaxonomyAdmin)
+admin.site.register(Profil, TaxonomyAdmin)
+admin.site.register(Question, TaxonomyAdmin)
 admin.site.register(Import, ImportAdmin)    

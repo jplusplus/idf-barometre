@@ -215,6 +215,105 @@
             "slug": "environnement"
         }
     }, 
+        {
+        "pk": 1, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 12, 
+            "format": "proportion", 
+            "question": 1, 
+            "variation": "", 
+            "sentence": "des ouvriers s'estiment satisfait des transports en commun."
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 1, 
+            "format": "number", 
+            "question": 2, 
+            "variation": "", 
+            "sentence": "millions de Franciliens estiment que la situation \u00e9conomique est dynamique."
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 9, 
+            "format": "simple", 
+            "question": 2, 
+            "variation": "", 
+            "sentence": "Que pensent les cadres de la situation \u00e9conomique ?"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 3, 
+            "format": "trend", 
+            "question": 3, 
+            "variation": "last_year", 
+            "sentence": "Qualit\u00e9 de l'environnement\r\nEvolution du taux de satisfaction chez les femmes depuis un an."
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 21, 
+            "format": "simple", 
+            "question": 3, 
+            "variation": "", 
+            "sentence": "Que pense-t-on de la qualit\u00e9 de l'environnement dans le Val-d'Oise ?"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 14, 
+            "format": "proportion", 
+            "question": 3, 
+            "variation": "", 
+            "sentence": "des Parisiens s'estiment satisfaits de la qualit\u00e9 de l'environnement."
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 2, 
+            "format": "proportion", 
+            "question": 1, 
+            "variation": "", 
+            "sentence": "des hommes s'estiment satisfaits par les transports en commun."
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 1, 
+            "format": "trend", 
+            "question": 2, 
+            "variation": "", 
+            "sentence": "Dynamisme de la situation \u00e9conomique\r\n\u00c9volution du taux de satisfaction chez les franciliens depuis 2 mois."
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 8, 
+            "format": "simple", 
+            "question": 1, 
+            "variation": "", 
+            "sentence": "Que pensent les plus de 65 ans des transports en commun ?"
+        }
+    },
     {
         "pk": 1, 
         "model": "auth.user", 

@@ -44,3 +44,17 @@ angular
                     "100"     : "#8fa310"
             return colors[key][level]         
     )
+    .filter("supPercent", ->
+        return (val='')-> 
+            # Remove ,0% end
+            val = val.replace /,0%/, "%"
+            # Add <sup></sup> arround %
+            val = val.replace /%/, "<sup>%</sup>"
+            # Add a plus prefix for percentage and non-negative values
+            val = "+" + val if val.match /%/ and val.indexOf("-") == -1 
+            # Return the new value explcitily
+            return val
+    )
+    .filter("nl2br", ->
+        return (str='')-> (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2')
+    )

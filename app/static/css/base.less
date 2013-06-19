@@ -9,6 +9,10 @@
 @zIndexLogo    : @zIndexGraph+100;
 @zIndexTips    : @zIndexGraph+100;
 
+@environnementColor:#BAD809;
+@economiqueColor:#ED9906;
+@transportColor:#06C5D8;
+
 
 body {
     background:url("/static/img/common/bg.jpg");
@@ -54,20 +58,57 @@ body {
         height:194px-2px;
         margin-left:2px;
         background:no-repeat;
-        text-align:center;
+        text-align:left;
         position:absolute;
         top:0;
         left:0;
         
         .wrapper {         
             display:block;   
-            width:100%;
-            height:100%;
-            background:white;
-            position:relative;
+            
+            position:absolute;
+            top:0; bottom:0;
+            left:0; right:0;
+            padding:25px;
+            font-size:13px;
+            line-height:16px;
+
+            background:white;            
             z-index:@zIndexPage;
-            .transition(0.2s);            
+            color:@textColor;
+            .transition(0.2s);
+            &:hover {
+                color:@textColor;
+                text-decoration:none;
+            }                        
         }
+
+        .indicator {
+            font-family:@serifFontFamily;
+            font-size:60px;
+            display:block;
+            line-height:75px;
+            font-weight:bold;
+            margin-bottom:10px;
+
+            sup {
+                font-size:40%;
+            }
+
+            &.economique    { color:@economiqueColor; }
+            &.transport     { color:@transportColor; }
+            &.environnement { color:@environnementColor; }
+        }
+
+        &.type-simple .indicator {
+            background:150px*-3px 0;
+            width:150px;
+            height:75px;
+            &.economique    { background-image:url("/static/img/common/pictos/picto_environnement.png"); }
+            &.transport     { background-image:url("/static/img/common/pictos/picto_situation_economique.png"); }
+            &.environnement { background-image:url("/static/img/common/pictos/picto_transports.png"); }            
+        }
+
 
         &:hover .wrapper{   
             z-index:@zIndexPage+10;
@@ -396,7 +437,7 @@ body {
 
     &.question-environnement {
         
-        @activeColor:#BAD809;
+        @activeColor:@environnementColor;
         .active, h2 strong { color:@activeColor; }
         .jspDrag { background:@activeColor; }
 
@@ -433,7 +474,7 @@ body {
 
     &.question-transport {
 
-        @activeColor:#06C5D8;
+        @activeColor:@transportColor;
         .active, h2 strong { color:@activeColor; }
         .jspDrag { background:@activeColor; }
 
@@ -469,7 +510,7 @@ body {
 
     &.question-economique {
 
-        @activeColor:#ED9906;
+        @activeColor:@economiqueColor;
         .active, h2 strong { color:@activeColor; }
         .jspDrag { background:@activeColor; }
 

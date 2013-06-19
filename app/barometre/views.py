@@ -6,11 +6,17 @@ from django.template.loader import get_template
 from django.shortcuts       import render_to_response, redirect
 from django.http            import Http404, HttpResponse
 from django.core            import serializers
+from random                 import random, shuffle
 from app.barometre.models   import Answer, Introduction
+
+
 import csv
 import json
 import datetime
 
+# Merge severals lists
+from itertools import chain
+merge = lambda l1, l2: list(chain(l1, l2)) 
 # Date handler for serialization
 dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
 
@@ -56,9 +62,49 @@ def answers(request, format='json'):
         return Http404
 
 
-def introductions(request):
-    # Get the introductions ordering by date
-    introductions = Introduction.objects.all()
+def introductions(request):  
+    # Index of the set with 3 simple blocks
+    rand = int(random()*2.9)
+    # Determines the length of each set
+    transport_len     = 3 if rand == 0 else 2 
+    economique_len    = 3 if rand == 1 else 2 
+    environnement_len = 3 if rand == 2 else 2 
+    # First get all small introductions
+    smalls = Introduction.objects.exclude(format="trend").order_by("?")
+    # Get the introductions ordering by date.
+    # Pick 2 elements for two of the sets,
+    # 3 elements for the third one
+    # (according the previous numbers)
+    transport     = smalls.filter(question__slug="transport")[:transport_len]
+    economique    = smalls.filter(question__slug="economique")[:economique_len]
+    environnement = smalls.filter(question__slug="environnement")[:environnement_len]
+    # Merge and the 3 data sets
+    introductions = merge(transport, merge(economique, environnement))
+    # Shuffle the dataset
+    shuffle(introductions)
+    # Now pick 2 bigs introductions for the datasets with only 2 elements  
+    bigs = Introduction.objects.filter(format='trend').order_by("?")    
+    big_intros = list()
+
+    if transport_len == 2:
+        transport = bigs.filter(question__slug="transport")        
+        if transport : big_intros.append(transport[0]) 
+
+    if economique_len == 2:
+        economique = bigs.filter(question__slug="economique")        
+        if economique : big_intros.append(economique[0]) 
+
+    if environnement_len == 2:
+        environnement = bigs.filter(question__slug="environnement")        
+        if environnement : big_intros.append(environnement[0]) 
+    
+    # Shuffle big rows
+    shuffle(big_intros)
+    bigs_len = len(big_intros);
+    # Then append the big intro to right position
+    if bigs_len > 0: introductions.insert(0, big_intros[0])
+    if bigs_len > 1: introductions.insert(8, big_intros[1])
+
     # Serialize data
     raw_data = serializers.serialize('python', introductions, relations=('profil','question'), extras=("indicator",))
     # now extract the inner 'fields' and 'extras' dicts

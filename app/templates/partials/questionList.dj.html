@@ -2,7 +2,7 @@
     <ul class="introductions unstyled">
         <li ng-repeat="introduction in introductions" class="introduction case-[[$index+1]]" ng-class="'type-' + introduction.format">
             <a class="wrapper" href="#/[[introduction.question.slug]]-[[introduction.profil.slug]]">
-                <div class="indicator" ng-switch-when="introduction.indicator.value">
+                <div class="indicator" ng-if="introduction.indicator.value">
                     [[introduction.indicator.value]]
                 </div>
                 [[introduction.sentence]]

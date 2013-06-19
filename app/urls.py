@@ -10,5 +10,4 @@ urlpatterns = patterns('',
     url(r'^answers\.(?P<format>(json|csv))$',       'app.barometre.views.answers',       name='answers'),
     url(r'^introductions.json$',                    'app.barometre.views.introductions', name='introductions'),
     url(r'^admin/',                                 include(admin.site.urls)),
-    url(r'^redactor/',                              include('redactor.urls')),
 )

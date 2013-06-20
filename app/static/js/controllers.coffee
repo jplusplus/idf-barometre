@@ -14,21 +14,22 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     $scope.$watch 'question', ->update()
 
     # Graph attributes
-    svg        = {}    
+    chartSvg   = {}
+    yAxisSvg   = {}
     parse      = d3.time.format("%m/%Y").parse
     dateFormat = d3.time.format("%b %y")
     # Wrapper that container the graph and a scrollbar
     wrapper = $rootElement.find(".wrapper")
-    chart   = $rootElement.find(".chart")
     # Saves wrap
-    wrapperWidth  = wrapper.innerWidth()
-    wrapperHeight = wrapper.innerHeight() - 20
+    wrapperWidth  = 619
+    wrapperHeight = 340
     # Add customise scrollbar
     wrapper.jScrollPane hideFocus: true
 
     # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
     x = d3.time.scale()
     y = d3.scale.linear()
+
 
     # Methods
     update = -> 
@@ -40,35 +41,37 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         x: event.clientX + (document.documentElement.scrollLeft or document.body.scrollLeft)
         y: event.clientY + (document.documentElement.scrollTop or document.body.scrollTop)
 
-    createPointTips = (d, index) ->
-        $tips = $(".point-tips[data-point=" + index + "]")
-        $point = $(svg.selectAll(".data-point")[0][index])      
-        # tips doenst exist yet
-        if $tips.length is 0        
-            # Create the tips
-            $tips = $("<div class='point-tips hidden' data-point='" + index + "' />")        
-            # Positionate the tips to under the mouse
-            $tips.css
-                left: (if $point.offset() then $point.offset().left else mouse().x)
-                top: (if $point.offset() then $point.offset().top else mouse().y)
-            # Appends the tips to the bodu
-            $tips.appendTo "body"      
-        # tips exists
-        else        
-            # Positionate the tips to under the mouse
-            $tips.css(
-                left: (if $point.offset() then $point.offset().left else mouse().x)
-                top: (if $point.offset() then $point.offset().top else mouse().y)
-            ).removeClass "hidden"
-      
-        # In any case, change the content of the tip
-        $tips.html "<div class='content'>" + ~~d.ratio + "%</div>"
-
-    closePointTips = (d, index) ->
-        $point = $(svg.selectAll(".data-point")[0][index])    
-        # Do not close active point      
-        # Just add a class hidden to the right tips
-        $(".point-tips[data-point=" + index + "]").addClass "hidden"  unless $point.hasClass("active")
+    point =
+        on:  (d, index)->
+        off: (d, index)-> point.tips.off(d, index)
+        tips:
+            on: (d, index)->
+                $tips = $(".point-tips[data-point=" + index + "]")
+                $point = $(chartSvg.selectAll(".data-point")[0][index])      
+                # tips doenst exist yet
+                if $tips.length is 0        
+                    # Create the tips
+                    $tips = $("<div class='point-tips hidden' data-point='" + index + "' />")        
+                    # Positionate the tips to under the mouse
+                    $tips.css
+                        left: (if $point.offset() then $point.offset().left else mouse().x)
+                        top: (if $point.offset() then $point.offset().top else mouse().y)
+                    # Appends the tips to the bodu
+                    $tips.appendTo "body"      
+                # tips exists
+                else        
+                    # Positionate the tips to under the mouse
+                    $tips.css(
+                        left: (if $point.offset() then $point.offset().left else mouse().x)
+                        top: (if $point.offset() then $point.offset().top else mouse().y)
+                    ).removeClass "hidden"              
+                # In any case, change the content of the tip
+                $tips.html "<div class='content'>" + ~~d.ratio + "%</div>"
+            off: (d, index)->
+                $point = $(chartSvg.selectAll(".data-point")[0][index])    
+                # Do not close active point      
+                # Just add a class hidden to the right tips
+                $(".point-tips[data-point=" + index + "]").addClass "hidden"  unless $point.hasClass("active")
 
     insertLinebreaks = (d) ->
         el = d3.select(this)
@@ -78,11 +81,13 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
 
         while i < words.length
             tspan = el.append("tspan").text(words[i])
-            tspan.attr("x", 0).attr "dy", "18"  if i > 0
+            tspan.attr("x", 0).attr "dy", "14"  if i > 0
             i++
 
-    render = ()-> 
-        chart.empty()   
+    render = ()->         
+        # Reload selectors and empty container
+        chart = $rootElement.find(".chart").empty()
+        axis  = $rootElement.find(".yaxis").empty()
         # Do we stop
         return if $scope.answers.length == 0
         # Parse dates and numbers. We assume $scope.answers is sorted by date.
@@ -93,7 +98,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
             catch error
                 return null
 
-        p         = [0, 15, 60, 15]
+        p         = [10, 30, 50, 50]
         minGap    = if $("html").hasClass("lt-ie9") then 80 else 40
         dotGap    = Math.max(minGap, wrapperWidth / ($scope.answers.length - 1))
         w         = (dotGap * ($scope.answers.length - 1)) - p[1] - p[3]
@@ -105,7 +110,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         x.range [0, w]
         y.range [h, 0]
         xAxis = d3.svg.axis().scale(x).tickSize(1).tickPadding(10).tickFormat(dateFormat).ticks(d3.time.months, 2)
-        yAxis = d3.svg.axis().scale(y).tickSize(1).orient("right")
+        yAxis = d3.svg.axis().scale(y).tickSize(1).tickPadding(10).orient("left")
 
         # An area generator, for the light fill.
         area = d3.svg.area()
@@ -120,7 +125,6 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
             .x( (d) -> x(d.date))
             .y( (d) -> y(d.ratio))
 
-
         # Compute the minimum and maximum date, and the maximum price.
         minDate  = d3.min $scope.answers, (d)-> d.date
         maxDate  = d3.max $scope.answers, (d)-> d.date        
@@ -131,25 +135,30 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         y.domain([minValue - offset, maxValue + offset]).nice()
 
         chart.css("width",  w + p[1] + p[3])
+
         # Add an SVG element with the desired dimensions and margin.
-        svg = d3.select( chart[0] )
+        chartSvg = d3.select( chart[0] )
                 .append("svg:svg")
                     .attr("width",  w + p[1] + p[3])
                     .attr("height", h + p[0] + p[2])
                     .append("g")
                         .attr("transform", "translate(" + p[3] + "," + p[0] + ")")
-        
+
+        # Add an another svg presenting the y axis
+        yAxisSvg = d3.select( axis[0] )
+                        .append("svg:svg")                        
+                            .attr("width",  axis.width())
+                            .attr("height", h + p[0] + p[2])
+
         unless Modernizr.svg         
             # Add the area path.
-            svg
-                .append("svg:path")
+            chartSvg.append("svg:path")
                     .attr("class", "area bg")
                     .attr("fill", "#ee9807")
                     .attr("d", area($scope.answers))
         # Add stripes
         else            
-            svg
-                .append("linearGradient")
+            chartSvg.append("linearGradient")
                     .attr("id", "sequence-gradient")
                     .attr("gradientUnits", "userSpaceOnUse")
                     .attr("spreadMethod", "repeat")
@@ -169,13 +178,13 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                             .attr("offset",     (d)-> d.offset)
                             .attr("stop-color", (d)-> d.color)
             # Add the area path.
-            svg.append("svg:path")
+            chartSvg.append("svg:path")
                 .attr("class", "area bg")
                 .attr("fill", "url(#sequence-gradient)")
                 .attr("d", area($scope.answers))
 
         # Add line dots
-        svg.selectAll(".data-point")
+        chartSvg.selectAll(".data-point")
             .data($scope.answers)
             .enter()
             .append("svg:circle")
@@ -186,18 +195,27 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                 .attr("stroke-width", 3)
                 .attr("stroke", "#ffffff")
                 .attr("r", 5)
-                .on("mousemove", createPointTips)
-                .on("mouseleave", closePointTips)
-                # .on "click", togglePoint
+                .on("mousemove",  point.tips.on)
+                .on("mouseleave", point.off)
+                .on("mouseenter", point.on)
 
         # Add the x-axis.
-        svg.append("g")
+        chartSvg.append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate(0, " + (h + 15) + ")")
+            .attr("transform", "translate(0, " + (h + 15) + ")")            
             .call xAxis
+
+        # Add the y-axis to an other svg
+        yAxisSvg.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(30, " + p[0] + ")")
+            .call yAxis
+
         # Add axis break line
-        svg.selectAll(".x.axis g text").each insertLinebreaks
-        svg.selectAll(".x.axis g text").attr "font-size", 16
+        chartSvg.selectAll(".x.axis g text").each insertLinebreaks
+        chartSvg.selectAll(".x.axis g text").attr "font-size", 10
+        chartSvg.selectAll(".x.axis line").attr "stroke", "#000"
+        yAxisSvg.selectAll(".y.axis g text").attr "font-size", 10    
 
         # Reinitialize jscrollpane
         wrapper.data("jsp").reinitialise()

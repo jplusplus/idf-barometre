@@ -417,9 +417,44 @@ body {
             text-align:center;
         }
 
-        .chart {
-            height:420px;
+        .wrapper {
+            position:absolute;
+            top:120px;
+            left:0;            
+            right:30px;
+            height:360px;
         }
+
+        .chart {
+            height:360px;
+            position:relative;              
+            z-index:@zIndexGraph+10;
+        }
+
+        .yaxis {
+            position:absolute;
+            z-index:@zIndexGraph+20;
+            left:0;
+            width:30px;
+            top:120px;
+            height:340px;
+            background:fade(#F8F9F9, 10);
+        }
+
+        .jspHorizontalBar {            
+            z-index:@zIndexGraph+30;
+        }
+
+        .border {
+            position:absolute;
+            z-index:@zIndexGraph;
+            top:120px;
+            left:29px;            
+            right:39px;
+            height:304px;
+            border:1px solid #aaa;
+        }
+
     }
 
     label {

@@ -32,6 +32,12 @@ body {
         top:0;
         z-index:@zIndexLogo;
     }
+
+
+    .axis {
+      shape-rendering: crispEdges;      
+    }
+
 }
 
 .container.centered {
@@ -414,19 +420,43 @@ body {
             color:white;
             margin:-5px;
             padding:15px 0;
+            line-height:30px;
             text-align:center;
+        }
+
+        .manual {
+            border:1px solid #eaeaea;
+            background:#f8f8f8;
+            color:#cccccc;
+            padding:10px 0;
+            width:430px;
+            margin:20px auto;
+            font-size:13px;
+            text-align:center;
+            font-weight:bold;
+            .border-radius(8px);
+        }
+
+        .border {
+            position:absolute;
+            z-index:@zIndexGraph;
+            top:125px;
+            left:19px; 
+            width:594px;
+            height:326px;
+            background:url("/static/img/graph/graph_frame.png") no-repeat 0 0;
         }
 
         .wrapper {
             position:absolute;
-            top:120px;
-            left:0;            
-            right:30px;
-            height:360px;
+            top:145px;
+            left:50px;            
+            right:50px;
+            height:340px;
         }
 
         .chart {
-            height:360px;
+            height:340px;
             position:relative;              
             z-index:@zIndexGraph+10;
         }
@@ -435,26 +465,14 @@ body {
             position:absolute;
             z-index:@zIndexGraph+20;
             left:0;
-            width:30px;
-            top:120px;
+            width:36px;
+            top:145px;
             height:340px;
-            background:fade(#F8F9F9, 10);
         }
 
         .jspHorizontalBar {            
             z-index:@zIndexGraph+30;
         }
-
-        .border {
-            position:absolute;
-            z-index:@zIndexGraph;
-            top:120px;
-            left:29px;            
-            right:39px;
-            height:304px;
-            border:1px solid #aaa;
-        }
-
     }
 
     label {

@@ -21,8 +21,9 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     # Wrapper that container the graph and a scrollbar
     wrapper = $rootElement.find(".wrapper")
     # Saves wrap
-    wrapperWidth  = 619
-    wrapperHeight = 340
+    wrapperWidth  = 549
+    wrapperHeight = 330
+    tickSize = 5
     # Add customise scrollbar
     wrapper.jScrollPane hideFocus: true
 
@@ -81,7 +82,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
 
         while i < words.length
             tspan = el.append("tspan").text(words[i])
-            tspan.attr("x", 0).attr "dy", "14"  if i > 0
+            tspan.attr("x", 0).attr "dy", "12"  if i > 0
             i++
 
     render = ()->         
@@ -98,7 +99,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
             catch error
                 return null
 
-        p         = [10, 30, 50, 50]
+        p         = [10, 10, 60, 10]
         minGap    = if $("html").hasClass("lt-ie9") then 80 else 40
         dotGap    = Math.max(minGap, wrapperWidth / ($scope.answers.length - 1))
         w         = (dotGap * ($scope.answers.length - 1)) - p[1] - p[3]
@@ -109,8 +110,8 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
         x.range [0, w]
         y.range [h, 0]
-        xAxis = d3.svg.axis().scale(x).tickSize(1).tickPadding(10).tickFormat(dateFormat).ticks(d3.time.months, 2)
-        yAxis = d3.svg.axis().scale(y).tickSize(1).tickPadding(10).orient("left")
+        xAxis = d3.svg.axis().scale(x).tickSize(tickSize).tickPadding(5).tickFormat(dateFormat).ticks(d3.time.months, 2)
+        yAxis = d3.svg.axis().scale(y).tickSize(tickSize).tickPadding(5).tickFormat((d)->d+"%").orient("left")
 
         # An area generator, for the light fill.
         area = d3.svg.area()
@@ -202,20 +203,29 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         # Add the x-axis.
         chartSvg.append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate(0, " + (h + 15) + ")")            
+            .attr("transform", "translate(0, #{h + 25-tickSize})")            
             .call xAxis
 
         # Add the y-axis to an other svg
         yAxisSvg.append("g")
             .attr("class", "y axis")
-            .attr("transform", "translate(30, " + p[0] + ")")
-            .call yAxis
+            .attr("transform", "translate(#{30+tickSize}, #{p[0]})")
+            .call yAxis    
 
         # Add axis break line
-        chartSvg.selectAll(".x.axis g text").each insertLinebreaks
-        chartSvg.selectAll(".x.axis g text").attr "font-size", 10
-        chartSvg.selectAll(".x.axis line").attr "stroke", "#000"
-        yAxisSvg.selectAll(".y.axis g text").attr "font-size", 10    
+        chartSvg.selectAll(".axis g text").each insertLinebreaks
+        # Removes horizontal lines
+        chartSvg.selectAll(".axis path").remove()
+        yAxisSvg.selectAll(".axis path").remove()
+        # Adjust text size
+        chartSvg.selectAll(".axis g text").attr "font-size", 10
+        yAxisSvg.selectAll(".axis g text").attr "font-size", 10 
+        # Draw ticks
+        chartSvg.selectAll(".axis g line").attr "stroke", "#aaa"
+        chartSvg.selectAll(".axis g line").attr "stroke-width", 1
+        yAxisSvg.selectAll(".axis g line").attr "stroke", "#aaa"
+        yAxisSvg.selectAll(".axis g line").attr "stroke-width", 1 
+        
 
         # Reinitialize jscrollpane
         wrapper.data("jsp").reinitialise()

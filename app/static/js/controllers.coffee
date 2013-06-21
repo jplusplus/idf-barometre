@@ -9,9 +9,8 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     # Models attributes
     $scope.question = $routeParams.question or "economique"
     $scope.sample   = $routeParams.sample   or "all"
-    # Watch for model change to update the graph
-    $scope.$watch 'sample',   ->update()
-    $scope.$watch 'question', ->update()
+    # List of active point
+    $scope.activePoints = {}
 
     # Graph attributes
     chartSvg   = {}
@@ -32,10 +31,31 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     y = d3.scale.linear()
 
 
-    # Methods
+    # Methods    
     update = -> 
         params = profil: $scope.sample, question: $scope.question
         $scope.answers = Answer.query params, render
+
+    closestActivePoints = (ref)->
+        ref = parseInt(ref)
+        # By default the closest key is a very big number
+        closestDist = Math.pow(99,99)
+        # Get all keys
+        keys = _.keys($scope.activePoints)
+        # Take the first key by default
+        closest = keys[0] 
+        # Look every key
+        _.each keys, (k)->
+            # Distance to the reference index
+            dist = Math.abs(parseInt(k)-ref)
+            # If the new distance is smaller
+            if dist > 0 and dist < closestDist
+                closestDist = dist
+                # Take the key as closest key
+                closest = k
+            
+        # Return the closest key
+        return parseInt(closest)
 
     mouse = (ev) ->
         ev = ev or event
@@ -43,20 +63,37 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         y: event.clientY + (document.documentElement.scrollTop or document.body.scrollTop)
 
     point =
-        on:  (d, index)->
-        off: (d, index)-> point.tips.off(d, index)
+        enter:  (d, index)->            
+            p = d3.select this
+            #p.transition().attr("r", 11).attr("stroke-width", 14)
+        leave: (d, index)-> 
+            p = d3.select this
+            # p.transition().attr("r", 5).attr("stroke-width", 3)
+            point.tips.clean()          
         tips:
-            on: (d, index)->
+            clean:->
+                console.log _.keys($scope.activePoints)
+                # For each point's tips
+                # look for the useless ones
+                $(".point-tips").each (key, tip)-> 
+                    index = $(tip).data("point")
+                    # Remove the inative point
+                    $(tip).remove() unless $scope.activePoints[index]
+                # For each activepoint,
+                # look for the missing tips                
+                _.each $scope.activePoints, point.tips.add
+
+            add: (d, index)->
                 $tips = $(".point-tips[data-point=" + index + "]")
-                $point = $(chartSvg.selectAll(".data-point")[0][index])      
+                $point = $(chartSvg.selectAll(".data-point")[0][index])  
                 # tips doenst exist yet
-                if $tips.length is 0        
+                if $tips.length is 0
                     # Create the tips
-                    $tips = $("<div class='point-tips hidden' data-point='" + index + "' />")        
+                    $tips = $("<div class='point-tips' data-point='" + index + "' />")        
                     # Positionate the tips to under the mouse
                     $tips.css
                         left: (if $point.offset() then $point.offset().left else mouse().x)
-                        top: (if $point.offset() then $point.offset().top else mouse().y)
+                        top:  (if $point.offset() then $point.offset().top else mouse().y)
                     # Appends the tips to the bodu
                     $tips.appendTo "body"      
                 # tips exists
@@ -64,15 +101,34 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                     # Positionate the tips to under the mouse
                     $tips.css(
                         left: (if $point.offset() then $point.offset().left else mouse().x)
-                        top: (if $point.offset() then $point.offset().top else mouse().y)
+                        top:  (if $point.offset() then $point.offset().top else mouse().y)
                     ).removeClass "hidden"              
                 # In any case, change the content of the tip
                 $tips.html "<div class='content'>" + ~~d.ratio + "%</div>"
-            off: (d, index)->
-                $point = $(chartSvg.selectAll(".data-point")[0][index])    
-                # Do not close active point      
-                # Just add a class hidden to the right tips
-                $(".point-tips[data-point=" + index + "]").addClass "hidden"  unless $point.hasClass("active")
+
+        toggle: (d, index)-> 
+            p = d3.select this
+            unless d.selected
+                d.selected = true
+                p.attr "fill", "#323c45"                
+                $scope.activePoints[index] = d
+                # if there is more than 2 points
+                if _.keys($scope.activePoints).length > 2
+                    # Get closest point
+                    closestIdx = closestActivePoints(index)
+                    closestElt = d3.selectAll(".data-point")[0][closestIdx]
+                    # If element exists
+                    if closestElt
+                        # Unselect it
+                        d3.select(closestElt).attr "fill", $filter("colors")($scope.question)
+                        delete $scope.activePoints[closestIdx]
+
+                $scope.$apply()
+            else
+                d.selected = false
+                p.attr "fill", $filter("colors")($scope.question)
+                delete $scope.activePoints[index]             
+                $scope.$apply()
 
     insertLinebreaks = (d) ->
         el = d3.select(this)
@@ -100,7 +156,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                 return null
 
         p         = [10, 10, 60, 10]
-        minGap    = if $("html").hasClass("lt-ie9") then 80 else 40
+        minGap    = 40
         dotGap    = Math.max(minGap, wrapperWidth / ($scope.answers.length - 1))
         w         = (dotGap * ($scope.answers.length - 1)) - p[1] - p[3]
         h         = wrapperHeight - p[0] - p[2]        
@@ -110,7 +166,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
         x.range [0, w]
         y.range [h, 0]
-        xAxis = d3.svg.axis().scale(x).tickSize(tickSize).tickPadding(5).tickFormat(dateFormat).ticks(d3.time.months, 2)
+        xAxis = d3.svg.axis().scale(x).tickSize(tickSize).tickPadding(10).tickFormat(dateFormat).ticks(d3.time.months, 2)
         yAxis = d3.svg.axis().scale(y).tickSize(tickSize).tickPadding(5).tickFormat((d)->d+"%").orient("left")
 
         # An area generator, for the light fill.
@@ -155,7 +211,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
             # Add the area path.
             chartSvg.append("svg:path")
                     .attr("class", "area bg")
-                    .attr("fill", "#ee9807")
+                    .attr("fill", $filter("colors")($scope.question))
                     .attr("d", area($scope.answers))
         # Add stripes
         else            
@@ -193,12 +249,13 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                 .attr("cx", (d)-> x d.date)
                 .attr("cy", (d)-> y d.ratio)
                 .attr("fill", $filter("colors")($scope.question))
+                .attr("r", 5)
                 .attr("stroke-width", 3)
                 .attr("stroke", "#ffffff")
-                .attr("r", 5)
-                .on("mousemove",  point.tips.on)
-                .on("mouseleave", point.off)
-                .on("mouseenter", point.on)
+                .on("mousemove",  point.tips.add)
+                .on("mouseleave", point.leave)
+                .on("mouseenter", point.enter)
+                .on("click",      point.toggle)
 
         # Add the x-axis.
         chartSvg.append("g")
@@ -230,7 +287,12 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         # Reinitialize jscrollpane
         wrapper.data("jsp").reinitialise()
 
-    update()
+
+    # Watch for model change to update the graph
+    $scope.$watch 'sample',       update
+    $scope.$watch 'question',     update
+    $scope.$watch 'activePoints', point.tips.clean, true
+
             
 
 AnswerGraphCtrl.$inject = ['$scope', 'Answer', '$rootElement', '$routeParams', '$location', '$filter'];

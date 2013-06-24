@@ -1,0 +1,52 @@
+// Base modal
+html body .modal {
+  @paddingTop:35px;
+  @paddingLeft:30px;
+  @width:700px - @paddingLeft*2px;
+  @height:360px - @paddingTop*2px;
+  
+  .border-radius(0);
+  .box-shadow(0 0 0 fade(@black, 0));
+  
+  .background-clip(none);
+  width: @width;
+  height:@height;
+  padding:0;
+  margin-left: -1px*@width/2px;
+  border: 0;
+  background: url("/static/img/popin/bg.png") 0 0 no-repeat;
+  padding:@paddingTop @paddingLeft;
+  
+  font-size: 13px;
+  color:#727272;
+
+  a.close {
+    position:absolute;
+    top:@paddingTop;
+    right:@paddingLeft;
+    .hide-text();
+    .opacity(100);
+    width:13px;
+    height:12px;
+    margin:5px 10px;
+    background:url("/static/img/popin/close.png") 0 0 no-repeat white;
+  }
+
+  a.dl {
+    display:block;
+    width:282px;
+    height:52px;
+    line-height:52px;
+    margin:auto;    
+    background:url("/static/img/popin/bt_telecharger.png") 0 0 no-repeat white;
+    text-transform:uppercase;
+    color:@white;
+    font-weight:bold;
+    font-size:11px;
+    margin-top:30px;
+    &:hover {
+      background-position:-1px*282px 0;
+      text-decoration:none;
+    }
+  }
+}

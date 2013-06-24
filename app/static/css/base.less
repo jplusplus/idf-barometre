@@ -2,12 +2,14 @@
 @import-once 'tools.less';
 @import-once 'animations.less';
 @import-once 'jscrollpane.less';
+@import-once 'bootstrap-overload.less';
 
 @zIndexPage    : 100;
 @zIndexOptions : @zIndexPage+100;
 @zIndexGraph   : @zIndexOptions+100;
 @zIndexLogo    : @zIndexGraph+100;
 @zIndexTips    : @zIndexGraph+100;
+@zIndexHeader  : @zIndexTips+100;
 
 @environnementColor:#BAD809;
 @economiqueColor:#ED9906;
@@ -283,7 +285,42 @@ body {
     .header {
         position:absolute;
         right:0;
-        top:0;    
+        top:0;
+        z-index:@zIndexHeader;
+        
+        li {
+            height:26px;
+            width:28px;
+            display:block;
+            margin-left:3px;
+            background:white no-repeat 0 0;
+            padding:0;
+            .box-shadow(0 2px 6px 0 fade(#000, 30));
+            float:left;
+            
+            a {
+                display:block;
+                height:26px;
+                width:28px;
+                .hide-text();                                
+            }            
+
+            &:hover {
+                background-position:-28px 0;
+            }
+
+            &.active {                
+                background-position:-28px*2px 0;
+            }
+            
+            &.info {
+                background-image:url("/static/img/common/tools_info.png");
+            }
+
+            &.dl {
+                background-image:url("/static/img/common/tools_dwl.png");
+            }
+        }    
     }
 
     .select-question {

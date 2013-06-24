@@ -1,5 +1,5 @@
 angular
-    .module('barometre', ['barometreFilters', 'barometreServices', 'ngSanitize'])
+    .module('barometre', ['barometreFilters', 'barometreServices', 'ngSanitize', 'ui.bootstrap'])
     .config(
         [
             '$interpolateProvider', 

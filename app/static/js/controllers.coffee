@@ -4,6 +4,27 @@ QuestionListCtrl = ($scope, Introduction, $rootElement )->
 
 QuestionListCtrl.$inject = ['$scope', 'Introduction', '$rootElement'];
 
+# the dialog is injected in the specified controller
+DialogCtrl = ($scope, dialog)->
+  $scope.close = -> dialog.close();
+  
+DialogCtrl.$inject = ['$scope', 'dialog'];
+
+HeaderCtrl = ($scope, $dialog)->        
+    $scope.opts =
+        backdrop: true
+        keyboard: true
+        backdropClick: true
+        dialogFade: true
+        backdropFade: true
+        templateUrl:  '/partial/dialog.html'
+        controller: 'DialogCtrl'
+    
+    $scope.openDialog = ->      
+        d = $dialog.dialog($scope.opts)
+        d.open()
+
+HeaderCtrl.$inject = ['$scope', '$dialog'];
 
 AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filter)->
 

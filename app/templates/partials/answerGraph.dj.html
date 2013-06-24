@@ -1,7 +1,16 @@
 <div class="container centered graph" ng-class="'question-' + question + ' profil-' + profil">
-    <div class="header">
-        <a href="{% url answers 'csv' %}?question=[[question]]&amp;profil=[[profil]]" class="dl">Télécharger</a>
-    </div>
+    <ul class="header unstyled" ng-controller="HeaderCtrl">
+        <li class="info">
+            <a ng-click="openDialog()">
+                Information
+            </a>
+        </li>
+        <li class="dl">
+            <a href="{% url answers 'csv' %}?question=[[question]]&amp;profil=[[profil]]">
+                Télécharger
+            </a>
+        </li>
+    </ul>
     <div class="select-question">
         <div class="row-fluid">
             <label class="span4 radio-economique vr">

@@ -89,17 +89,23 @@ body {
             }                        
         }
 
-        .indicator {
-            font-family:@serifFontFamily;
-            font-size:60px;
+        .indicator {            
+            font-family:@serifFontFamily;            
+            font-size: 76px;
             display:block;
             line-height:60px;
-            font-weight:bold;
+            font-weight:400;
             margin-bottom:10px;
-            padding-right:10px;
+            padding-right:10px;    
 
             sup {
                 font-size:40%;
+                top:-1.1em;
+            }
+
+            sub {
+                bottom:0.2em;
+                font-size:60%;
             }
 
             &.economique    { color:@economiqueColor; }
@@ -121,6 +127,7 @@ body {
                     float:left;
                     margin:0;
                     padding:0;
+                    
                 }
 
                 &.increase .previous,
@@ -128,10 +135,10 @@ body {
                     padding-top:40px;
                 }
                 
-                .picto {                
+                .picto {    
                     height:53px;
                     width:53px;
-                    margin:0 5px;        
+                    margin:5px;                                        
                     background:0 0 no-repeat transparent;
                     display:block;
                     float:left;
@@ -317,7 +324,7 @@ body {
         }
     }
 
-    .select-sample {
+    .select-profil {
         display:block;
         width:255px;
         position:absolute;
@@ -562,26 +569,26 @@ body {
             background-position:-150px*2px 0;
         }
 
-        &.sample-18_24      .radio-18_24      { background-position:-100px 0; }
-        &.sample-25_34      .radio-25_34      { background-position:-100px 0; }
-        &.sample-35_49      .radio-35_49      { background-position:-100px 0; }
-        &.sample-50_64      .radio-50_64      { background-position:-100px 0; }
-        &.sample-65_plus    .radio-65_plus    { background-position:-100px 0; }
-        &.sample-femme      .radio-femme      { background-position:-100px 0; }
-        &.sample-homme      .radio-homme      { background-position:-100px 0; }
-        &.sample-cadre      .radio-cadre      { background-position:-100px 0; }
-        &.sample-employe    .radio-employe    { background-position:-100px 0; }
-        &.sample-ouvrier    .radio-ouvrier    { background-position:-100px 0; }
-        &.sample-retraite   .radio-retraite   { background-position:-100px 0; }
-        &.sample-technicien .radio-technicien { background-position:-100px 0; }
-        &.sample-75 .radio-75 i { color:@activeColor; }
-        &.sample-77 .radio-77 i { color:@activeColor; }
-        &.sample-78 .radio-78 i { color:@activeColor; }
-        &.sample-91 .radio-91 i { color:@activeColor; }
-        &.sample-92 .radio-92 i { color:@activeColor; }
-        &.sample-93 .radio-93 i { color:@activeColor; }
-        &.sample-94 .radio-94 i { color:@activeColor; }
-        &.sample-95 .radio-95 i { color:@activeColor; }
+        &.profil-18_24      .radio-18_24      { background-position:-100px 0; }
+        &.profil-25_34      .radio-25_34      { background-position:-100px 0; }
+        &.profil-35_49      .radio-35_49      { background-position:-100px 0; }
+        &.profil-50_64      .radio-50_64      { background-position:-100px 0; }
+        &.profil-65_plus    .radio-65_plus    { background-position:-100px 0; }
+        &.profil-femme      .radio-femme      { background-position:-100px 0; }
+        &.profil-homme      .radio-homme      { background-position:-100px 0; }
+        &.profil-cadre      .radio-cadre      { background-position:-100px 0; }
+        &.profil-employe    .radio-employe    { background-position:-100px 0; }
+        &.profil-ouvrier    .radio-ouvrier    { background-position:-100px 0; }
+        &.profil-retraite   .radio-retraite   { background-position:-100px 0; }
+        &.profil-technicien .radio-technicien { background-position:-100px 0; }
+        &.profil-75 .radio-75 i { color:@activeColor; }
+        &.profil-77 .radio-77 i { color:@activeColor; }
+        &.profil-78 .radio-78 i { color:@activeColor; }
+        &.profil-91 .radio-91 i { color:@activeColor; }
+        &.profil-92 .radio-92 i { color:@activeColor; }
+        &.profil-93 .radio-93 i { color:@activeColor; }
+        &.profil-94 .radio-94 i { color:@activeColor; }
+        &.profil-95 .radio-95 i { color:@activeColor; }
 
         .border-top { 
             background-image:url("/static/img/graph/fond_haut_p3.png");
@@ -598,26 +605,26 @@ body {
             background-position:-150px*2px 0;
         }        
 
-        &.sample-18_24      .radio-18_24      { background-position:-150px 0; }
-        &.sample-25_34      .radio-25_34      { background-position:-150px 0; }
-        &.sample-35_49      .radio-35_49      { background-position:-150px 0; }
-        &.sample-50_64      .radio-50_64      { background-position:-150px 0; }
-        &.sample-65_plus    .radio-65_plus    { background-position:-150px 0; }
-        &.sample-femme      .radio-femme      { background-position:-150px 0; }
-        &.sample-homme      .radio-homme      { background-position:-150px 0; }
-        &.sample-cadre      .radio-cadre      { background-position:-150px 0; }
-        &.sample-employe    .radio-employe    { background-position:-150px 0; }
-        &.sample-ouvrier    .radio-ouvrier    { background-position:-150px 0; }
-        &.sample-retraite   .radio-retraite   { background-position:-150px 0; }
-        &.sample-technicien .radio-technicien { background-position:-150px 0; }
-        &.sample-75 .radio-75 i { color:@activeColor; }
-        &.sample-77 .radio-77 i { color:@activeColor; }
-        &.sample-78 .radio-78 i { color:@activeColor; }
-        &.sample-91 .radio-91 i { color:@activeColor; }
-        &.sample-92 .radio-92 i { color:@activeColor; }
-        &.sample-93 .radio-93 i { color:@activeColor; }
-        &.sample-94 .radio-94 i { color:@activeColor; }
-        &.sample-95 .radio-95 i { color:@activeColor; }
+        &.profil-18_24      .radio-18_24      { background-position:-150px 0; }
+        &.profil-25_34      .radio-25_34      { background-position:-150px 0; }
+        &.profil-35_49      .radio-35_49      { background-position:-150px 0; }
+        &.profil-50_64      .radio-50_64      { background-position:-150px 0; }
+        &.profil-65_plus    .radio-65_plus    { background-position:-150px 0; }
+        &.profil-femme      .radio-femme      { background-position:-150px 0; }
+        &.profil-homme      .radio-homme      { background-position:-150px 0; }
+        &.profil-cadre      .radio-cadre      { background-position:-150px 0; }
+        &.profil-employe    .radio-employe    { background-position:-150px 0; }
+        &.profil-ouvrier    .radio-ouvrier    { background-position:-150px 0; }
+        &.profil-retraite   .radio-retraite   { background-position:-150px 0; }
+        &.profil-technicien .radio-technicien { background-position:-150px 0; }
+        &.profil-75 .radio-75 i { color:@activeColor; }
+        &.profil-77 .radio-77 i { color:@activeColor; }
+        &.profil-78 .radio-78 i { color:@activeColor; }
+        &.profil-91 .radio-91 i { color:@activeColor; }
+        &.profil-92 .radio-92 i { color:@activeColor; }
+        &.profil-93 .radio-93 i { color:@activeColor; }
+        &.profil-94 .radio-94 i { color:@activeColor; }
+        &.profil-95 .radio-95 i { color:@activeColor; }
 
         .border-top { 
             background-image:url("/static/img/graph/fond_haut_p2.png");
@@ -635,33 +642,33 @@ body {
             background-position:-150px*2px 0;
         }
 
-        &.sample-18_24      .radio-18_24      { background-position:-200px 0; }
-        &.sample-25_34      .radio-25_34      { background-position:-200px 0; }
-        &.sample-35_49      .radio-35_49      { background-position:-200px 0; }
-        &.sample-50_64      .radio-50_64      { background-position:-200px 0; }
-        &.sample-65_plus    .radio-65_plus    { background-position:-200px 0; }
-        &.sample-femme      .radio-femme      { background-position:-200px 0; }
-        &.sample-homme      .radio-homme      { background-position:-200px 0; }
-        &.sample-cadre      .radio-cadre      { background-position:-200px 0; }
-        &.sample-employe    .radio-employe    { background-position:-200px 0; }
-        &.sample-ouvrier    .radio-ouvrier    { background-position:-200px 0; }
-        &.sample-retraite   .radio-retraite   { background-position:-200px 0; }
-        &.sample-technicien .radio-technicien { background-position:-200px 0; }
-        &.sample-75 .radio-75 i { color:@activeColor; }
-        &.sample-77 .radio-77 i { color:@activeColor; }
-        &.sample-78 .radio-78 i { color:@activeColor; }
-        &.sample-91 .radio-91 i { color:@activeColor; }
-        &.sample-92 .radio-92 i { color:@activeColor; }
-        &.sample-93 .radio-93 i { color:@activeColor; }
-        &.sample-94 .radio-94 i { color:@activeColor; }
-        &.sample-95 .radio-95 i { color:@activeColor; }
+        &.profil-18_24      .radio-18_24      { background-position:-200px 0; }
+        &.profil-25_34      .radio-25_34      { background-position:-200px 0; }
+        &.profil-35_49      .radio-35_49      { background-position:-200px 0; }
+        &.profil-50_64      .radio-50_64      { background-position:-200px 0; }
+        &.profil-65_plus    .radio-65_plus    { background-position:-200px 0; }
+        &.profil-femme      .radio-femme      { background-position:-200px 0; }
+        &.profil-homme      .radio-homme      { background-position:-200px 0; }
+        &.profil-cadre      .radio-cadre      { background-position:-200px 0; }
+        &.profil-employe    .radio-employe    { background-position:-200px 0; }
+        &.profil-ouvrier    .radio-ouvrier    { background-position:-200px 0; }
+        &.profil-retraite   .radio-retraite   { background-position:-200px 0; }
+        &.profil-technicien .radio-technicien { background-position:-200px 0; }
+        &.profil-75 .radio-75 i { color:@activeColor; }
+        &.profil-77 .radio-77 i { color:@activeColor; }
+        &.profil-78 .radio-78 i { color:@activeColor; }
+        &.profil-91 .radio-91 i { color:@activeColor; }
+        &.profil-92 .radio-92 i { color:@activeColor; }
+        &.profil-93 .radio-93 i { color:@activeColor; }
+        &.profil-94 .radio-94 i { color:@activeColor; }
+        &.profil-95 .radio-95 i { color:@activeColor; }
 
         .border-top { 
             background-image:url("/static/img/graph/fond_haut_p1.png");
         }
     }
 
-    &.sample-all {    
+    &.profil-all {    
         &.question-environnement .radio-all {
             background-position:-76px*2px 0;
         }
@@ -678,25 +685,25 @@ body {
         }
     }
 
-    &.sample-18_24, &.sample-25_34, &.sample-35_49, &.sample-50_64, &.sample-65_plus {        
+    &.profil-18_24, &.profil-25_34, &.profil-35_49, &.profil-50_64, &.profil-65_plus {        
         .border-left {
             background-image:url("/static/img/graph/fond_gauche_p2.png");            
         }
     }
 
-    &.sample-femme, &.sample-homme{        
+    &.profil-femme, &.profil-homme{        
         .border-left {
             background-image:url("/static/img/graph/fond_gauche_p3.png");            
         }
     }
 
-    &.sample-cadre, &.sample-employe, &.sample-ouvrier, &.sample-retraite, &.sample-technicien {        
+    &.profil-cadre, &.profil-employe, &.profil-ouvrier, &.profil-retraite, &.profil-technicien {        
         .border-left {
             background-image:url("/static/img/graph/fond_gauche_p4.png");            
         }
     }
 
-    &.sample-75, &.sample-77, &.sample-78, &.sample-91, &.sample-92, &.sample-93, &.sample-94, &.sample-95 {        
+    &.profil-75, &.profil-77, &.profil-78, &.profil-91, &.profil-92, &.profil-93, &.profil-94, &.profil-95 {        
         .border-left {
             background-image:url("/static/img/graph/fond_gauche_p5.png");            
         }

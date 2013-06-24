@@ -9,8 +9,8 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
 
 
     # Models attributes
-    $scope.question = $routeParams.question or "economique"
-    $scope.sample   = $routeParams.sample   or "all"
+    $scope.question = $routeParams.q or "economique"
+    $scope.profil   = $routeParams.p or "all"
     # List of active point
     $scope.activePoints = {}
 
@@ -33,8 +33,11 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     y = d3.scale.linear()
     
     update = -> 
-        params = profil: $scope.sample, question: $scope.question
+        params = profil: $scope.profil, question: $scope.question
         $scope.answers = Answer.query params, render
+        # Update path
+        $location.search "p", $scope.profil
+        $location.search "q", $scope.question
 
     loadShortcuts = ->
         wrapper = $rootElement.find(".wrapper")
@@ -362,7 +365,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         return true
 
     # Watch for model change to update the graph
-    $scope.$watch 'sample',       update
+    $scope.$watch 'profil',       update
     $scope.$watch 'question',     update    
     $scope.$watch 'activePoints', point.tips.clean, true
     $scope.$watch 'activePoints', point.setTrend, true
@@ -372,6 +375,9 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         # Force active point removing     
         point.tips.clean()
 
+    $scope.$on '$routeUpdate', ->
+        $scope.question = $location.search().q
+        $scope.profil   = $location.search().p
             
 
 AnswerGraphCtrl.$inject = ['$scope', 'Answer', '$rootElement', '$routeParams', '$location', '$filter'];

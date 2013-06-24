@@ -45,13 +45,17 @@ angular
             return colors[key][level]         
     )
     .filter("supPercent", ->
-        return (val='', html=true)-> 
+        return (val='', html=true, format=null)-> 
             # Remove ,0% end
             val = val.replace /,0%/, "%"
             # Add <sup></sup> arround %
-            val = val.replace /%/, "<sup>%</sup>" if html
-            # Add a plus prefix for percentage and non-negative values
-            val = "+" + val if val.match /%/ and val.indexOf("-") == -1 
+            val = val.replace /%/, "<sup>%</sup>" if html            
+
+            if format == "trend"
+                # Add a plus prefix for percentage and non-negative values
+                val = "<sub>✚</sub>" + val if val.indexOf("-") == -1                 
+                # Relplace the classic minus by a special chart
+                val = val.replace("-", "⁃")
             # Return the new value explcitily
             return val
     )

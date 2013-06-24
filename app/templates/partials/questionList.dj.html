@@ -1,21 +1,17 @@
 <div class="container centered">
     <ul class="introductions unstyled">
-        <li ng-repeat="introduction in introductions" class="introduction case-[[$index+1]]" ng-class="'type-' + introduction.format">
-            <a class="wrapper" href="#/[[introduction.question.slug]]-[[introduction.profil.slug]]">
-                <div class="indicator" ng-class="introduction.question.slug">
-                    <span ng-bind-html="introduction.indicator.value | supPercent" class="ratio value"></span>
-                    <div class="trend" ng-if="introduction.format == 'trend'"  ng-class="introduction.indicator.class">                    
-                        <span class="previous ratio">
-                            [[introduction.indicator.previous | supPercent:false]]
-                        </span>
+        <li ng-repeat="intro in introductions" class="introduction case-[[$index+1]]" ng-class="'type-' + intro.format">
+            <a class="wrapper" href="#/answers/?q=[[intro.question.slug]]&amp;p=[[intro.profil.slug]]">
+                <div class="indicator" ng-class="intro.question.slug">
+                    <span ng-bind-html="intro.indicator.value | supPercent:true:intro.format" class="ratio value"></span>
+                    <div class="trend" ng-if="intro.format == 'trend'"  ng-class="intro.indicator.class">                    
+                        <span class="previous ratio" ng-bind-html="intro.indicator.previous | supPercent"></span>
                         <span class="picto"><!-- Trend pictogram --></span>
-                        <span class="current ratio">
-                            [[introduction.indicator.current | supPercent:false]]
-                        </span>
+                        <span class="current ratio" ng-bind-html="intro.indicator.current | supPercent">/span>
                     </div>
                 </div>
                 <div class="caption">
-                    <span ng-bind-html="introduction.sentence | nl2br"></span>
+                    <span ng-bind-html="intro.sentence | nl2br"></span>
                 </div>                
             </a>
         </li>

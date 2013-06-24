@@ -1,4 +1,4 @@
-<div class="container centered graph" ng-class="'question-' + question + ' sample-' + sample">
+<div class="container centered graph" ng-class="'question-' + question + ' profil-' + profil">
     <div class="select-question">
         <div class="row-fluid">
             <label class="span4 radio-economique vr">
@@ -19,67 +19,67 @@
         </div>
     </div>
 
-    <div class="select-sample">
+    <div class="select-profil">
         <div class="hr select select-all">
             <label class="radio-all">
                 Tous
-                <input type="radio" name="sample" ng-model="sample" value="all" />
+                <input type="radio" name="profil" ng-model="profil" value="all" />
             </label>
         </div>
 
         <div class="hr select select-age">
             <label class="radio-18_24">
                 18-24<br /><small>ans</small>
-                <input type="radio" name="sample" ng-model="sample" value="18_24" />
+                <input type="radio" name="profil" ng-model="profil" value="18_24" />
             </label>
             <label class="radio-25_34">
                 25-34<br /><small>ans</small>
-                <input type="radio" name="sample" ng-model="sample" value="25_34" />
+                <input type="radio" name="profil" ng-model="profil" value="25_34" />
             </label>
             <label class="radio-35_49">
                 35-49<br /><small>ans</small>
-                <input type="radio" name="sample" ng-model="sample" value="35_49" />
+                <input type="radio" name="profil" ng-model="profil" value="35_49" />
             </label>
             <label class="radio-50_64">
                 50-64<br /><small>ans</small>
-                <input type="radio" name="sample" ng-model="sample" value="50_64" />
+                <input type="radio" name="profil" ng-model="profil" value="50_64" />
             </label>
             <label class="radio-65_plus">
                 65+<br /><small>ans</small>
-                <input type="radio" name="sample" ng-model="sample" value="65_plus" />
+                <input type="radio" name="profil" ng-model="profil" value="65_plus" />
             </label>
         </div>
         <div class="hr select select-sex">
             <label class="radio-homme">
                 Homme
-                <input type="radio" name="sample" ng-model="sample" value="homme" />
+                <input type="radio" name="profil" ng-model="profil" value="homme" />
             </label>
             <label class="radio-femme">
                 Femme
-                <input type="radio" name="sample" ng-model="sample" value="femme" />
+                <input type="radio" name="profil" ng-model="profil" value="femme" />
             </label>
         </div>
 
         <div class="hr select select-job">            
             <label class="radio-cadre">
                 Cadre
-                <input type="radio" name="sample" ng-model="sample" value="cadre" />
+                <input type="radio" name="profil" ng-model="profil" value="cadre" />
             </label>
             <label class="radio-employe">
                 Employé
-                <input type="radio" name="sample" ng-model="sample" value="employe" />
+                <input type="radio" name="profil" ng-model="profil" value="employe" />
             </label>
             <label class="radio-ouvrier">
                 Ouvrier
-                <input type="radio" name="sample" ng-model="sample" value="ouvrier" />
+                <input type="radio" name="profil" ng-model="profil" value="ouvrier" />
             </label>
             <label class="radio-technicien">
                 Technicien
-                <input type="radio" name="sample" ng-model="sample" value="technicien" />
+                <input type="radio" name="profil" ng-model="profil" value="technicien" />
             </label>
             <label class="radio-retraite">
                 Retraité
-                <input type="radio" name="sample" ng-model="sample" value="retraite" />
+                <input type="radio" name="profil" ng-model="profil" value="retraite" />
             </label>
         </div>
 
@@ -87,37 +87,37 @@
             <div class="span6">
                 <label class="radio-75">
                     <i>75</i> Paris
-                    <input type="radio" name="sample" ng-model="sample" value="75" />
+                    <input type="radio" name="profil" ng-model="profil" value="75" />
                 </label>
                 <label class="radio-77">
                     <i>77</i> Seine et Marne
-                    <input type="radio" name="sample" ng-model="sample" value="77" />
+                    <input type="radio" name="profil" ng-model="profil" value="77" />
                 </label>
                 <label class="radio-78">
                     <i>78</i> Yvelines
-                    <input type="radio" name="sample" ng-model="sample" value="78" />
+                    <input type="radio" name="profil" ng-model="profil" value="78" />
                 </label>
                 <label class="radio-91">
                     <i>91</i> Essonne
-                    <input type="radio" name="sample" ng-model="sample" value="91" />
+                    <input type="radio" name="profil" ng-model="profil" value="91" />
                 </label>
             </div>
             <div class="span6">
                 <label class="radio-92">
                     <i>92</i> Hauts-de-seine
-                    <input type="radio" name="sample" ng-model="sample" value="92" />
+                    <input type="radio" name="profil" ng-model="profil" value="92" />
                 </label>
                 <label class="radio-93">
                     <i>93</i> Seine-St-Denis
-                    <input type="radio" name="sample" ng-model="sample" value="93" />
+                    <input type="radio" name="profil" ng-model="profil" value="93" />
                 </label>
                 <label class="radio-94">
                     <i>94</i> Val-de-Marne
-                    <input type="radio" name="sample" ng-model="sample" value="94" />
+                    <input type="radio" name="profil" ng-model="profil" value="94" />
                 </label>
                 <label class="radio-95">
                     <i>95</i> Val d'Oise
-                    <input type="radio" name="sample" ng-model="sample" value="95" />
+                    <input type="radio" name="profil" ng-model="profil" value="95" />
                 </label>
             </div>
         </div>
@@ -128,7 +128,7 @@
         <div class="border-left"></div>        
         <h2>
             Ce que pense 
-            <span ng:bind-html="sample | alias"></span> 
+            <span ng:bind-html="profil | alias"></span> 
             <span ng:bind-html="question | alias"></span> 
         </h2>
         <div class="manual">

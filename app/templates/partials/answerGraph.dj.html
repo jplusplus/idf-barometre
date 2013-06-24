@@ -1,12 +1,12 @@
 <div class="container centered graph" ng-class="'question-' + question + ' profil-' + profil">
     <ul class="header unstyled" ng-controller="HeaderCtrl">
         <li class="info">
-            <a ng-click="openDialog()">
+            <a ng-click="openDialog()" title="Plus d'info sur ce sondage">
                 Information
             </a>
         </li>
         <li class="dl">
-            <a href="{% url answers 'csv' %}?question=[[question]]&amp;profil=[[profil]]">
+            <a href="{% url answers 'csv' %}?question=[[question]]&amp;profil=[[profil]]" title="Téléchargez les données de cet échantillon">
                 Télécharger
             </a>
         </li>

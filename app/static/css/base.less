@@ -55,11 +55,22 @@ body {
 
 .introductions {
     .box-shadow(0 0 20px 0 fade(black, 20) );
+    .translate3d(0,0,0);    
     height:582px;
     top:58px;
     position:relative;
     z-index:@zIndexPage;
     background:url("/static/img/intro/pointilles.png") #edeef0 0 0 no-repeat;
+    
+    li.what {
+        padding-top:110px;
+        width:226px;
+        height:83px;
+        background:@white;       
+        text-align:center;
+        text-transform:uppercase;
+        font-size:13px;
+    }
     
     .introduction {
         width:225px-2px;
@@ -272,6 +283,51 @@ body {
     }
 }
 
+    
+/* ---------------------------------------------------------- */
+/* GENERAL HEADER BAR */
+.header {
+    position:absolute;
+    right:0;
+    top:0;
+    z-index:@zIndexHeader;
+    
+    li {
+        height:26px;
+        width:28px;
+        display:block;
+        margin-left:3px;
+        background:white no-repeat 0 0;
+        padding:0;
+        .box-shadow(0 2px 6px 0 fade(#000, 30));
+        float:left;
+        
+        a {
+            display:block;
+            height:26px;
+            width:28px;
+            .hide-text();                                
+        }            
+
+        &:hover {
+            background-position:-28px 0;
+        }
+
+        &.active {                
+            background-position:-28px*2px 0;
+        }
+        
+        &.info {
+            background-image:url("/static/img/common/tools_info.png");
+        }
+
+        &.dl {
+            background-image:url("/static/img/common/tools_dwl.png");
+        }
+    }    
+}
+
+
 
 /* ---------------------------------------------------------- */
 /* PAGE GRAPH */
@@ -281,47 +337,6 @@ body {
     height:620px;
     position:relative;
     z-index:@zIndexPage;
-    
-    .header {
-        position:absolute;
-        right:0;
-        top:0;
-        z-index:@zIndexHeader;
-        
-        li {
-            height:26px;
-            width:28px;
-            display:block;
-            margin-left:3px;
-            background:white no-repeat 0 0;
-            padding:0;
-            .box-shadow(0 2px 6px 0 fade(#000, 30));
-            float:left;
-            
-            a {
-                display:block;
-                height:26px;
-                width:28px;
-                .hide-text();                                
-            }            
-
-            &:hover {
-                background-position:-28px 0;
-            }
-
-            &.active {                
-                background-position:-28px*2px 0;
-            }
-            
-            &.info {
-                background-image:url("/static/img/common/tools_info.png");
-            }
-
-            &.dl {
-                background-image:url("/static/img/common/tools_dwl.png");
-            }
-        }    
-    }
 
     .select-question {
         display:block;

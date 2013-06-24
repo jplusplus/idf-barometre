@@ -1,5 +1,17 @@
 <div class="container centered">
+    <ul class="header unstyled" ng-controller="HeaderCtrl">
+        <li class="info">
+            <a ng-click="openDialog()">
+                Information
+            </a>
+        </li>
+    </ul>
     <ul class="introductions unstyled">
+        <li class="what">
+            Sondage réalisé tous les<br />
+            2 mois auprès d'un panel<br />
+            de 1500 personnes.
+        </li>
         <li ng-repeat="intro in introductions" class="introduction case-[[$index+1]]" ng-class="'type-' + intro.format">
             <a class="wrapper" href="#/answers/?q=[[intro.question.slug]]&amp;p=[[intro.profil.slug]]">
                 <div class="indicator" ng-class="intro.question.slug">

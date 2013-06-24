@@ -6,6 +6,8 @@ QuestionListCtrl.$inject = ['$scope', 'Introduction', '$rootElement'];
 
 
 AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filter)->
+
+
     # Models attributes
     $scope.question = $routeParams.question or "economique"
     $scope.sample   = $routeParams.sample   or "all"
@@ -16,27 +18,28 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     chartSvg   = {}
     yAxisSvg   = {}    
     parse      = d3.time.format("%m/%Y").parse
-    dateFormat = d3.time.format("%b %y")
-    # Wrapper that container the graph and a scrollbar
-    wrapper = $rootElement.find(".wrapper")
+    dateFormat = d3.time.format("%b %y")    
+    # Empty shortcuts
+    wrapper = chart = axis = $(null)        
     # Saves wrap
     wrapperWidth  = 549
     wrapperHeight = 330
     tickSize      = 5    
     padding       = [10, 10, 60, 10]
     minGap        = 40
-    # Add customise scrollbar
-    wrapper.jScrollPane hideFocus: true
 
     # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
     x = d3.time.scale()
     y = d3.scale.linear()
-
-
-    # Methods    
+    
     update = -> 
         params = profil: $scope.sample, question: $scope.question
         $scope.answers = Answer.query params, render
+
+    loadShortcuts = ->
+        wrapper = $rootElement.find(".wrapper")
+        chart   = $rootElement.find(".chart")
+        axis    = $rootElement.find(".yaxis")
 
     closestActivePoints = (ref)->
         ref = parseInt(ref)
@@ -60,10 +63,11 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         return parseInt(closest)
 
     point =      
-        offset: (d)->
+        offset: (d)-> 
+            wrapper = $rootElement.find(".wrapper")
             return {
-                top  : wrapper.offset().top  + y(d.ratio)
-                left : wrapper.offset().left + x(d.date)
+                top  :  wrapper.offset().top  + y(d.ratio)
+                left :  wrapper.offset().left + x(d.date)
             }
         setTrend: (d)->
             # Wait for D3 instance
@@ -101,6 +105,13 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                     # Hide the trend                                                                            
                     trend.style("display", "none")
         tips:
+            update: ()->                
+                # Update the existing activePoint
+                _.each $scope.activePoints, (d, key)->
+                    # Update the data within activePoints
+                    $scope.activePoints[key] = $scope.answers[key]
+                # Render the tips
+                point.tips.clean()
             clean:->
                 # For each point's tips
                 # look for the useless ones
@@ -126,7 +137,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                         left: offset.left
                         top:  offset.top
                     # Appends the tips to the bodu
-                    $tips.appendTo $rootElement   
+                    $tips.appendTo "body"   
                 # tips exists
                 else        
                     # offset of the point according its data
@@ -175,12 +186,15 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
             tspan.attr("x", 0).attr "dy", "12"  if i > 0
             i++
 
-    render = ()->         
-        # Reload selectors and empty container
-        chart = $rootElement.find(".chart").empty()
-        axis  = $rootElement.find(".yaxis").empty()
+    render = ()->    
+        loadShortcuts()    
+        # Empty container
+        chart.empty()
+        axis.empty()
+        # Update tips
+        point.tips.update()        
         # Do we stop
-        return if $scope.answers.length == 0
+        return false if $scope.answers.length is 0                    
         # Parse dates and numbers. We assume $scope.answers is sorted by date.
         _.each $scope.answers, (d) ->
             try 
@@ -336,16 +350,27 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         yAxisSvg.selectAll(".axis g line").attr "stroke", "#aaa"
         yAxisSvg.selectAll(".axis g line").attr "stroke-width", 1 
         
+        # jscrollpane already exists
+        if wrapper.data("jsp")?
+            # Reinitialize jscrollpane
+            wrapper.data("jsp").reinitialise() 
+        else        
+            # Add customise scrollbar
+            wrapper.jScrollPane hideFocus: true
 
-        # Reinitialize jscrollpane
-        wrapper.data("jsp").reinitialise()
-
+        # This is the end
+        return true
 
     # Watch for model change to update the graph
     $scope.$watch 'sample',       update
-    $scope.$watch 'question',     update
+    $scope.$watch 'question',     update    
     $scope.$watch 'activePoints', point.tips.clean, true
     $scope.$watch 'activePoints', point.setTrend, true
+    # Watch the controller destruction
+    $scope.$on '$destroy', ->
+        $scope.activePoints = []
+        # Force active point removing     
+        point.tips.clean()
 
             
 

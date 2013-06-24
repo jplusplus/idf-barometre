@@ -63,9 +63,14 @@ def answers(request, format='json'):
         return HttpResponse(output, mimetype="application/json")
     # CSV request
     elif format == 'csv':        
+        filename = "answers"
+        if "question" in request.GET:
+            filename += "-" + request.GET["question"]
+        if "profil" in request.GET:
+            filename += "-" + request.GET["profil"]            
         # Create the HttpResponse object with the appropriate CSV header.
         response = HttpResponse(content_type='text/text')
-        response['Content-Disposition'] = 'attachment; filename="answer.csv"'
+        response['Content-Disposition'] = 'attachment; filename="%s.csv"' % (filename,)
         # Frist the answer
         writer = csv.writer(response)
         # Only if there is data

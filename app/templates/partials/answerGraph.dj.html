@@ -144,7 +144,15 @@
             <span ng:bind-html="question | alias"></span> 
         </h2>
         <div class="manual">
-            Cliquez sur un point pour calculer le taux de croissance            
+            <span ng-if="activePointsCount() == 0">
+                Cliquez sur un premier point pour calculer le taux de croissance            
+            </span>
+            <span ng-if="activePointsCount() == 1">
+                Cliquez sur un second point pour calculer le taux de croissance            
+            </span>
+            <span ng-if="activePointsCount() == 2">
+                Cliquez sur un autre point pour comparer le taux de croissance            
+            </span>
         </div>
         <div class="yaxis"></div>
         <div class="border"></div>

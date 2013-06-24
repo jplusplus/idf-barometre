@@ -28,12 +28,12 @@ HeaderCtrl.$inject = ['$scope', '$dialog'];
 
 AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filter)->
 
-
     # Models attributes
     $scope.question = $routeParams.q or "economique"
     $scope.profil   = $routeParams.p or "all"
     # List of active point
     $scope.activePoints = {}
+    $scope.activePointsCount = -> _.keys($scope.activePoints).length
 
     # Graph attributes
     chartSvg   = {}
@@ -180,7 +180,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                 p.attr "fill", "#323c45"                
                 $scope.activePoints[index] = d
                 # if there is more than 2 points
-                if _.keys($scope.activePoints).length > 2
+                if $scope.activePointsCount() > 2
                     # Get closest point
                     closestIdx = closestActivePoints(index)
                     closestElt = d3.selectAll(".data-point")[0][closestIdx]

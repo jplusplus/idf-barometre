@@ -113,7 +113,7 @@ class Introduction(models.Model):
             # Do we find the current value?
             if currentAnswer:                    
                 # Update the filter according the variation field
-                if self.variation == 'last_2_month':                    
+                if self.variation == 'last_2_month':                                 
                     # Previous answer date: 2 month before
                     filters["date"] = currentAnswer[0].date - relativedelta(months=2)
                 else:
@@ -121,7 +121,7 @@ class Introduction(models.Model):
                     filters["date"] = currentAnswer[0].date - relativedelta(years=1)
 
                 # Get the previous answer
-                previousAnswer = Answer.objects.order_by("-date").filter(**filters) 
+                previousAnswer = Answer.objects.order_by("-date").filter(**filters)                 
                 # The revious answer exists
                 if previousAnswer:
                     indicator["value"]    = Answer.float( currentAnswer[0].ratio - previousAnswer[0].ratio, "%")

@@ -42,24 +42,44 @@ def answers(request, format='json'):
 
     # Get the answers ordering by date
     answers = Answer.objects.exclude(ratio__lte=0).filter(**filters).order_by("date")
+    # this gives you a list of dicts
+    raw_data = serializers.serialize('python', answers, relations=('profil','question',))
+    # now extract the inner `fields` dicts
+    actual_data = [d['fields'] for d in raw_data]
+    # now extract the inner 'fields' into profil and question
+    # and simplify the date field
+    for index, row in enumerate(actual_data):
+        row["date"]     = row["date"].strftime("%m/%Y")
+        row["profil"]   = row["profil"]["fields"]["display"]
+        row["question"] = row["question"]["fields"]["display"]
+        # Useless value
+        del row["created_at"]
 
+    # JSON request
     if format == 'json':                
-        # this gives you a list of dicts
-        raw_data = serializers.serialize('python', answers, relations=('profil','question',))
-        # now extract the inner `fields` dicts
-        actual_data = [d['fields'] for d in raw_data]
-        # now extract the inner 'fields' into profil and question
-        # and simplify the date field
-        for index, row in enumerate(actual_data):
-            row["date"]     = row["date"].strftime("%m/%Y")
-            row["profil"]   = row["profil"]["fields"]["display"]
-            row["question"] = row["question"]["fields"]["display"]
         # and now dump to JSON
         output = json.dumps(actual_data, default=dthandler)    
-
+        # Returns the data as JSON type
         return HttpResponse(output, mimetype="application/json")
+    # CSV request
+    elif format == 'csv':        
+        # Create the HttpResponse object with the appropriate CSV header.
+        response = HttpResponse(content_type='text/text')
+        response['Content-Disposition'] = 'attachment; filename="answer.csv"'
+        # Frist the answer
+        writer = csv.writer(response)
+        # Only if there is data
+        if len(actual_data) > 0:
+            # Take the first row keys as header
+            writer.writerow( actual_data[0].keys() )
+            # Take every row values
+            for row in actual_data:
+                writer.writerow( row.values() )
+
+        # Returns the data as CSV type
+        return response
     else:
-        return Http404
+        raise Http404
 
 
 def introductions(request):  

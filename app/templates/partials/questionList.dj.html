@@ -3,7 +3,16 @@
         <li ng-repeat="introduction in introductions" class="introduction case-[[$index+1]]" ng-class="'type-' + introduction.format">
             <a class="wrapper" href="#/[[introduction.question.slug]]-[[introduction.profil.slug]]">
                 <div class="indicator" ng-class="introduction.question.slug">
-                    <span ng-bind-html="introduction.indicator.value | supPercent"></span>
+                    <span ng-bind-html="introduction.indicator.value | supPercent" class="ratio value"></span>
+                    <div class="trend" ng-if="introduction.format == 'trend'"  ng-class="introduction.indicator.class">                    
+                        <span class="previous ratio">
+                            [[introduction.indicator.previous | supPercent:false]]
+                        </span>
+                        <span class="picto"><!-- Trend pictogram --></span>
+                        <span class="current ratio">
+                            [[introduction.indicator.current | supPercent:false]]
+                        </span>
+                    </div>
                 </div>
                 <div class="caption">
                     <span ng-bind-html="introduction.sentence | nl2br"></span>

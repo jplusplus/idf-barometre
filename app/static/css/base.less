@@ -93,9 +93,10 @@ body {
             font-family:@serifFontFamily;
             font-size:60px;
             display:block;
-            line-height:75px;
+            line-height:60px;
             font-weight:bold;
             margin-bottom:10px;
+            padding-right:10px;
 
             sup {
                 font-size:40%;
@@ -104,6 +105,55 @@ body {
             &.economique    { color:@economiqueColor; }
             &.transport     { color:@transportColor; }
             &.environnement { color:@environnementColor; }
+
+
+            .trend {
+                font-size:25px;
+                line-height:25px;
+                white-space:nowrap;
+                margin-top:5px;       
+                height:70px;         
+                width:200px;                
+                display:block;
+                
+                .ratio {
+                    display:block;
+                    float:left;
+                    margin:0;
+                    padding:0;
+                }
+
+                &.increase .previous,
+                &.decrease .current {
+                    padding-top:40px;
+                }
+                
+                .picto {                
+                    height:53px;
+                    width:53px;
+                    margin:0 5px;        
+                    background:0 0 no-repeat transparent;
+                    display:block;
+                    float:left;
+                }
+
+                &.decrease .picto {                        
+                    background-position:-53px 0;
+                }
+            }
+
+            &.environnement .picto {
+                background-image:url("/static/img/intro/tendance-environnement.png");
+            }
+
+            &.economique .picto {
+                background-image:url("/static/img/intro/tendance-situation_economique.png");
+            }
+
+            &.transport .picto {
+                background-image:url("/static/img/intro/tendance-transports.png"); 
+            } 
+
         }
 
         &.type-simple .indicator {
@@ -113,6 +163,10 @@ body {
             &.environnement { background-image:url("/static/img/common/pictos/picto_environnement.png"); }
             &.economique    { background-image:url("/static/img/common/pictos/picto_situation_economique.png"); }
             &.transport     { background-image:url("/static/img/common/pictos/picto_transports.png"); }            
+        }
+
+        .caption {
+            clear:left;
         }
 
 
@@ -194,7 +248,16 @@ body {
             width:225px*2px-2px;
             .wrapper { 
                 background-image:url("/static/img/intro/case9.png");  
-            }            
+            }   
+            
+            .value {
+                float:left;
+                padding-right:10px;
+            }         
+            
+            .trend {                
+                width:400px;                
+            }
         } 
 
     }

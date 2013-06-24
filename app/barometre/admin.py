@@ -13,7 +13,7 @@ class AnswerAdmin(admin.ModelAdmin):
     pass
 
 class IntroductionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('sentence', 'question', 'profil_truncated', 'format')
 
 
 class ImportAdmin(ModelAdmin):

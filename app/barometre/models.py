@@ -4,6 +4,7 @@ from django.conf               import settings
 from django.utils.html         import strip_tags
 from django.core.files.storage import FileSystemStorage
 from dateutil.relativedelta    import relativedelta
+from django.utils.text         import truncate_words
 import datetime
 import re
 
@@ -85,6 +86,9 @@ class Introduction(models.Model):
         else:
             return self.sentence
 
+    def profil_truncated(self):
+        return truncate_words(self.profil.display, 4)
+
     def indicator(self):
         # Default indicator to None
         indicator = dict()
@@ -127,6 +131,7 @@ class Introduction(models.Model):
                     indicator["value"]    = Answer.float( currentAnswer[0].ratio - previousAnswer[0].ratio, "%")
                     indicator["current"]  = Answer.float( currentAnswer[0].ratio, "%")
                     indicator["previous"] = Answer.float( previousAnswer[0].ratio, "%")
+                    indicator["class"]    = "increase" if currentAnswer[0].ratio >= previousAnswer[0].ratio else "decrease" 
                 
         return indicator
 

@@ -14,7 +14,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
 
     # Graph attributes
     chartSvg   = {}
-    yAxisSvg   = {}
+    yAxisSvg   = {}    
     parse      = d3.time.format("%m/%Y").parse
     dateFormat = d3.time.format("%b %y")
     # Wrapper that container the graph and a scrollbar
@@ -22,7 +22,9 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     # Saves wrap
     wrapperWidth  = 549
     wrapperHeight = 330
-    tickSize = 5
+    tickSize      = 5    
+    padding       = [10, 10, 60, 10]
+    minGap        = 40
     # Add customise scrollbar
     wrapper.jScrollPane hideFocus: true
 
@@ -57,22 +59,49 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         # Return the closest key
         return parseInt(closest)
 
-    mouse = (ev) ->
-        ev = ev or event
-        x: event.clientX + (document.documentElement.scrollLeft or document.body.scrollLeft)
-        y: event.clientY + (document.documentElement.scrollTop or document.body.scrollTop)
-
-    point =
-        enter:  (d, index)->            
-            p = d3.select this
-            #p.transition().attr("r", 11).attr("stroke-width", 14)
-        leave: (d, index)-> 
-            p = d3.select this
-            # p.transition().attr("r", 5).attr("stroke-width", 3)
-            point.tips.clean()          
+    point =      
+        offset: (d)->
+            return {
+                top  : wrapper.offset().top  + y(d.ratio)
+                left : wrapper.offset().left + x(d.date)
+            }
+        setTrend: (d)->
+            # Wait for D3 instance
+            if chartSvg.select?
+                # find the trend group
+                trend = chartSvg.select("g.trend")
+                # Keys list sortted by key
+                keys = _.sortBy _.keys($scope.activePoints), (d, key)->key
+                # Only if there is enougth data
+                unless keys.length < 2
+                    fst = $scope.activePoints[ keys[0] ]
+                    snd = $scope.activePoints[ keys[1] ]
+                    # First and second values substracted to know the trend
+                    val  = snd.ratio
+                    val -= fst.ratio
+                    # Set the value
+                    trend.select("text").text( $filter("supPercent")(val+"%", false) )
+                    # Set the color of the circle
+                    trend.select("circle").transition()
+                        .attr("fill", if val < 0 then "#cc0e00" else "#69cc00")
+                    # Show the trend                                                                            
+                    trend.style("display", null)
+                    # Find the new position
+                    dist = x(snd.date) - x(fst.date)
+                    tx   = x(fst.date) + (dist)/2
+                    # Put the rend beside the dots when there a close
+                    if dist < 50
+                        ty = Math.min( y(fst.ratio), y(snd.ratio) ) + 40
+                    else
+                        ty = Math.min( y(fst.ratio), y(snd.ratio) )
+                    # Set the position
+                    trend.transition()
+                        .attr("transform", "translate(#{tx}, #{ty})")
+                else
+                    # Hide the trend                                                                            
+                    trend.style("display", "none")
         tips:
             clean:->
-                console.log _.keys($scope.activePoints)
                 # For each point's tips
                 # look for the useless ones
                 $(".point-tips").each (key, tip)-> 
@@ -89,26 +118,29 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                 # tips doenst exist yet
                 if $tips.length is 0
                     # Create the tips
-                    $tips = $("<div class='point-tips' data-point='" + index + "' />")        
+                    $tips = $("<div class='point-tips' data-point='" + index + "' />") 
+                    # offset of the point according its data
+                    offset = point.offset(d);      
                     # Positionate the tips to under the mouse
                     $tips.css
-                        left: (if $point.offset() then $point.offset().left else mouse().x)
-                        top:  (if $point.offset() then $point.offset().top else mouse().y)
+                        left: offset.left
+                        top:  offset.top
                     # Appends the tips to the bodu
-                    $tips.appendTo "body"      
+                    $tips.appendTo $rootElement   
                 # tips exists
                 else        
+                    # offset of the point according its data
+                    offset = point.offset(d);      
                     # Positionate the tips to under the mouse
-                    $tips.css(
-                        left: (if $point.offset() then $point.offset().left else mouse().x)
-                        top:  (if $point.offset() then $point.offset().top else mouse().y)
-                    ).removeClass "hidden"              
+                    $tips.css
+                        left: offset.left
+                        top:  offset.top
                 # In any case, change the content of the tip
                 $tips.html "<div class='content'>" + ~~d.ratio + "%</div>"
 
-        toggle: (d, index)-> 
+        toggle: (d, index)->             
             p = d3.select this
-            unless d.selected
+            if not d.selected? or d.selected isnt true
                 d.selected = true
                 p.attr "fill", "#323c45"                
                 $scope.activePoints[index] = d
@@ -121,12 +153,14 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                     if closestElt
                         # Unselect it
                         d3.select(closestElt).attr "fill", $filter("colors")($scope.question)
+                        delete $scope.activePoints[closestIdx].selected = false
                         delete $scope.activePoints[closestIdx]
 
                 $scope.$apply()
             else
                 d.selected = false
                 p.attr "fill", $filter("colors")($scope.question)
+                delete $scope.activePoints[index].selected = false
                 delete $scope.activePoints[index]             
                 $scope.$apply()
 
@@ -155,11 +189,9 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
             catch error
                 return null
 
-        p         = [10, 10, 60, 10]
-        minGap    = 40
         dotGap    = Math.max(minGap, wrapperWidth / ($scope.answers.length - 1))
-        w         = (dotGap * ($scope.answers.length - 1)) - p[1] - p[3]
-        h         = wrapperHeight - p[0] - p[2]        
+        w         = (dotGap * ($scope.answers.length - 1)) - padding[1] - padding[3]
+        h         = wrapperHeight - padding[0] - padding[2]        
         gradientW = (w / ($scope.answers.length - 1)) * 2    
 
 
@@ -191,21 +223,21 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         x.domain([minDate, maxDate])
         y.domain([minValue - offset, maxValue + offset]).nice()
 
-        chart.css("width",  w + p[1] + p[3])
+        chart.css("width",  w + padding[1] + padding[3])
 
         # Add an SVG element with the desired dimensions and margin.
         chartSvg = d3.select( chart[0] )
                 .append("svg:svg")
-                    .attr("width",  w + p[1] + p[3])
-                    .attr("height", h + p[0] + p[2])
+                    .attr("width",  w + padding[1] + padding[3])
+                    .attr("height", h + padding[0] + padding[2])
                     .append("g")
-                        .attr("transform", "translate(" + p[3] + "," + p[0] + ")")
+                        .attr("transform", "translate(" + padding[3] + "," + padding[0] + ")")
 
         # Add an another svg presenting the y axis
         yAxisSvg = d3.select( axis[0] )
                         .append("svg:svg")                        
                             .attr("width",  axis.width())
-                            .attr("height", h + p[0] + p[2])
+                            .attr("height", h + padding[0] + padding[2])
 
         unless Modernizr.svg         
             # Add the area path.
@@ -253,9 +285,30 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                 .attr("stroke-width", 3)
                 .attr("stroke", "#ffffff")
                 .on("mousemove",  point.tips.add)
-                .on("mouseleave", point.leave)
-                .on("mouseenter", point.enter)
+                .on("mouseleave", point.tips.clean)
                 .on("click",      point.toggle)
+
+        trendDisplay = if _.keys($scope.activePoints).length < 2 then "none" else null
+        # Create a group to contain the trend circle
+        trend = chartSvg.append("g")
+                            .style("display", trendDisplay)
+                            .attr("class", "trend")
+                            .attr("transform", "translate(#{w/2}, -50)")
+
+        # Appends a circle
+        trend.append("svg:circle")
+            .attr("r", 25)
+            .attr("fill", "#cc0e00")
+
+        # Appends a text
+        trend.append("svg:text")
+            .attr("y", 5)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#fff")
+            .style("font-size", 16)
+            .style("font-weight", "bold")
+            .text $filter("supPercent")("10%", false)
+
 
         # Add the x-axis.
         chartSvg.append("g")
@@ -266,7 +319,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         # Add the y-axis to an other svg
         yAxisSvg.append("g")
             .attr("class", "y axis")
-            .attr("transform", "translate(#{30+tickSize}, #{p[0]})")
+            .attr("transform", "translate(#{30+tickSize}, #{padding[0]})")
             .call yAxis    
 
         # Add axis break line
@@ -292,6 +345,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     $scope.$watch 'sample',       update
     $scope.$watch 'question',     update
     $scope.$watch 'activePoints', point.tips.clean, true
+    $scope.$watch 'activePoints', point.setTrend, true
 
             
 

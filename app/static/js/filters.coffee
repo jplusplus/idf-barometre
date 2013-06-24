@@ -45,11 +45,11 @@ angular
             return colors[key][level]         
     )
     .filter("supPercent", ->
-        return (val='')-> 
+        return (val='', html=true)-> 
             # Remove ,0% end
             val = val.replace /,0%/, "%"
             # Add <sup></sup> arround %
-            val = val.replace /%/, "<sup>%</sup>"
+            val = val.replace /%/, "<sup>%</sup>" if html
             # Add a plus prefix for percentage and non-negative values
             val = "+" + val if val.match /%/ and val.indexOf("-") == -1 
             # Return the new value explcitily

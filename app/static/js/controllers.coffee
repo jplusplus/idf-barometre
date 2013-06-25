@@ -73,7 +73,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         $scope.answers = Answer.query params, render
         # Update the ArrowColor service
         ArrowColor.question = $scope.question
-        
+
     loadShortcuts = ->
         wrapper = $rootElement.find(".wrapper")
         chart   = $rootElement.find(".chart")
@@ -194,7 +194,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 # In any case, change the content of the tip
                 $tips.html "<div class='content'>" + ~~d.ratio + "%</div>"
 
-        toggle: (d, index)->             
+        toggle: (d, index)->              
             p = d3.select this
             if not d.selected? or d.selected isnt true
                 d.selected = true

@@ -4,19 +4,19 @@
 }
 
 .slide-enter {
-  .translate(-800px, 0);
-  opacity:0;
+  .transform( translate(-800px, 0) );
+  .opacity(0);
 }
 .slide-enter.slide-enter-active {
-   .translate(0px, 0);
-    opacity:1;
+    .transform( translate(0, 0) scale(1) );
+    .opacity(100);
 }
 
 .slide-leave {
-    .translate(0px, 0); 
-    opacity:1;
+    .transform( translate(0, 0) scale(1) );
+    .opacity(100);
 }
 .slide-leave.slide-leave-active {
-    .translate(800px, 0);
-    opacity:0;
+    .transform( translate(800px, 0) scale(0.7) );    
+    .opacity(0);
 }

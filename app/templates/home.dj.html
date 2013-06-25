@@ -28,8 +28,11 @@
 
 {% block content %}
     <div ng-app="barometre" id="barometre">        
-        <div class="container relative">
-            <a href="#/" class="logo">Baromètre Ile-de-France</a>
+        <div class="container relative" ng-controller="ArrowColorCtrl" ng-class="getClass()">
+            <a href="#/" class="logo">
+                Baromètre Ile-de-France
+                <span class="arrow"></span>
+            </a>
         </div>
         <div id="content" ng-view  ng-animate="'slide'"></div>
     </div>

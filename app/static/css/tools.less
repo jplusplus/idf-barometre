@@ -14,6 +14,22 @@
     -ms-transform:@transform;     
 }
 
+.transform-origin(@origin) {
+    transform-origin:@origin;
+    -moz-transform-origin:@origin; 
+    -webkit-transform-origin:@origin;
+    -o-transform-origin:@origin; 
+    -ms-transform-origin:@origin;     
+}
+
+.perspective(@perspective) {
+    perspective:@perspective;
+    -moz-perspective:@perspective;
+    -webkit-perspective:@perspective;
+    -o-perspective:@perspective;
+    -ms-perspective:@perspective;
+}
+
 .no-bullet { list-style: none; }
 .relative { position:relative; }
 .hidden  { display:none; }

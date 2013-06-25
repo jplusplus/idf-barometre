@@ -21,24 +21,57 @@ body {
     height:100%;
     width:100%;
     overflow:hidden;
-    
-    .logo {
-        .hide-text();
-        display:block;        
-        background:url("/static/img/common/logo.png") no-repeat;
-        width:242px;
-        height:151px;
-        margin:0;
-        padding:0;
-        position:absolute;
-        top:0;
-        z-index:@zIndexLogo;
-    }
-
 
     .axis {
       shape-rendering: crispEdges;      
     }
+
+}
+
+ 
+.logo {
+    .hide-text();
+    display:block;        
+    background:url("/static/img/common/logo.png") no-repeat;
+    width:242px;
+    height:151px;
+    margin:0;
+    padding:0;
+    position:absolute;
+    top:0;
+    z-index:@zIndexLogo;
+    
+    .arrow {
+        display:block;
+        height:54px;
+        width:7px;
+        background:url("/static/img/common/logo_aiguille_blanc.png") no-repeat 0 0;
+        position:absolute;
+        top:43px;
+        left:118px;
+        .rotate(40deg);        
+        .transition(0.4s);
+        .transform-origin(50% 50%);
+     
+        .question-economique & {            
+            .rotate(140deg);
+            .transform-origin(50% 50%);
+            background-image:url("/static/img/common/logo_aiguille_orange.png");
+        }
+     
+        .question-transport & {
+            .rotate(240deg);
+            .transform-origin(50% 50%);
+            background-image:url("/static/img/common/logo_aiguille_bleue.png");
+        }
+
+        .question-environnement & {
+            .rotate(300deg);
+            .transform-origin(50% 50%);
+            background-image:url("/static/img/common/logo_aiguille_verte.png");
+        }
+    }
+
 
 }
 
@@ -787,11 +820,9 @@ body {
     width:0px;
     height:0px;
     /*  Center of the point */
-    margin-left:5px;
     margin-top:0;
     
-    .lt-ie9 & { margin-left:10px; }
-    
+    .lt-ie9 & { margin-left:5px; }    
     
     &.hidden {
         display:none;
@@ -819,6 +850,19 @@ body {
         .translate(0, 0);
     }
 
+    &.js-first {
+        margin-left:10px;
+        .content {
+            background-image:url("/static/img/graph/bulle_droite.png");
+        }
+    }
+
+    &.js-last {
+        margin-left:-10px;
+        .content {
+            background-image:url("/static/img/graph/bulle_gauche.png");
+        }
+    }
 }
 
 

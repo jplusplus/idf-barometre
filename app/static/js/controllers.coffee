@@ -1,8 +1,10 @@
 
-QuestionListCtrl = ($scope, Introduction, $rootElement )->    
+QuestionListCtrl = ($scope, $rootElement, Introduction, ArrowColor)->    
     $scope.introductions = Introduction.query()
+    # Unable the arrow color service
+    ArrowColor.active = false
 
-QuestionListCtrl.$inject = ['$scope', 'Introduction', '$rootElement'];
+QuestionListCtrl.$inject = ['$scope', '$rootElement', 'Introduction', 'ArrowColor'];
 
 # the dialog is injected in the specified controller
 DialogCtrl = ($scope, dialog)->
@@ -26,14 +28,22 @@ HeaderCtrl = ($scope, $dialog)->
 
 HeaderCtrl.$inject = ['$scope', '$dialog'];
 
-AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filter)->
+ArrowColorCtrl = ($scope, ArrowColor)->
+    $scope.state  = ArrowColor
+    $scope.getClass = ->
+        return if $scope.state.active then "question-" + $scope.state.question else ""
 
+ArrowColorCtrl.$inject = ['$scope', 'ArrowColor'];
+    
+AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answer, ArrowColor)->
     # Models attributes
     $scope.question = $routeParams.q or "economique"
     $scope.profil   = $routeParams.p or "all"
     # List of active point
     $scope.activePoints = {}
     $scope.activePointsCount = -> _.keys($scope.activePoints).length
+    # Unable the arrow color service
+    ArrowColor.active = true
 
     # Graph attributes
     chartSvg   = {}
@@ -46,7 +56,7 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     wrapperWidth  = 549
     wrapperHeight = 330
     tickSize      = 5    
-    padding       = [10, 10, 60, 10]
+    padding       = [10, 18, 60, 18]
     minGap        = 40
 
     # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
@@ -56,6 +66,8 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
     update = -> 
         params = profil: $scope.profil, question: $scope.question
         $scope.answers = Answer.query params, render
+        # Update the ArrowColor service
+        ArrowColor.question = $scope.question
         # Update path
         $location.search "p", $scope.profil
         $location.search "q", $scope.question
@@ -90,8 +102,8 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         offset: (d)-> 
             wrapper = $rootElement.find(".wrapper")
             return {
-                top  :  wrapper.offset().top  + y(d.ratio)
-                left :  wrapper.offset().left + x(d.date)
+                left : x(d.date) + padding[3]
+                top  : y(d.ratio) 
             }
         setTrend: (d)->
             # Wait for D3 instance
@@ -154,13 +166,17 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                     # Create the tips
                     $tips = $("<div class='point-tips' data-point='" + index + "' />") 
                     # offset of the point according its data
-                    offset = point.offset(d);      
+                    offset = point.offset(d);     
+                    # add a class to the first point
+                    $tips.addClass "js-first" if parseInt(index) == 0 
+                    # add a class to the last point
+                    $tips.addClass "js-last" if parseInt(index) == $scope.answers.length - 1 
                     # Positionate the tips to under the mouse
                     $tips.css
                         left: offset.left
                         top:  offset.top
                     # Appends the tips to the bodu
-                    $tips.appendTo "body"   
+                    $tips.appendTo wrapper.find(".jspPane")
                 # tips exists
                 else        
                     # offset of the point according its data
@@ -400,4 +416,4 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
         $scope.profil   = $location.search().p
             
 
-AnswerGraphCtrl.$inject = ['$scope', 'Answer', '$rootElement', '$routeParams', '$location', '$filter'];
+AnswerGraphCtrl.$inject = ['$scope', '$rootElement', '$routeParams', '$location', '$filter', 'Answer', 'ArrowColor'];

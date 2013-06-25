@@ -9,6 +9,9 @@
 {% endblock %}
 
 {% block extrajs %}
+    <!--[if lte IE 8]>
+        <script src="{% static 'js/vendor/json2.js' %}"></script>
+    <![endif-->
     <script type="text/javascript"   src="{% static 'js/vendor/modernizr.custom.js' %}"></script>
     <script type="text/javascript"   src="{% static 'js/vendor/angular/angular.js' %}"></script>
     <script type="text/javascript"   src="{% static 'js/vendor/angular/angular-sanitize.js' %}"></script>
@@ -27,7 +30,7 @@
 {% endblock %}
 
 {% block content %}
-    <div ng-app="barometre" id="barometre">        
+    <div ng-app="barometre" id="ng-app">        
         <div class="container relative" ng-controller="ArrowColorCtrl" ng-class="getClass()">
             <a href="#/" class="logo">
                 Baromètre Ile-de-France

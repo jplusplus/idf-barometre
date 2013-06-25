@@ -55,10 +55,10 @@ angular
                 if html
                     # Add a plus prefix for percentage and non-negative values
                     val = "<sub>✚</sub>" + val if val.indexOf("-") == -1                 
+                    # Relplace the classic minus by a special chart
+                    val = val.replace("-", "⁃")
                 else
-                    val = "+" + val if val.indexOf("-") == -1                 
-                # Relplace the classic minus by a special chart
-                val = val.replace("-", "⁃")
+                    val = "+" + val if val.indexOf("-") == -1
             # Return the new value explcitily
             return val
     )

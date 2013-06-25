@@ -51,19 +51,24 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
     parse      = d3.time.format("%m/%Y").parse
     dateFormat = d3.time.format("%b %y")    
     # Empty shortcuts
-    wrapper = chart = axis = $(null)        
+    wrapper = chart = axis = $(null)    
+    # This dead IE required that we create jscrollpane here
+    unless Modernizr.svg 
+        # Add customise scrollbar
+        $rootElement.find(".wrapper").jScrollPane hideFocus: true    
     # Saves wrap
     wrapperWidth  = 549
     wrapperHeight = 330
-    tickSize      = 5    
+    tickSize      = 5
     padding       = [10, 18, 60, 18]
     minGap        = 40
 
     # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
     x = d3.time.scale()
     y = d3.scale.linear()
+
     
-    update = -> 
+    update = (a, b)-> 
         params = profil: $scope.profil, question: $scope.question
         $scope.answers = Answer.query params, render
         # Update the ArrowColor service
@@ -120,9 +125,9 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                     val  = snd.ratio
                     val -= fst.ratio
                     # Set the value
-                    trend.select("text").text( $filter("supPercent")(val+"%", false, "trend") )
+                    trend.select("text").text( $filter("supPercent")(val+"%", false, "trend") )                    
                     # Set the color of the circle
-                    trend.select("circle").transition().attr("fill", if val < 0 then "#cc0e00" else "#69cc00")
+                    trend.select("circle").attr("fill", if val < 0 then "#cc0e00" else "#69cc00")
                     # Show the trend                                                                            
                     trend.style("display", null)
                     # Find the new position
@@ -133,9 +138,13 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                         ty = Math.min( y(fst.ratio), y(snd.ratio) ) + 40
                     else
                         ty = Math.min( y(fst.ratio), y(snd.ratio) )
-                    # Set the position
-                    trend.transition()
-                        .attr("transform", "translate(#{tx}, #{ty})")
+                    # Duration only without ie
+                    if Modernizr.svg
+                        # Set the position with transition
+                        trend.transition().attr("transform", "translate(#{tx}, #{ty})")
+                    else
+                        # Set the position
+                        trend.attr("transform", "translate(#{tx}, #{ty})")
                 else
                     # Hide the trend                                                                            
                     trend.style("display", "none")
@@ -203,14 +212,14 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                     if closestElt
                         # Unselect it
                         d3.select(closestElt).attr "fill", $filter("colors")($scope.question)
-                        delete $scope.activePoints[closestIdx].selected = false
+                        delete $scope.activePoints[closestIdx].selected
                         delete $scope.activePoints[closestIdx]
 
                 $scope.$apply()
             else
                 d.selected = false
                 p.attr "fill", $filter("colors")($scope.question)
-                delete $scope.activePoints[index].selected = false
+                delete $scope.activePoints[index].selected
                 delete $scope.activePoints[index]             
                 $scope.$apply()
 
@@ -292,10 +301,11 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                             .attr("width",  axis.width())
                             .attr("height", h + padding[0] + padding[2])
 
-        unless Modernizr.svg         
+        unless Modernizr.svg    
             # Add the area path.
             chartSvg.append("svg:path")
                     .attr("class", "area bg")
+                    .attr("stroke-width", "0")
                     .attr("fill", $filter("colors")($scope.question))
                     .attr("d", area($scope.answers))
         # Add stripes
@@ -346,7 +356,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         trend = chartSvg.append("g")
                             .style("display", trendDisplay)
                             .attr("class", "trend")
-                            .attr("transform", "translate(#{w/2}, -50)")
+                            .attr("transform", "translate(#{w/2}, -70)")
 
         # Appends a circle
         trend.append("svg:circle")
@@ -355,7 +365,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
 
         # Appends a text
         trend.append("svg:text")
-            .attr("y", 5)
+            .attr("y", if Modernizr.svg then 5 else 0)
             .attr("text-anchor", "middle")
             .attr("fill", "#fff")
             .style("font-size", 16)

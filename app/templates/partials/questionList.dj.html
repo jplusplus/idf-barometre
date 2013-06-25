@@ -12,19 +12,17 @@
             2 mois auprès d'un panel<br />
             de 1500 personnes.
         </li>
-        <li ng-repeat="intro in introductions" class="introduction case-[[$index+1]]" ng-class="'type-' + intro.format">
-            <a class="wrapper" href="#/answers/?q=[[intro.question.slug]]&amp;p=[[intro.profil.slug]]">
+        <li ng-repeat="intro in introductions" class="introduction case-[[$index+1]]" ng-class="'type-' + intro.format">            
+            <a class="wrapper" href="#/answers/?q=[[intro.question.slug]]&amp;p=[[intro.profil.slug]]">                
                 <div class="indicator" ng-class="intro.question.slug">
                     <span ng-bind-html="intro.indicator.value | supPercent:true:intro.format" class="ratio value"></span>
                     <div class="trend" ng-if="intro.format == 'trend'"  ng-class="intro.indicator.class">                    
                         <span class="previous ratio" ng-bind-html="intro.indicator.previous | supPercent"></span>
                         <span class="picto"><!-- Trend pictogram --></span>
-                        <span class="current ratio" ng-bind-html="intro.indicator.current | supPercent">/span>
+                        <span class="current ratio" ng-bind-html="intro.indicator.current | supPercent"></span>
                     </div>
                 </div>
-                <div class="caption">
-                    <span ng-bind-html="intro.sentence | nl2br"></span>
-                </div>                
+                <div class="caption" ng-bind-html="intro.sentence | nl2br"></div>                
             </a>
         </li>
     </ul>

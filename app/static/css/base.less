@@ -8,7 +8,7 @@
 @zIndexOptions : @zIndexPage+100;
 @zIndexGraph   : @zIndexOptions+100;
 @zIndexLogo    : @zIndexGraph+100;
-@zIndexTips    : @zIndexGraph+100;
+@zIndexTips    : @zIndexLogo+100;
 @zIndexHeader  : @zIndexTips+100;
 
 @environnementColor:#BAD809;
@@ -49,7 +49,7 @@ body {
         position:absolute;
         top:43px;
         left:118px;
-        .rotate(40deg);        
+        .rotate(40deg);
         .transition(0.4s);
         .transform-origin(50% 50%);
      
@@ -142,7 +142,7 @@ body {
             line-height:60px;
             font-weight:400;
             margin-bottom:10px;
-            padding-right:10px;    
+            padding-right:10px;
 
             sup {
                 font-size:40%;
@@ -157,7 +157,6 @@ body {
             &.economique    { color:@economiqueColor; }
             &.transport     { color:@transportColor; }
             &.environnement { color:@environnementColor; }
-
 
             .trend {
                 font-size:25px;
@@ -223,7 +222,7 @@ body {
         }
 
 
-        &:hover .wrapper{   
+        &:hover .wrapper {   
             z-index:@zIndexPage+10;
             .scale(1.05);
             .box-shadow(0 0 20px 0 fade(black, 20) );
@@ -613,6 +612,7 @@ body {
             left:50px;            
             right:50px;
             height:340px;
+            overflow:hidden;
         }
 
         .chart {
@@ -643,8 +643,13 @@ body {
         text-align:center;
         
         input {
-            display:none;
-        }        
+            /* IE doesn't like hidden */
+            .opacity(0);
+            width:0;
+            height:0;       
+            position:absolute;
+            top:-99999px;    
+        }
     }
 
 

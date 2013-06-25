@@ -49,11 +49,14 @@ angular
             # Remove ,0% end
             val = val.replace /,0%/, "%"
             # Add <sup></sup> arround %
-            val = val.replace /%/, "<sup>%</sup>" if html            
+            val = val.replace /%/, "<sup>%</sup>" if html           
 
             if format == "trend"
-                # Add a plus prefix for percentage and non-negative values
-                val = "<sub>✚</sub>" + val if val.indexOf("-") == -1                 
+                if html
+                    # Add a plus prefix for percentage and non-negative values
+                    val = "<sub>✚</sub>" + val if val.indexOf("-") == -1                 
+                else
+                    val = "+" + val if val.indexOf("-") == -1                 
                 # Relplace the classic minus by a special chart
                 val = val.replace("-", "⁃")
             # Return the new value explcitily

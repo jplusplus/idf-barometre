@@ -108,10 +108,9 @@ AnswerGraphCtrl = ($scope, Answer, $rootElement, $routeParams, $location, $filte
                     val  = snd.ratio
                     val -= fst.ratio
                     # Set the value
-                    trend.select("text").text( $filter("supPercent")(val+"%", false) )
+                    trend.select("text").text( $filter("supPercent")(val+"%", false, "trend") )
                     # Set the color of the circle
-                    trend.select("circle").transition()
-                        .attr("fill", if val < 0 then "#cc0e00" else "#69cc00")
+                    trend.select("circle").transition().attr("fill", if val < 0 then "#cc0e00" else "#69cc00")
                     # Show the trend                                                                            
                     trend.style("display", null)
                     # Find the new position

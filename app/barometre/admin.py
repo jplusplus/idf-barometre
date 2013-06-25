@@ -17,7 +17,7 @@ class IntroductionAdmin(admin.ModelAdmin):
 
 
 class ImportAdmin(ModelAdmin):
-    fields = ['model_name','upload_file']
+    fields = ('upload_file',)
     list_display = ('upload_file', 'model_name', 'created_at')
 
     formfield_overrides = {

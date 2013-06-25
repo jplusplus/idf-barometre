@@ -1,9 +1,9 @@
 <div class="container centered graph" ng-class="'question-' + question + ' profil-' + profil">
     <ul class="header unstyled" ng-controller="HeaderCtrl">
         <li class="info">
-            <a ng-click="openDialog()" title="Plus d'info sur ce sondage">
+            <span ng-click="openDialog()" href="javascript:return false;" title="Plus d'info sur ce sondage">
                 Information
-            </a>
+            </span>
         </li>
         <li class="dl">
             <a href="{% url answers 'csv' %}?question=[[question]]&amp;profil=[[profil]]" title="Téléchargez les données de cet échantillon">
@@ -13,124 +13,100 @@
     </ul>
     <div class="select-question">
         <div class="row-fluid">
-            <label class="span4 radio-economique vr">
+            <a href="#/answers/?q=economique&amp;p=[[profil]]" class="span4 radio-economique vr">
                 <i class="icon"></i>
-                Situation économique
-                <input type="radio" ng-model="question" value="economique" name="question" />
-            </label>
-            <label class="span4 radio-transport vr">
+                Situation économique                
+            </a>
+            <a href="#/answers/?q=transport&amp;p=[[profil]]" class="span4 radio-transport vr">
                 <i class="icon"></i>
-                Transports en commun
-                <input type="radio" ng-model="question" value="transport" name="question" />
-            </label>
-            <label class="span4 radio-environnement">
+                Transports en commun                
+            </a>
+            <a href="#/answers/?q=environnement&amp;p=[[profil]]" class="span4 radio-environnement">
                 <i class="icon"></i>
-                Qualité de l'environement
-                <input type="radio" ng-model="question" value="environnement" name="question" />
-            </label>
+                Qualité de l'environement                
+            </a>
         </div>
     </div>
 
     <div class="select-profil">
         <div class="hr select select-all">
-            <label class="radio-all">
-                Tous
-                <input type="radio" name="profil" ng-model="profil" value="all" />
-            </label>
+            <a href="#/answers/?p=all&amp;q=[[question]]amp;" class="radio-all">
+                Tous                
+            </a>
         </div>
 
         <div class="hr select select-age">
-            <label class="radio-18_24">
-                18-24<br /><small>ans</small>
-                <input type="radio" name="profil" ng-model="profil" value="18_24" />
-            </label>
-            <label class="radio-25_34">
-                25-34<br /><small>ans</small>
-                <input type="radio" name="profil" ng-model="profil" value="25_34" />
-            </label>
-            <label class="radio-35_49">
-                35-49<br /><small>ans</small>
-                <input type="radio" name="profil" ng-model="profil" value="35_49" />
-            </label>
-            <label class="radio-50_64">
-                50-64<br /><small>ans</small>
-                <input type="radio" name="profil" ng-model="profil" value="50_64" />
-            </label>
-            <label class="radio-65_plus">
-                65+<br /><small>ans</small>
-                <input type="radio" name="profil" ng-model="profil" value="65_plus" />
-            </label>
+            <a href="#/answers/?p=18_24&amp;q=[[question]]" class="radio-18_24">
+                18-24<br /><small>ans</small>                
+            </a>
+            <a href="#/answers/?p=25_34&amp;q=[[question]]" class="radio-25_34">
+                25-34<br /><small>ans</small>                
+            </a>
+            <a href="#/answers/?p=35_49&amp;q=[[question]]" class="radio-35_49">
+                35-49<br /><small>ans</small>                
+            </a>
+            <a href="#/answers/?p=50_64&amp;q=[[question]]" class="radio-50_64">
+                50-64<br /><small>ans</small>                
+            </a>
+            <a href="#/answers/?p=65_plus&amp;q=[[question]]" class="radio-65_plus">
+                65+<br /><small>ans</small>                
+            </a>
         </div>
         <div class="hr select select-sex">
-            <label class="radio-homme">
-                Homme
-                <input type="radio" name="profil" ng-model="profil" value="homme" />
-            </label>
-            <label class="radio-femme">
-                Femme
-                <input type="radio" name="profil" ng-model="profil" value="femme" />
-            </label>
+            <a href="#/answers/?p=homme&amp;q=[[question]]" class="radio-homme">
+                Homme                
+            </a>
+            <a href="#/answers/?p=femme&amp;q=[[question]]" class="radio-femme">
+                Femme                
+            </a>
         </div>
 
         <div class="hr select select-job">            
-            <label class="radio-cadre">
-                Cadre
-                <input type="radio" name="profil" ng-model="profil" value="cadre" />
-            </label>
-            <label class="radio-employe">
-                Employé
-                <input type="radio" name="profil" ng-model="profil" value="employe" />
-            </label>
-            <label class="radio-ouvrier">
-                Ouvrier
-                <input type="radio" name="profil" ng-model="profil" value="ouvrier" />
-            </label>
-            <label class="radio-technicien">
-                Technicien
-                <input type="radio" name="profil" ng-model="profil" value="technicien" />
-            </label>
-            <label class="radio-retraite">
-                Retraité
-                <input type="radio" name="profil" ng-model="profil" value="retraite" />
-            </label>
+            <a href="#/answers/?p=cadre&amp;q=[[question]]" class="radio-cadre">
+                Cadre                
+            </a>
+            <a href="#/answers/?p=employe&amp;q=[[question]]" class="radio-employe">
+                Employé                
+            </a>
+            <a href="#/answers/?p=ouvrier&amp;q=[[question]]" class="radio-ouvrier">
+                Ouvrier                
+            </a>
+            <a href="#/answers/?p=technicien&amp;q=[[question]]" class="radio-technicien">
+                Technicien                
+            </a>
+            <a href="#/answers/?p=retraite&amp;q=[[question]]" class="radio-retraite">
+                Retraité                
+            </a>
         </div>
 
         <div class="row-fluid select-dept">
             <div class="span6">
-                <label class="radio-75">
-                    <i>75</i> Paris
-                    <input type="radio" name="profil" ng-model="profil" value="75" />
-                </label>
-                <label class="radio-77">
-                    <i>77</i> Seine et Marne
-                    <input type="radio" name="profil" ng-model="profil" value="77" />
-                </label>
-                <label class="radio-78">
-                    <i>78</i> Yvelines
-                    <input type="radio" name="profil" ng-model="profil" value="78" />
-                </label>
-                <label class="radio-91">
-                    <i>91</i> Essonne
-                    <input type="radio" name="profil" ng-model="profil" value="91" />
-                </label>
+                <a href="#/answers/?p=75&amp;q=[[question]]" class="radio-75">
+                    <i>75</i> Paris                    
+                </a>
+                <a href="#/answers/?p=77&amp;q=[[question]]" class="radio-77">
+                    <i>77</i> Seine et Marne                    
+                </a>
+                <a href="#/answers/?p=78&amp;q=[[question]]" class="radio-78">
+                    <i>78</i> Yvelines                    
+                </a>
+                <a href="#/answers/?p=91&amp;q=[[question]]" class="radio-91">
+                    <i>91</i> Essonne                    
+                </a>
             </div>
             <div class="span6">
-                <label class="radio-92">
-                    <i>92</i> Hauts-de-seine
-                    <input type="radio" name="profil" ng-model="profil" value="92" />
-                </label>
-                <label class="radio-93">
-                    <i>93</i> Seine-St-Denis
-                    <input type="radio" name="profil" ng-model="profil" value="93" />
-                </label>
-                <label class="radio-94">
-                    <i>94</i> Val-de-Marne
-                    <input type="radio" name="profil" ng-model="profil" value="94" />
-                </label>
-                <label class="radio-95">
-                    <i>95</i> Val d'Oise
-                    <input type="radio" name="profil" ng-model="profil" value="95" />
-                </label>
+                <a href="#/answers/?p=92&amp;q=[[question]]" class="radio-92">
+                    <i>92</i> Hauts-de-seine                    
+                </a>
+                <a href="#/answers/?p=93&amp;q=[[question]]" class="radio-93">
+                    <i>93</i> Seine-St-Denis                    
+                </a>
+                <a href="#/answers/?p=94&amp;q=[[question]]" class="radio-94">
+                    <i>94</i> Val-de-Marne                    
+                </a>
+                <a href="#/answers/?p=95&amp;q=[[question]]" class="radio-95">
+                    <i>95</i> Val d'Oise                    
+                </a>
             </div>
         </div>
 
@@ -139,8 +115,8 @@
         <div class="border-top"></div>        
         <div class="border-left"></div>        
         <h2>
-            Ce que pense 
-            <span ng:bind-html="profil | alias"></span> 
+            Ce que pense
+            <span ng:bind-html="profil | alias"></span>&nbsp;
             <span ng:bind-html="question | alias"></span> 
         </h2>
         <div class="manual">

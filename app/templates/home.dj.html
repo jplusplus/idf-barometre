@@ -23,15 +23,15 @@
     <script type="text/javascript"   src="{% static 'js/vendor/underscore-min.js' %}"></script>    
     <script type="text/javascript"   src="{% static 'js/vendor/ui-bootstrap-custom-0.3.0.js' %}"></script>    
     <script type="text/coffeescript" src="{% static 'js/controllers.coffee' %}"></script>
-    <script type="text/coffeescript" src="{% static 'js/directives.coffee' %}"></script>
     <script type="text/coffeescript" src="{% static 'js/filters.coffee' %}"></script>
     <script type="text/coffeescript" src="{% static 'js/services.coffee' %}"></script>
     <script type="text/coffeescript" src="{% static 'js/app.coffee' %}"></script>    
+    <script type="text/coffeescript" src="{% static 'js/directives.coffee' %}"></script>
 {% endblock %}
 
 {% block content %}
     <div ng-app="barometre" id="ng-app">        
-        <div class="container relative" ng-controller="ArrowColorCtrl" ng-class="getClass()">
+        <div class="container relative logo-container" ng-controller="ArrowColorCtrl" ng-class="getClass()">
             <a href="#/" class="logo">
                 Baromètre Ile-de-France
                 <span class="arrow"></span>

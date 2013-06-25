@@ -11,10 +11,13 @@ angular
 
                 # Bind routes to the controllers
                 $routeProvider
-                    .when('/', {controller: QuestionListCtrl, templateUrl: "/partial/questionList.html?#{Date()}"})
+                    .when('/', {
+                        controller: QuestionListCtrl
+                        templateUrl: "/partial/questionList.html?#{Date()}"
+                    })
                     .when('/answers/', {
-                        controller: AnswerGraphCtrl,  
-                        templateUrl: "/partial/answerGraph.html",
+                        controller: AnswerGraphCtrl  
+                        templateUrl: "/partial/answerGraph.html?#{Date()}"
                         reloadOnSearch: false
                     })
                     .otherwise redirectTo: '/'

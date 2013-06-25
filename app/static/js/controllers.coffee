@@ -19,7 +19,7 @@ HeaderCtrl = ($scope, $dialog)->
         backdropClick: true
         dialogFade: true
         backdropFade: true
-        templateUrl:  '/partial/dialog.html'
+        templateUrl:  '/partial/dialog.html?#{Date()}'
         controller: 'DialogCtrl'
     
     $scope.openDialog = ->      
@@ -68,15 +68,12 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
     y = d3.scale.linear()
 
     
-    update = (a, b)-> 
+    update = -> 
         params = profil: $scope.profil, question: $scope.question
         $scope.answers = Answer.query params, render
         # Update the ArrowColor service
         ArrowColor.question = $scope.question
-        # Update path
-        $location.search "p", $scope.profil
-        $location.search "q", $scope.question
-
+        
     loadShortcuts = ->
         wrapper = $rootElement.find(".wrapper")
         chart   = $rootElement.find(".chart")

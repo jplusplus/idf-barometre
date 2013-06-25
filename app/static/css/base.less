@@ -4,12 +4,13 @@
 @import-once 'jscrollpane.less';
 @import-once 'bootstrap-overload.less';
 
-@zIndexPage    : 100;
+@zIndexContext : 100;
+@zIndexPage    : @zIndexContext+100;
 @zIndexOptions : @zIndexPage+100;
 @zIndexGraph   : @zIndexOptions+100;
-@zIndexLogo    : @zIndexGraph+100;
+@zIndexHeader  : @zIndexGraph+100;
+@zIndexLogo    : @zIndexHeader+100;
 @zIndexTips    : @zIndexLogo+100;
-@zIndexHeader  : @zIndexTips+100;
 
 @environnementColor:#BAD809;
 @economiqueColor:#ED9906;
@@ -18,16 +19,26 @@
 
 body {
     background:url("/static/img/common/bg.jpg");
-    height:100%;
-    width:100%;
-    overflow:hidden;
+    position:relative;
+    z-index:@zIndexContext;
 
     .axis {
       shape-rendering: crispEdges;      
     }
 
+    a:hover {
+        text-decoration:none;
+    }
+
 }
 
+/* ---------------------------------------------------------- */
+/* LOGO */
+
+.logo-container {
+    position:relative;   
+    z-index:@zIndexLogo;
+}
  
 .logo {
     .hide-text();
@@ -39,6 +50,7 @@ body {
     padding:0;
     position:absolute;
     top:0;
+    left:0;
     z-index:@zIndexLogo;
     
     .arrow {
@@ -71,8 +83,6 @@ body {
             background-image:url("/static/img/common/logo_aiguille_verte.png");
         }
     }
-
-
 }
 
 .container.centered {
@@ -334,10 +344,11 @@ body {
         .box-shadow(0 2px 6px 0 fade(#000, 30));
         float:left;
         
-        a {
+        a, span {
             display:block;
             height:26px;
             width:28px;
+            cursor:pointer;
             .hide-text();                                
         }            
 
@@ -379,11 +390,13 @@ body {
         left:275px;
         right:0;
 
-        label {
+        a {
             padding-top:70px;
             padding-bottom:70px;
             height:30px;
             position:relative;
+            cursor:pointer;
+            color:inherit;
             
             .icon {
                 display:block;
@@ -427,7 +440,7 @@ body {
 
             .clearfix();
             padding:0;
-            padding-bottom:15px;
+            padding-bottom:10px;
             margin:0;
             margin-bottom:10px;
             text-align:center;
@@ -439,9 +452,9 @@ body {
             }
         }
 
-        .select label {
-            padding-top:45px;
-            padding-bottom:0px;
+        .select a {
+            padding-top:45px;            
+            padding-bottom:5px;
             line-height:10px;
             height:10px;
             width:41px;
@@ -449,6 +462,7 @@ body {
             margin-right:4px;  
             position:relative;
             left:-5px;  
+            color:inherit;
             
             /* inline-block hack for ie */
             float:none !important;
@@ -456,16 +470,16 @@ body {
             display:inline-block !important;
             display:inline;
             
-            background:no-repeat 0 0;
+            background:no-repeat 0 0;            
         }
             
-        label.radio-all {
+        a.radio-all {
             padding-top:55px;
             width:76px;
             background-image:url("/static/img/common/pictos/picto_all.png");
         }
 
-        .select-age label {                  
+        .select-age a {                  
 
             &.radio-18_24 {
                 background-image:url("/static/img/common/pictos/picto_age_18_24.png");                
@@ -485,7 +499,7 @@ body {
         }
 
 
-        .select-sex label {    
+        .select-sex a {    
             margin:0 8px;        
             &.radio-femme {
                 background-image:url("/static/img/common/pictos/picto_femme.png");                
@@ -496,7 +510,7 @@ body {
         }
 
 
-        .select-job label {  
+        .select-job a {  
             font-size:9px;
             &.radio-cadre {
                 background-image:url("/static/img/common/pictos/picto_cadre.png");
@@ -515,7 +529,7 @@ body {
             }
         }    
         
-        .select-dept label {
+        .select-dept a {
             
             display:block;
             clear:left;
@@ -635,21 +649,12 @@ body {
         }
     }
 
-    label {
+    a {
         font-weight:bold;
         font-size: 13px;
         color:#545454;
         display:block;
-        text-align:center;
-        
-        input {
-            /* IE doesn't like hidden */
-            .opacity(0);
-            width:0;
-            height:0;       
-            position:absolute;
-            top:-99999px;    
-        }
+        text-align:center;        
     }
 
 

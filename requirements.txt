@@ -10,3 +10,5 @@ wsgiref==0.1.2
 django-compressor==1.2
 django-csvimport
 wadofstuff-django-serializers==1.1.0
+boto
+django-storages

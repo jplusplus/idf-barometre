@@ -22,3 +22,4 @@ venv
 # Generated files
 app/static/CACHE
 app/media
+staticfiles

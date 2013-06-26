@@ -162,6 +162,7 @@ body {
             sub {
                 bottom:0.2em;
                 font-size:60%;
+                font-weight:bold;
             }
 
             &.economique    { color:@economiqueColor; }
@@ -174,7 +175,7 @@ body {
                 white-space:nowrap;
                 margin-top:5px;       
                 height:70px;         
-                width:200px;                
+                width:150px;                
                 display:block;
                 
                 .ratio {
@@ -318,7 +319,11 @@ body {
             }         
             
             .trend {                
-                width:400px;                
+                width:300px;                
+            }
+
+            .lt-ie8 & .trend {                
+                width:150px;                
             }
         } 
 
@@ -622,6 +627,7 @@ body {
 
         .wrapper {
             position:absolute;
+            z-index:@zIndexGraph+10;
             top:145px;
             left:50px;            
             right:50px;
@@ -632,12 +638,12 @@ body {
         .chart {
             height:340px;
             position:relative;              
-            z-index:@zIndexGraph+10;
+            z-index:@zIndexGraph+20;
         }
 
         .yaxis {
             position:absolute;
-            z-index:@zIndexGraph+20;
+            z-index:@zIndexGraph+30;
             left:0;
             width:36px;
             top:145px;
@@ -831,8 +837,7 @@ body {
     height:0px;
     /*  Center of the point */
     margin-top:0;
-    
-    .lt-ie9 & { margin-left:5px; }    
+      
     
     &.hidden {
         display:none;

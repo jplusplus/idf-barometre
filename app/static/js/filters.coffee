@@ -19,6 +19,14 @@ angular
                 "economique"    : "de la <strong>situation économique</strong>"
                 "transport"     : "des <strong>transports en commun</strong>"
                 "environnement" : "de la <strong>situation économique</strong>"
+                "75"            : "les <strong>habitants du 75</strong>"
+                "77"            : "les <strong>habitants du 77</strong>"
+                "78"            : "les <strong>habitants du 78</strong>"
+                "91"            : "les <strong>habitants du 91</strong>"
+                "92"            : "les <strong>habitants du 92</strong>"
+                "93"            : "les <strong>habitants du 93</strong>"
+                "94"            : "les <strong>habitants du 94</strong>"
+                "95"            : "les <strong>habitants du 95</strong>"
             return aliases[key]
     )
     .filter('colors', ->
@@ -54,9 +62,9 @@ angular
             if format == "trend"
                 if html
                     # Add a plus prefix for percentage and non-negative values
-                    val = "<sub>✚</sub>" + val if val.indexOf("-") == -1                 
+                    val = "<sub>+</sub>" + val if val.indexOf("-") == -1                 
                     # Relplace the classic minus by a special chart
-                    val = val.replace("-", "⁃")
+                    val = val.replace("-", "<sub>-</sub>")
                 else
                     val = "+" + val if val.indexOf("-") == -1
             # Return the new value explcitily

@@ -61,13 +61,13 @@ class Question(models.Model):
 
 
 class Introduction(models.Model):
+    format    = models.CharField(max_length=128, blank=False, choices=INTRO_FORMATS, default='simple')
     sentence  = models.TextField(blank=True, 
                                 verbose_name='Phrase',
                                 help_text='Exemple: Que pensent les <strong>ouvriers</strong> des <strong>transports en commun</strong> ?')
     # related_name='+' disable backward relation
     profil    = models.ForeignKey(Profil, related_name='+')
     question  = models.ForeignKey(Question, related_name='+')    
-    format    = models.CharField(max_length=128, blank=False, choices=INTRO_FORMATS, default='simple')
     variation = models.CharField(max_length=128, 
                                  blank=True, 
                                  choices=INTRO_VARIATIONS,

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from datetime import datetime
 from django import forms
 from django.db import models
@@ -12,8 +13,31 @@ class TaxonomyAdmin(admin.ModelAdmin):
 class AnswerAdmin(admin.ModelAdmin):
     pass
 
+class IntroductionAdminForm(forms.ModelForm):
+
+    # Check that the profil
+    # is set to "all" for the number format
+    def clean_profil(self): 
+        if self.cleaned_data["format"] == "number" and self.cleaned_data["profil"] != "all":
+            raise forms.ValidationError(u"Le profil doit être \"total\" pour le format \"nombre de transilien\".")
+        return self.cleaned_data["profil"]   
+
+
+    # Check that the variation is 
+    # set only with "trend" format
+    def clean_variation(self):      
+        # Error, required value
+        if self.cleaned_data["variation"] == "" and self.cleaned_data["format"] == "trend":
+            raise forms.ValidationError(u"Une variation est requise pour le format \"taux de croissance\".")
+        # Cleanup, empty this value if not "trend format"
+        elif self.cleaned_data["variation"] != "" and self.cleaned_data["format"] != "trend":
+            self.cleaned_data["variation"] = "" 
+        return self.cleaned_data["variation"]
+    
 class IntroductionAdmin(admin.ModelAdmin):
     list_display = ('sentence', 'question', 'profil_truncated', 'format')
+    form = IntroductionAdminForm
+
 
 
 class ImportAdmin(ModelAdmin):

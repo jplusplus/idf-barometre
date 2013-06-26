@@ -1,8 +1,4 @@
-@import-once 'vendor/bootstrap/bootstrap.less';
-@import-once 'tools.less';
-@import-once 'animations.less';
-@import-once 'jscrollpane.less';
-@import-once 'bootstrap-overload.less';
+@staticPath: "../../";
 
 @zIndexContext : 100;
 @zIndexPage    : @zIndexContext+100;
@@ -16,9 +12,14 @@
 @economiqueColor:#ED9906;
 @transportColor:#06C5D8;
 
+@import-once 'vendor/bootstrap/bootstrap.less';
+@import-once 'tools.less';
+@import-once 'animations.less';
+@import-once 'jscrollpane.less';
+@import-once 'bootstrap-overload.less';
 
 body {
-    background:url("/static/img/common/bg.jpg");
+    background:url("@{staticPath}img/common/bg.jpg");
     position:relative;
     z-index:@zIndexContext;
 
@@ -43,7 +44,7 @@ body {
 .logo {
     .hide-text();
     display:block;        
-    background:url("/static/img/common/logo.png") no-repeat;
+    background:url("@{staticPath}img/common/logo.png") no-repeat;
     width:242px;
     height:151px;
     margin:0;
@@ -57,7 +58,7 @@ body {
         display:block;
         height:54px;
         width:7px;
-        background:url("/static/img/common/logo_aiguille_blanc.png") no-repeat 0 0;
+        background:url("@{staticPath}img/common/logo_aiguille_blanc.png") no-repeat 0 0;
         position:absolute;
         top:43px;
         left:118px;
@@ -68,19 +69,19 @@ body {
         .question-economique & {            
             .rotate(140deg);
             .transform-origin(50% 50%);
-            background-image:url("/static/img/common/logo_aiguille_orange.png");
+            background-image:url("@{staticPath}img/common/logo_aiguille_orange.png");
         }
      
         .question-transport & {
             .rotate(240deg);
             .transform-origin(50% 50%);
-            background-image:url("/static/img/common/logo_aiguille_bleue.png");
+            background-image:url("@{staticPath}img/common/logo_aiguille_bleue.png");
         }
 
         .question-environnement & {
             .rotate(300deg);
             .transform-origin(50% 50%);
-            background-image:url("/static/img/common/logo_aiguille_verte.png");
+            background-image:url("@{staticPath}img/common/logo_aiguille_verte.png");
         }
     }
 }
@@ -103,7 +104,7 @@ body {
     top:58px;
     position:relative;
     z-index:@zIndexPage;
-    background:url("/static/img/intro/pointilles.png") #edeef0 0 0 no-repeat;
+    background:url("@{staticPath}img/intro/pointilles.png") #edeef0 0 0 no-repeat;
     
     li.what {
         padding-top:110px;
@@ -206,15 +207,15 @@ body {
             }
 
             &.environnement .picto {
-                background-image:url("/static/img/intro/tendance-environnement.png");
+                background-image:url("@{staticPath}img/intro/tendance-environnement.png");
             }
 
             &.economique .picto {
-                background-image:url("/static/img/intro/tendance-situation_economique.png");
+                background-image:url("@{staticPath}img/intro/tendance-situation_economique.png");
             }
 
             &.transport .picto {
-                background-image:url("/static/img/intro/tendance-transports.png"); 
+                background-image:url("@{staticPath}img/intro/tendance-transports.png"); 
             } 
 
         }
@@ -223,9 +224,9 @@ body {
             background:150px*-3px 0;
             width:150px;
             height:75px;
-            &.environnement { background-image:url("/static/img/common/pictos/picto_environnement.png"); }
-            &.economique    { background-image:url("/static/img/common/pictos/picto_situation_economique.png"); }
-            &.transport     { background-image:url("/static/img/common/pictos/picto_transports.png"); }            
+            &.environnement { background-image:url("@{staticPath}img/common/pictos/picto_environnement.png"); }
+            &.economique    { background-image:url("@{staticPath}img/common/pictos/picto_situation_economique.png"); }
+            &.transport     { background-image:url("@{staticPath}img/common/pictos/picto_transports.png"); }            
         }
 
         .caption {
@@ -245,7 +246,7 @@ body {
             top:194px*0px;
             height:194px*2px-2px;
             .wrapper { 
-                background-image:url("/static/img/intro/case1.png"); 
+                background-image:url("@{staticPath}img/intro/case1.png"); 
             }                
         }
         
@@ -253,7 +254,7 @@ body {
             left:225px*0px;
             top:194px*1px;
             .wrapper { 
-                background-image:url("/static/img/intro/case2.png");
+                background-image:url("@{staticPath}img/intro/case2.png");
             }
         }
         
@@ -261,7 +262,7 @@ body {
             left:225px*0px;
             top:194px*2px;
             .wrapper { 
-                background-image:url("/static/img/intro/case3.png");
+                background-image:url("@{staticPath}img/intro/case3.png");
             }
         }
         
@@ -269,7 +270,7 @@ body {
             left:225px*1px;
             top:194px*2px;
             .wrapper { 
-                background-image:url("/static/img/intro/case4.png");
+                background-image:url("@{staticPath}img/intro/case4.png");
             }
         }
         
@@ -277,7 +278,7 @@ body {
             left:225px*2px;
             top:194px*0px;
             .wrapper { 
-                background-image:url("/static/img/intro/case5.png");
+                background-image:url("@{staticPath}img/intro/case5.png");
             }
         }
         
@@ -285,7 +286,7 @@ body {
             left:225px*2px;
             top:194px*1px;
             .wrapper { 
-                background-image:url("/static/img/intro/case6.png");
+                background-image:url("@{staticPath}img/intro/case6.png");
             }
         }
         
@@ -293,7 +294,7 @@ body {
             left:225px*3px;
             top:194px*0px;
             .wrapper { 
-                background-image:url("/static/img/intro/case7.png");
+                background-image:url("@{staticPath}img/intro/case7.png");
             }
         }
         
@@ -301,7 +302,7 @@ body {
             left:225px*3px;
             top:194px*1px;
             .wrapper { 
-                background-image:url("/static/img/intro/case8.png");
+                background-image:url("@{staticPath}img/intro/case8.png");
             }
         }
         
@@ -310,7 +311,7 @@ body {
             top:194px*2px;
             width:225px*2px-2px;
             .wrapper { 
-                background-image:url("/static/img/intro/case9.png");  
+                background-image:url("@{staticPath}img/intro/case9.png");  
             }   
             
             .value {
@@ -366,11 +367,11 @@ body {
         }
         
         &.info {
-            background-image:url("/static/img/common/tools_info.png");
+            background-image:url("@{staticPath}img/common/tools_info.png");
         }
 
         &.dl {
-            background-image:url("/static/img/common/tools_dwl.png");
+            background-image:url("@{staticPath}img/common/tools_dwl.png");
         }
     }    
 }
@@ -415,19 +416,19 @@ body {
             }
             
             &.radio-environnement .icon { 
-                background-image:url("/static/img/common/pictos/picto_environnement.png"); 
+                background-image:url("@{staticPath}img/common/pictos/picto_environnement.png"); 
             }
 
             &.radio-economique  .icon { 
-                background-image:url("/static/img/common/pictos/picto_situation_economique.png"); 
+                background-image:url("@{staticPath}img/common/pictos/picto_situation_economique.png"); 
             }
 
             &.radio-transport  .icon { 
-                background-image:url("/static/img/common/pictos/picto_transports.png"); 
+                background-image:url("@{staticPath}img/common/pictos/picto_transports.png"); 
             }
 
             &.vr { 
-                background:url("/static/img/graph/pointilles_horizontal.png") repeat-y right 0;       
+                background:url("@{staticPath}img/graph/pointilles_horizontal.png") repeat-y right 0;       
             }
         }
     }
@@ -453,7 +454,7 @@ body {
             white-space:nowrap;
             
             &.hr {
-                background:url("/static/img/graph/pointilles_vertical.png") repeat-x bottom;         
+                background:url("@{staticPath}img/graph/pointilles_vertical.png") repeat-x bottom;         
             }
         }
 
@@ -481,25 +482,25 @@ body {
         a.radio-all {
             padding-top:55px;
             width:76px;
-            background-image:url("/static/img/common/pictos/picto_all.png");
+            background-image:url("@{staticPath}img/common/pictos/picto_all.png");
         }
 
         .select-age a {                  
 
             &.radio-18_24 {
-                background-image:url("/static/img/common/pictos/picto_age_18_24.png");                
+                background-image:url("@{staticPath}img/common/pictos/picto_age_18_24.png");                
             }
             &.radio-25_34 {
-                background-image:url("/static/img/common/pictos/picto_age_25_34.png");
+                background-image:url("@{staticPath}img/common/pictos/picto_age_25_34.png");
             }
             &.radio-35_49 {
-                background-image:url("/static/img/common/pictos/picto_age_35_49.png");
+                background-image:url("@{staticPath}img/common/pictos/picto_age_35_49.png");
             }
             &.radio-50_64 {
-                background-image:url("/static/img/common/pictos/picto_age_50_64.png");
+                background-image:url("@{staticPath}img/common/pictos/picto_age_50_64.png");
             }
             &.radio-65_plus {
-                background-image:url("/static/img/common/pictos/picto_age_65_plus.png");
+                background-image:url("@{staticPath}img/common/pictos/picto_age_65_plus.png");
             }                                                
         }
 
@@ -507,10 +508,10 @@ body {
         .select-sex a {    
             margin:0 8px;        
             &.radio-femme {
-                background-image:url("/static/img/common/pictos/picto_femme.png");                
+                background-image:url("@{staticPath}img/common/pictos/picto_femme.png");                
             }
             &.radio-homme {
-                background-image:url("/static/img/common/pictos/picto_homme.png");                
+                background-image:url("@{staticPath}img/common/pictos/picto_homme.png");                
             }
         }
 
@@ -518,19 +519,19 @@ body {
         .select-job a {  
             font-size:9px;
             &.radio-cadre {
-                background-image:url("/static/img/common/pictos/picto_cadre.png");
+                background-image:url("@{staticPath}img/common/pictos/picto_cadre.png");
             }
             &.radio-employe {
-                background-image:url("/static/img/common/pictos/picto_employe.png");
+                background-image:url("@{staticPath}img/common/pictos/picto_employe.png");
             }
             &.radio-ouvrier {
-                background-image:url("/static/img/common/pictos/picto_ouvrier.png");
+                background-image:url("@{staticPath}img/common/pictos/picto_ouvrier.png");
             }
             &.radio-retraite {
-                background-image:url("/static/img/common/pictos/picto_retraite.png");
+                background-image:url("@{staticPath}img/common/pictos/picto_retraite.png");
             }
             &.radio-technicien {
-                background-image:url("/static/img/common/pictos/picto_technicien.png");
+                background-image:url("@{staticPath}img/common/pictos/picto_technicien.png");
             }
         }    
         
@@ -551,7 +552,7 @@ body {
                 height:28px;
                 width:28px;
                 margin-right:5px;
-                background:url("/static/img/common/pictos/picto_blank.png") 2px 0 no-repeat;
+                background:url("@{staticPath}img/common/pictos/picto_blank.png") 2px 0 no-repeat;
                 line-height:28px;
                 font-size: 15px;
                 text-align:center;                
@@ -564,7 +565,7 @@ body {
         width:619px;        
         height:478px;
         
-        background:url("/static/img/graph/fond.png") no-repeat;
+        background:url("@{staticPath}img/graph/fond.png") no-repeat;
         position:absolute;        
         z-index:@zIndexGraph;
         bottom:-20px;
@@ -622,7 +623,7 @@ body {
             left:19px; 
             width:594px;
             height:326px;
-            background:url("/static/img/graph/graph_frame.png") no-repeat 0 0;
+            background:url("@{staticPath}img/graph/graph_frame.png") no-repeat 0 0;
         }
 
         .wrapper {
@@ -700,7 +701,7 @@ body {
         }
 
         .border-top { 
-            background-image:url("/static/img/graph/fond_haut_p3.png");
+            background-image:url("@{staticPath}img/graph/fond_haut_p3.png");
         }
     }
 
@@ -739,7 +740,7 @@ body {
         }
 
         .border-top { 
-            background-image:url("/static/img/graph/fond_haut_p2.png");
+            background-image:url("@{staticPath}img/graph/fond_haut_p2.png");
         }
     }
 
@@ -779,7 +780,7 @@ body {
         }
 
         .border-top { 
-            background-image:url("/static/img/graph/fond_haut_p1.png");
+            background-image:url("@{staticPath}img/graph/fond_haut_p1.png");
         }
     }
 
@@ -796,31 +797,31 @@ body {
             background-position:-76px*4px 0;
         }
         .border-left {
-            background-image:url("/static/img/graph/fond_gauche_p1.png");            
+            background-image:url("@{staticPath}img/graph/fond_gauche_p1.png");            
         }
     }
 
     &.profil-18_24, &.profil-25_34, &.profil-35_49, &.profil-50_64, &.profil-65_plus {        
         .border-left {
-            background-image:url("/static/img/graph/fond_gauche_p2.png");            
+            background-image:url("@{staticPath}img/graph/fond_gauche_p2.png");            
         }
     }
 
     &.profil-femme, &.profil-homme{        
         .border-left {
-            background-image:url("/static/img/graph/fond_gauche_p3.png");            
+            background-image:url("@{staticPath}img/graph/fond_gauche_p3.png");            
         }
     }
 
     &.profil-cadre, &.profil-employe, &.profil-ouvrier, &.profil-retraite, &.profil-technicien {        
         .border-left {
-            background-image:url("/static/img/graph/fond_gauche_p4.png");            
+            background-image:url("@{staticPath}img/graph/fond_gauche_p4.png");            
         }
     }
 
     &.profil-75, &.profil-77, &.profil-78, &.profil-91, &.profil-92, &.profil-93, &.profil-94, &.profil-95 {        
         .border-left {
-            background-image:url("/static/img/graph/fond_gauche_p5.png");            
+            background-image:url("@{staticPath}img/graph/fond_gauche_p5.png");            
         }
     }
 
@@ -860,7 +861,7 @@ body {
         height:50px-10px;        
         padding-top:10px;
         margin-left:-63px/2px;
-        background:url("/static/img/graph/bulle_normal.png") no-repeat center 0;           
+        background:url("@{staticPath}img/graph/bulle_normal.png") no-repeat center 0;           
         .transition(transform opacity 0.6s);            
         .translate(0, 0);
     }
@@ -868,14 +869,14 @@ body {
     &.js-first {
         margin-left:10px;
         .content {
-            background-image:url("/static/img/graph/bulle_droite.png");
+            background-image:url("@{staticPath}img/graph/bulle_droite.png");
         }
     }
 
     &.js-last {
         margin-left:-10px;
         .content {
-            background-image:url("/static/img/graph/bulle_gauche.png");
+            background-image:url("@{staticPath}img/graph/bulle_gauche.png");
         }
     }
 }

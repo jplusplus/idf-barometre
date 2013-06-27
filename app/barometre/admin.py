@@ -18,8 +18,8 @@ class IntroductionAdminForm(forms.ModelForm):
     # Check that the profil
     # is set to "all" for the number format
     def clean_profil(self): 
-        if self.cleaned_data["format"] == "number" and self.cleaned_data["profil"] != "all":
-            raise forms.ValidationError(u"Le profil doit être \"total\" pour le format \"nombre de transilien\".")
+        if self.cleaned_data["format"] == "number" and self.cleaned_data["profil"].slug != "all":
+            raise forms.ValidationError(u"Le profil doit être \"total\" pour le format \"nombre de françiliens\".")
         return self.cleaned_data["profil"]   
 
 

@@ -248,7 +248,7 @@ class Command(LabelCommand):
                             row[column] = 0
                 try:
                     if field in ["date", "datetime", "created_at", "createat"]:
-                        row[column] = datetime.strptime(row[column], self.dateformat)
+                        row[column] = datetime.strptime(row[column], self.dateformat)                        
                     model_instance.__setattr__(field, row[column])
                 except:
                     try:

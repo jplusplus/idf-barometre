@@ -12,6 +12,7 @@ from app.barometre.models   import Answer, Introduction
 
 import csv
 import json
+import pytz
 import datetime
 
 # Merge severals lists
@@ -46,10 +47,12 @@ def answers(request, format='json'):
     raw_data = serializers.serialize('python', answers, relations=('profil','question',))
     # now extract the inner `fields` dicts
     actual_data = [d['fields'] for d in raw_data]
+    # Paris timezone to normalize the date
+    paris_tz = pytz.timezone("Europe/Paris")
     # now extract the inner 'fields' into profil and question
     # and simplify the date field
     for index, row in enumerate(actual_data):
-        row["date"]     = row["date"].strftime("%m/%Y")
+        row["date"]     = paris_tz.normalize(row["date"]).strftime("%m/%Y")
         row["profil"]   = row["profil"]["fields"]["display"]
         row["question"] = row["question"]["fields"]["display"]
         # Useless value

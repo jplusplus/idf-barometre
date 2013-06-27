@@ -49,7 +49,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
     chartSvg   = {}
     yAxisSvg   = {}    
     parse      = d3.time.format("%m/%Y").parse
-    dateFormat = d3.time.format("%b %y")    
+    dateFormat = d3.time.format("%b %y")  
     # Empty shortcuts
     wrapper = chart = axis = $(null)    
     # This dead IE required that we create jscrollpane here
@@ -254,12 +254,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         gradientW = (w / ($scope.answers.length - 1)) * 2    
 
 
-        # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
-        x.range [0, w]
-        y.range [h, 0]
-        xAxis = d3.svg.axis().scale(x).tickSize(tickSize).tickPadding(10).tickFormat(dateFormat).ticks(d3.time.months, 2)
-        yAxis = d3.svg.axis().scale(y).tickSize(tickSize).tickPadding(5).tickFormat((d)->d+"%").orient("left")
-
+  
         # An area generator, for the light fill.
         area = d3.svg.area()
             .interpolate("linear")
@@ -281,6 +276,14 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         offset   = (maxValue - minValue) * 0.3
         x.domain([minDate, maxDate])
         y.domain([minValue - offset, maxValue + offset]).nice()
+        # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
+        x.range [0, w]
+        y.range [h, 0]
+        # Only tick for the received values
+        dates = _.pluck($scope.answers, "date")        
+        xAxis = d3.svg.axis().scale(x).tickSize(tickSize).tickPadding(10).tickFormat(dateFormat).tickValues(dates)
+        yAxis = d3.svg.axis().scale(y).tickSize(tickSize).tickPadding(5).tickFormat((d)->d+"%").orient("left")
+
 
         chart.css("width",  w + padding[1] + padding[3])
 

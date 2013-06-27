@@ -6,6 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from dateutil.relativedelta    import relativedelta
 from django.utils.text         import truncate_words
 import datetime
+import pytz
 import re
 
 
@@ -150,7 +151,8 @@ class Answer(models.Model):
         verbose_name_plural = u"réponses"
 
     def __unicode__(self):
-        date = self.date.strftime("%m/%Y")
+        paris_tz = pytz.timezone("Europe/Paris")
+        date = paris_tz.normalize(self.date).strftime("%m/%Y")    
         return  u'%s: Question "%s" selon %s' % (date, self.question.display, self.profil.display) 
 
     @staticmethod    

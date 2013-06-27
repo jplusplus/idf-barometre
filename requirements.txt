@@ -14,5 +14,6 @@ django-csvimport
 wadofstuff-django-serializers==1.1.0
 boto
 django-storages
+pytz
 gunicorn
 git+git://github.com/mazelife/django-redactor.git

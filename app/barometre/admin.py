@@ -12,7 +12,7 @@ class TaxonomyAdmin(admin.ModelAdmin):
     list_display = ('display', 'slug',)
 
 class AnswerAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ('question', 'profil', 'date')
 
 class IntroductionAdminForm(forms.ModelForm):    
 
@@ -37,7 +37,8 @@ class IntroductionAdminForm(forms.ModelForm):
     
 class IntroductionAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'question', 'profil_truncated', 'format')
-    form = IntroductionAdminForm        
+    list_filter = ('question', 'profil', 'format')
+    form = IntroductionAdminForm
     formfield_overrides = {
         models.TextField: {'widget': AdminRedactorEditor(            
             redactor_settings={

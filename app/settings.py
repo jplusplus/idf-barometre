@@ -122,6 +122,10 @@ COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
 
+# Activate CSS minifier
+COMPRESS_CSS_FILTERS = ("compressor.filters.cssmin.CSSMinFilter",)
+COMPRESS_ENABLED = not True
+
 INSTALLED_APPS = (    
     'django.contrib.auth',
     'django.contrib.contenttypes',

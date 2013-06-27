@@ -128,8 +128,6 @@ COMPRESS_CSS_FILTERS = (
     "compressor.filters.css_default.CssAbsoluteFilter",
 )
 
-COMPRESS_ENABLED = not DEBUG
-
 INSTALLED_APPS = (    
     'django.contrib.auth',
     'django.contrib.contenttypes',

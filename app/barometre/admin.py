@@ -4,6 +4,7 @@ from django import forms
 from django.db import models
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin 
+from redactor.widgets import AdminRedactorEditor
 from app.barometre.models import Answer, Profil, Question, Import, Introduction
 
 class TaxonomyAdmin(admin.ModelAdmin):
@@ -13,7 +14,7 @@ class TaxonomyAdmin(admin.ModelAdmin):
 class AnswerAdmin(admin.ModelAdmin):
     pass
 
-class IntroductionAdminForm(forms.ModelForm):
+class IntroductionAdminForm(forms.ModelForm):    
 
     # Check that the profil
     # is set to "all" for the number format
@@ -35,8 +36,17 @@ class IntroductionAdminForm(forms.ModelForm):
         return self.cleaned_data["variation"]
     
 class IntroductionAdmin(admin.ModelAdmin):
-    list_display = ('sentence', 'question', 'profil_truncated', 'format')
-    form = IntroductionAdminForm
+    list_display = ('__unicode__', 'question', 'profil_truncated', 'format')
+    form = IntroductionAdminForm        
+    formfield_overrides = {
+        models.TextField: {'widget': AdminRedactorEditor(            
+            redactor_settings={
+                'overlay' : True,
+                'buttons': [ 'bold', 'italic', 'deleted'],
+                'autoformat': False,
+            }
+        )},
+    }
 
 
 

@@ -79,12 +79,13 @@ class Introduction(models.Model):
 
     def __unicode__(self):
         indicator = self.indicator()
+        sentence  = strip_tags(self.sentence)
         if type(indicator) in (int,str,):
-            return '%s %s' % (indicator, self.sentence)        
+            return '%s %s' % (indicator, sentence)        
         elif "value" in indicator:
-            return '%s %s' % (indicator["value"], self.sentence)                    
+            return '%s %s' % (indicator["value"], sentence)                    
         else:
-            return self.sentence
+            return sentence
 
     def profil_truncated(self):
         return truncate_words(self.profil.display, 4)

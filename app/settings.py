@@ -136,8 +136,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    # External added
-    'compressor', # Compresses linked and inline JavaScript or CSS into a single cached file.    
+    # Compresses linked and inline JavaScript or CSS into a single cached file.    
+    'compressor', 
+    # Rich text editor for admin forms
+    'redactor',
     # Internal added   
     'app.barometre'
 )

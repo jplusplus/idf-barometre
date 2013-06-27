@@ -18,7 +18,7 @@ angular
                 "retraite"      : "les <strong>retraités</strong>"
                 "economique"    : "de la <strong>situation économique</strong>"
                 "transport"     : "des <strong>transports en commun</strong>"
-                "environnement" : "de la <strong>situation économique</strong>"
+                "environnement" : "de <strong>la qualité de l'environnement</strong>"
                 "75"            : "les <strong>habitants du 75</strong>"
                 "77"            : "les <strong>habitants du 77</strong>"
                 "78"            : "les <strong>habitants du 78</strong>"

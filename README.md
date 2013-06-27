@@ -13,7 +13,7 @@ Pour fonctionner l'application a besoin de :
 
 Sur Ubuntu/Debian, installez les packages suivants pour utiliser MySQL :
 
-    $ sudo apt-get install build-essential python-pip python-dev libjpeg-dev mysql
+    $ sudo apt-get install build-essential python-pip python-dev libjpeg-dev mysql 
 
 ### Initialiser Virtualenv
 À la racine du projet lancez cette commande pour initialiser l'environement virtuel dans ce dossier :

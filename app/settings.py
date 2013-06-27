@@ -61,7 +61,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = here('staticfiles')
+STATIC_ROOT = here('static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -72,7 +72,6 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    here('static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -124,9 +123,11 @@ COMPRESS_PRECOMPILERS = (
 
 # Activate CSS minifier
 COMPRESS_CSS_FILTERS = (
-    "compressor.filters.cssmin.CSSMinFilter",
     "compressor.filters.css_default.CssAbsoluteFilter",
 )
+
+COMPRESS_ENABLED = True
+
 
 INSTALLED_APPS = (    
     'django.contrib.auth',
@@ -145,8 +146,6 @@ SERIALIZATION_MODULES = {
     'json': 'wadofstuff.django.serializers.json',
     'python': 'wadofstuff.django.serializers.python'
 }
-
-COMPRESSOR_ENABLED = True
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

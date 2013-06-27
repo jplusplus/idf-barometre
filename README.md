@@ -70,11 +70,11 @@ Votre application est désormais accéssible sur [http://127.0.0.1:8000](http://
 
 Veillez à respecter cette struture de fichier, le format des dates (colonne *date*) et celui des poourcentages (colonne *ratio*) :
 
-date | question | profil | reponse  | ratio
---- | --- | --- | --- | ---
-01/02/2011 | Transport | Total | ratio | 57
-01/02/2011 | Transport | Homme | ratio | 58
-01/02/2011 | Transport | Femme | ratio | 58
+date | question | profil |ratio
+--- | --- | --- | ---
+01/02/2011 | Transport | Total | 57
+01/02/2011 | Transport | Homme | 58
+01/02/2011 | Transport | Femme | 58
 ... |
 
 ## License

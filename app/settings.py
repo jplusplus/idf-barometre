@@ -123,8 +123,12 @@ COMPRESS_PRECOMPILERS = (
 )
 
 # Activate CSS minifier
-COMPRESS_CSS_FILTERS = ("compressor.filters.cssmin.CSSMinFilter",)
-COMPRESS_ENABLED = not True
+COMPRESS_CSS_FILTERS = (
+    "compressor.filters.cssmin.CSSMinFilter",
+    "compressor.filters.css_default.CssAbsoluteFilter",
+)
+
+COMPRESS_ENABLED = not DEBUG
 
 INSTALLED_APPS = (    
     'django.contrib.auth',

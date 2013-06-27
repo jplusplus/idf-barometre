@@ -128,7 +128,7 @@ class Introduction(models.Model):
                 previousAnswer = Answer.objects.order_by("-date").filter(**filters)                 
                 # The revious answer exists
                 if previousAnswer:
-                    indicator["value"]    = Answer.float( currentAnswer[0].ratio - previousAnswer[0].ratio, "%")
+                    indicator["value"]    = Answer.float( currentAnswer[0].ratio - previousAnswer[0].ratio, "pt")
                     indicator["current"]  = Answer.float( currentAnswer[0].ratio, "%")
                     indicator["previous"] = Answer.float( previousAnswer[0].ratio, "%")
                     indicator["class"]    = "increase" if currentAnswer[0].ratio >= previousAnswer[0].ratio else "decrease" 

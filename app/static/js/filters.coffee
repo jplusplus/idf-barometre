@@ -55,9 +55,9 @@ angular
     .filter("supPercent", ->
         return (val='', html=true, format=null)-> 
             # Remove ,0% end
-            val = val.replace /,0%/, "%"
+            val = val.replace /,0(%|pt)/, "$1"
             # Add <sup></sup> arround %
-            val = val.replace /%/, "<sup>%</sup>" if html           
+            val = val.replace /(%|pt)/, "<sup>$1</sup>" if html           
 
             if format == "trend"
                 if html

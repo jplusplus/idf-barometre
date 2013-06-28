@@ -121,13 +121,16 @@ class Introduction(models.Model):
                 # Update the filter according the variation field
                 if self.variation == 'last_2_month':                                 
                     # Previous answer date: 2 month before
-                    filters["date"] = currentAnswer[0].date - relativedelta(months=2)
+                    delta = Answer.normalize_date(currentAnswer[0].date - relativedelta(months=2))
                 else:
                     # Previous answer date by default: 1 year before
-                    filters["date"] = currentAnswer[0].date - relativedelta(years=1)
+                    delta = currentAnswer[0].date - relativedelta(years=1)
 
+                filters["date__month"] = delta.month
+                filters["date__year"]  = delta.year
                 # Get the previous answer
-                previousAnswer = Answer.objects.order_by("-date").filter(**filters)                 
+                previousAnswer = Answer.objects.order_by("-date").filter(**filters)                          
+
                 # The revious answer exists
                 if previousAnswer:
                     indicator["value"]    = Answer.float( currentAnswer[0].ratio - previousAnswer[0].ratio, "pt")
@@ -151,13 +154,21 @@ class Answer(models.Model):
         verbose_name_plural = u"réponses"
 
     def __unicode__(self):
-        paris_tz = pytz.timezone("Europe/Paris")
-        date = paris_tz.normalize(self.date).strftime("%m/%Y")    
+        date = self.local_date().strftime("%m/%Y")
         return  u'%s: Question "%s" selon %s' % (date, self.question.display, self.profil.display) 
+    
+    def local_date(self):
+        return Answer.normalize_date(self.date)
 
     @staticmethod    
     def float(val, suffix=''):
         return str( round(val, 1) ).replace('.', ',') + suffix
+
+    @staticmethod   
+    def normalize_date(date):
+        paris_tz = pytz.timezone("Europe/Paris")
+        return paris_tz.normalize(date)
+
 
 class Import(models.Model):
     model_name  = models.CharField(max_length=255, blank=False, choices=IMPORT_MODELS, default='barometre.Answer')

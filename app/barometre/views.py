@@ -110,7 +110,7 @@ def introductions(request):
     introductions = merge(transport, merge(economique, environnement))
     # Shuffle the dataset
     shuffle(introductions)
-    """
+
     # Now pick 2 bigs introductions for the datasets with only 2 elements  
     bigs = Introduction.objects.filter(format='trend').order_by("?")    
     big_intros = list()
@@ -133,7 +133,7 @@ def introductions(request):
     # Then append the big intro to right position
     if bigs_len > 0: introductions.insert(0, big_intros[0])
     if bigs_len > 1: introductions.insert(8, big_intros[1])
-    """
+    
     # Serialize data
     raw_data = serializers.serialize('python', introductions, relations=('profil','question'), extras=("indicator",))
     # now extract the inner 'fields' and 'extras' dicts

@@ -13,11 +13,11 @@ angular
                 $routeProvider
                     .when('/', {
                         controller: QuestionListCtrl
-                        templateUrl: "/partial/questionList.html?#{Date()}"
+                        templateUrl: "/partial/questionList.html"
                     })
                     .when('/answers/', {
                         controller: AnswerGraphCtrl  
-                        templateUrl: "/partial/answerGraph.html?#{Date()}"
+                        templateUrl: "/partial/answerGraph.html"
                         reloadOnSearch: false
                     })
                     .otherwise redirectTo: '/'

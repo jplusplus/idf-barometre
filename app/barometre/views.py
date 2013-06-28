@@ -98,7 +98,7 @@ def introductions(request):
     economique_len    = 3 if rand == 1 else 2 
     environnement_len = 3 if rand == 2 else 2 
     # First get all small introductions
-    smalls = Introduction.objects.filter(format="trend").order_by("?")
+    smalls = Introduction.objects.exclude(format="trend").order_by("?")
     # Get the introductions ordering by date.
     # Pick 2 elements for two of the sets,
     # 3 elements for the third one
@@ -110,9 +110,8 @@ def introductions(request):
     introductions = merge(transport, merge(economique, environnement))
     # Shuffle the dataset
     shuffle(introductions)
-
     # Now pick 2 bigs introductions for the datasets with only 2 elements  
-    bigs = Introduction.objects.exclude(format='trend').order_by("?")    
+    bigs = Introduction.objects.filter(format='trend').order_by("?")    
     big_intros = list()
 
     if transport_len == 2:

@@ -28,12 +28,12 @@ HeaderCtrl = ($scope, $dialog)->
 
 HeaderCtrl.$inject = ['$scope', '$dialog'];
 
-ArrowColorCtrl = ($scope, ArrowColor)->
+ActiveColorCtrl = ($scope, ArrowColor)->
     $scope.state  = ArrowColor
     $scope.getClass = ->
         return if $scope.state.active then "question-" + $scope.state.question else ""
 
-ArrowColorCtrl.$inject = ['$scope', 'ArrowColor'];
+ActiveColorCtrl.$inject = ['$scope', 'ArrowColor'];
     
 AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answer, ArrowColor)->
     # Models attributes

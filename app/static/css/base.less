@@ -371,7 +371,17 @@ body {
         }
 
         &.dl {
-            background-image:url("@{staticPath}img/common/tools_dwl.png");
+            background-image:url("@{staticPath}img/common/tools_dwl_sprite.png");
+            
+            .question-transport & {
+                background-position:-84px*0px 0;
+            }            
+            .question-environnement & {
+                background-position:-84px*1px 0;
+            }            
+            .question-economique & {
+                background-position:-84px*2px 0;
+            }
         }
     }    
 }

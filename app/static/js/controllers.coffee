@@ -19,7 +19,7 @@ HeaderCtrl = ($scope, $dialog)->
         backdropClick: true
         dialogFade: true
         backdropFade: true
-        templateUrl:  '/partial/dialog.html'
+        templateUrl:  './partial/dialog.html'
         controller: 'DialogCtrl'
     
     $scope.openDialog = ->      

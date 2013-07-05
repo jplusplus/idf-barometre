@@ -8,5 +8,5 @@ admin.autodiscover()
 urlpatterns = patterns('',    
     url(r'^admin/', include(admin.site.urls)),    
     url(r'^barometre/', include('app.barometre.urls')),
-    url(r'^/$', redirect_to, {'url' : '/barometre/'})
+    url(r'^$', redirect_to, {'url' : '/barometre/'})
 )

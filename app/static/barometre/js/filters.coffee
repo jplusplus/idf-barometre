@@ -39,10 +39,10 @@ angular
                     "51"      : "#EA9806"
                     "100"     : "#B3750E"
                 "transport":
-                    "default" : "#06c3d6"
+                    "default" : "#07C5D8"
                     "0"       : "#08c5d8"
                     "50"      : "#4dd5e3"
-                    "51"      : "#06c3d6"
+                    "51"      : "#07C5D8"
                     "100"     : "#1096a2"
                 "environnement":
                     "default" : "#bad808"

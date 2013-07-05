@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Encoding: utf-8
+# -*- coding: utf-8 -*-
 
 from django.template        import RequestContext, TemplateDoesNotExist
 from django.template.loader import get_template
@@ -82,7 +82,10 @@ def answers(request, format='json'):
             writer.writerow( actual_data[0].keys() )
             # Take every row values
             for row in actual_data:
-                writer.writerow( row.values() )
+                # UT8 encode the string
+                values = [unicode(s).encode("utf-8") for s in row.values()]
+                # Add the encoded values to the CSV
+                writer.writerow( values )
 
         # Returns the data as CSV type
         return response

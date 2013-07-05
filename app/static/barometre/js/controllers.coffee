@@ -294,7 +294,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         maxValue = d3.max $scope.answers, (d)-> d.ratio        
         offset   = (maxValue - minValue) * 0.3
         x.domain([minDate, maxDate])
-        y.domain([minValue - offset, maxValue + offset]).nice()
+        y.domain([0, 100]).nice()
         # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
         x.range [0, w]
         y.range [h, 0]

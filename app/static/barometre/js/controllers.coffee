@@ -247,14 +247,8 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
             stops.push offset: pos(start), color: $filter("colors")($scope.question, if i%2 then "0" else "51")
             stops.push offset: pos(end),   color: $filter("colors")($scope.question, if i%2 then "50" else "100")
 
-        console.log stops
         return stops
-        """
-        { offset: "0%",   color: $filter("colors")($scope.question, "0") }
-        { offset: "50%",  color: $filter("colors")($scope.question, "50") }
-        { offset: "51%",  color: $filter("colors")($scope.question, "51") }
-        { offset: "100%", color: $filter("colors")($scope.question, "100") }
-        """
+        
 
     render = ()->    
         loadShortcuts()    
@@ -276,7 +270,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         dotGap    = Math.max(minGap, wrapperWidth / ($scope.answers.length - 1))
         w         = (dotGap * ($scope.answers.length - 1)) - padding[1] - padding[3]
         h         = wrapperHeight - padding[0] - padding[2]        
-        stopWidth = (w / ($scope.answers.length))
+        stopWidth = (w / ($scope.answers.length-1))*2
 
 
   
@@ -334,17 +328,23 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                     .attr("fill", $filter("colors")($scope.question))
                     .attr("d", area($scope.answers))
         # Add stripes
-        else            
+        else           
+            # Gradient spreadMethod bug on Safari 
+            # cf: http://stackoverflow.com/questions/11434971/svg-lineargradiend-spreadmethod-ignored-by-safari-osx-and-ios            
+            # So we repeat the gradientStop instead of use the repeat method
+            stops = getGradientStops(x(maxDate), stopWidth/2)
+
             chartSvg.append("linearGradient")
                     .attr("id", "sequence-gradient")
                     .attr("gradientUnits", "userSpaceOnUse")
+                    .attr("spreadMethod", "repeat")
                     .attr("y1", 0)
                     .attr("x1", 0)
                     .attr("y2", 0)
-                    .attr("x2", x.max)
+                    .attr("x2", x(maxDate))
                     .selectAll("stop")
                         # Get the gradient stops accoring the size of the gradient and its steps
-                        .data( getGradientStops(x(maxDate), stopWidth) )
+                        .data(stops)
                         .enter()
                         .append("stop")
                             .attr("offset",     (d)-> d.offset)

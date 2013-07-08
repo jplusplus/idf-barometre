@@ -296,7 +296,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         # Edits min and max according the offset;
         # takes care to not overlap 0 and 100
         minRatio = Math.max(0, minRatio-offset)
-        maxRatio = Math.max(100, maxRatio+offset)
+        maxRatio = Math.min(100, maxRatio+offset)
         # Extend x/y domains according the max values
         x.domain([minDate, maxDate])
         y.domain([minRatio, maxRatio]).nice()

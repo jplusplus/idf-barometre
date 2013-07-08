@@ -49,7 +49,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
     chartSvg   = {}
     yAxisSvg   = {}    
     parse      = d3.time.format("%m/%Y").parse
-    dateFormat = d3.time.format("%b %y")  
+    dateFormat = (d)-> getMonth(d) + " " + (d.getFullYear()-2000)
     # Empty shortcuts
     wrapper = chart = axis = $(null)    
     # This dead IE required that we create jscrollpane here
@@ -73,6 +73,22 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         $scope.answers = Answer.query params, render
         # Update the ArrowColor service
         ArrowColor.question = $scope.question
+
+    getMonth = (d)->
+        return [
+            "Jan.",
+            "Fév.",
+            "Mar.",
+            "Avr.",
+            "Mai.",
+            "Jun.",
+            "Jul.",
+            "Aoû.",
+            "Sep.",
+            "Oct.",
+            "Nov.",
+            "Déc."
+        ][d.getMonth()] or d3.time.format("%b")(d)
 
     loadShortcuts = ->
         wrapper = $rootElement.find(".wrapper")

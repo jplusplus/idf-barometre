@@ -124,43 +124,20 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 top  : y(d.ratio) 
             }
         setTrend: (d)->
-            # Wait for D3 instance
-            if chartSvg.select?
-                # find the trend group
-                trend = chartSvg.select("g.trend")
-                # Keys list sortted by key
-                keys = _.sortBy _.keys($scope.activePoints), (d, key)->key
-                # Only if there is enougth data
-                unless keys.length < 2
-                    fst = $scope.activePoints[ keys[0] ]
-                    snd = $scope.activePoints[ keys[1] ]
-                    # First and second values substracted to know the trend
-                    val  = snd.ratio
-                    val -= fst.ratio
-                    # Set the value
-                    trend.select("text").text( $filter("supPercent")(val+"pt", false, "trend") )                    
-                    # Set the color of the circle
-                    trend.select("circle").attr("fill", if val < 0 then "#cc0e00" else "#69cc00")
-                    # Show the trend                                                                            
-                    trend.style("display", null)
-                    # Find the new position
-                    dist = x(snd.date) - x(fst.date)
-                    tx   = x(fst.date) + (dist)/2
-                    # Put the rend beside the dots when there a close
-                    if dist < 50
-                        ty = Math.min( y(fst.ratio), y(snd.ratio) ) + 40
-                    else
-                        ty = Math.min( y(fst.ratio), y(snd.ratio) )
-                    # Duration only without ie
-                    if Modernizr.svg
-                        # Set the position with transition
-                        trend.transition().attr("transform", "translate(#{tx}, #{ty})")
-                    else
-                        # Set the position
-                        trend.attr("transform", "translate(#{tx}, #{ty})")
-                else
-                    # Hide the trend                                                                            
-                    trend.style("display", "none")
+            # Keys list sortted by key
+            keys = _.sortBy _.keys($scope.activePoints), (d, key)->key
+            # Only if there is enougth data
+            unless keys.length < 2
+                fst = $scope.activePoints[ keys[0] ]
+                snd = $scope.activePoints[ keys[1] ]
+                # First and second values substracted to know the trend
+                val  = snd.ratio
+                val -= fst.ratio
+                # Sets the trend attribute into the scope
+                $scope.trend = val
+            else
+                # Sets the trend to false to disable it
+                $scope.trend = false
         tips:
             update: ()->                
                 # Update the existing activePoint

@@ -120,15 +120,15 @@
             <span ng:bind-html="question | alias"></span> 
         </h2>
         <div class="manual">
-            <span ng-if="activePointsCount() == 0">
-                Cliquez sur un premier point pour calculer le taux de croissance            
+            <span ng-if="trend === false">
+                Cliquez deux points pour afficher la variation
             </span>
-            <span ng-if="activePointsCount() == 1">
-                Cliquez sur un second point pour calculer le taux de croissance            
-            </span>
-            <span ng-if="activePointsCount() == 2">
-                Cliquez sur un autre point pour comparer le taux de croissance            
-            </span>
+            <span ng-if="trend !== false" ng-pluralize count="trend" when="{
+                '0' : '0 point',
+                '1' : '1 point',
+                '-1' : '-1 point',
+                'other' : '{} points'
+            }"></span>
         </div>
         <div class="yaxis"></div>
         <div class="border"></div>

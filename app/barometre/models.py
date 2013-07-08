@@ -133,7 +133,7 @@ class Introduction(models.Model):
 
                 # The revious answer exists
                 if previousAnswer:
-                    indicator["value"]    = Answer.float( currentAnswer[0].ratio - previousAnswer[0].ratio, "pt")
+                    indicator["value"]    = Answer.float( currentAnswer[0].ratio - previousAnswer[0].ratio, "pt", "pts")
                     indicator["current"]  = Answer.float( currentAnswer[0].ratio, "%")
                     indicator["previous"] = Answer.float( previousAnswer[0].ratio, "%")
                     indicator["class"]    = "increase" if currentAnswer[0].ratio >= previousAnswer[0].ratio else "decrease" 
@@ -161,7 +161,11 @@ class Answer(models.Model):
         return Answer.normalize_date(self.date)
 
     @staticmethod    
-    def float(val, suffix=''):
+    def float(val, suffix_single='', suffix_plural=''):
+        # Take the single suffix as default valure for plural suffix
+        suffix_plural = suffix_single if suffix_plural == '' else suffix_plural
+        # Create the right suffix
+        suffix = suffix_plural if val > 1 or val < -1 else suffix_single
         return str( round(val, 1) ).replace('.', ',') + suffix
 
     @staticmethod   

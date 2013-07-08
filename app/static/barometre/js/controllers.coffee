@@ -305,7 +305,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         maxDate  = d3.max $scope.answers.rows, (d)-> d.date        
         minRatio = $scope.answers.question_min
         maxRatio = $scope.answers.question_max        
-        offset   = (maxRatio - minRatio) * 0.3
+        offset   = (maxRatio - minRatio) * 0.10
         # Edits min and max according the offset;
         # takes care to not overlap 0 and 100
         minRatio = Math.max(0, minRatio-offset)

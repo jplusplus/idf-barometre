@@ -73,3 +73,11 @@ angular
     .filter("nl2br", ->
         return (str='')-> (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2')
     )
+    .filter("sentence", ->
+        return (question)->
+            return {
+                "economique"   : "Dynamisme de la situation économique",
+                "environnement": "Qualité de l'environnement",
+                "transport"    : "Qualité des transports"
+            }[question.slug]
+    )

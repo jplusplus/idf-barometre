@@ -21,6 +21,7 @@
                         <span class="picto"><!-- Trend pictogram --></span>
                         <span class="current ratio" ng-bind-html="intro.indicator.current | supPercent"></span>
                     </div>
+                    <h3 ng-if="intro.format == 'trend'">[[intro.question | sentence]]</h3>
                 </div>
                 <div class="caption" ng-bind-html="intro.sentence"></div>                
             </a>

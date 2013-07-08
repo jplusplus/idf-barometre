@@ -401,28 +401,6 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 .on("mouseleave", point.tips.clean)
                 .on("click",      point.toggle)
 
-        trendDisplay = if _.keys($scope.activePoints).length < 2 then "none" else null
-        # Create a group to contain the trend circle
-        trend = chartSvg.append("g")
-                            .style("display", trendDisplay)
-                            .attr("class", "trend")
-                            .attr("transform", "translate(#{w/2}, -70)")
-
-        # Appends a circle
-        trend.append("svg:circle")
-            .attr("r", 25)
-            .attr("fill", "#cc0e00")
-
-        # Appends a text
-        trend.append("svg:text")
-            .attr("y", if Modernizr.svg then 5 else 0)
-            .attr("text-anchor", "middle")
-            .attr("fill", "#fff")
-            .style("font-size", 16)
-            .style("font-weight", "bold")
-            .text $filter("supPercent")("10%", false)
-
-
         # Add the x-axis.
         chartSvg.append("g")
             .attr("class", "x axis")

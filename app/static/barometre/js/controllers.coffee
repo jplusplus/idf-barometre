@@ -157,16 +157,19 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 # For each point's tips
                 # look for the useless ones
                 $(".point-tips").each (key, tip)-> 
-                    index = $(tip).data("point")
+                    $tip  = $(tip) 
+                    index = $tip.data("point")
+                    # Activate the tip
+                    $tip.addClass("active")
                     # Remove the inative point
-                    $(tip).remove() unless $scope.activePoints[index]
+                    $tip.remove() unless $scope.activePoints[index]
                 # For each activepoint,
                 # look for the missing tips                
                 _.each $scope.activePoints, point.tips.add
 
             add: (d, index)->
                 $tips = $(".point-tips[data-point=" + index + "]")
-                $point = $(chartSvg.selectAll(".data-point")[0][index])  
+                $point = $(chartSvg.selectAll(".data-point")[0][index]) 
                 # tips doenst exist yet
                 if $tips.length is 0
                     # Create the tips

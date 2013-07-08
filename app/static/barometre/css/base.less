@@ -890,22 +890,59 @@ body {
         height:50px-10px;        
         padding-top:10px;
         margin-left:-63px/2px;
-        background:url("@{staticPath}img/graph/bulle_normal.png") no-repeat center 0;           
+        background:url("@{staticPath}img/graph/bulle_all.png") no-repeat -64px 0;           
         .transition(transform opacity 0.6s);            
         .translate(0, 0);
+    }
+
+    &.active .content {
+        color:@white;
+        .question-economique & { 
+            background-position:-64px -51px;
+        }
+        .question-transport & { 
+            background-position:-64px -51px*2px;
+        }
+        .question-environnement & { 
+            background-position:-64px -51px*3px;
+        }
     }
 
     &.js-first {
         margin-left:10px;
         .content {
-            background-image:url("@{staticPath}img/graph/bulle_droite.png");
+            background-position:0 0;
+        }
+        
+        &.active .content {            
+            .question-economique & { 
+                background-position:0 -51px;
+            }
+            .question-transport & { 
+                background-position:0 -51px*2px;
+            }
+            .question-environnement & { 
+                background-position:0 -51px*3px;
+            }
         }
     }
 
     &.js-last {
         margin-left:-10px;
         .content {
-            background-image:url("@{staticPath}img/graph/bulle_gauche.png");
+            background-position:-64px*2px 0;            
+        }
+
+        &.active .content {                
+            .question-economique & { 
+                background-position:-64px*2px -51px;
+            }
+            .question-transport & { 
+                background-position:-64px*2px -51px*2px;
+            }
+            .question-environnement & { 
+                background-position:-64px*2px -51px*3px;
+            }
         }
     }
 }

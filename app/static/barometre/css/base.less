@@ -176,20 +176,23 @@ body {
                 white-space:nowrap;
                 margin-top:5px;       
                 height:70px;         
-                width:150px;                
+                width:175px;                
+                display:inline-block !important;
                 display:block;
+                text-align:center;                                
                 
                 .ratio {
+                    display:inline-block !important;
                     display:block;
-                    float:left;
+                    *float:left;
                     margin:0;
-                    padding:0;
-                    
+                    padding:0;                    
                 }
 
-                &.increase .previous,
-                &.decrease .current {
-                    padding-top:40px;
+                &.increase .current,
+                &.decrease .previous {
+                    position:relative;                 
+                    top:-40px;
                 }
                 
                 .picto {    
@@ -197,8 +200,9 @@ body {
                     width:53px;
                     margin:5px;                                        
                     background:0 0 no-repeat transparent;
+                    display:inline-block !important;
                     display:block;
-                    float:left;
+                    *float:left;
                 }
 
                 &.decrease .picto {                        
@@ -245,9 +249,16 @@ body {
             left:225px*1px;
             top:194px*0px;
             height:194px*2px-2px;
+            
             .wrapper { 
                 background-image:url("@{staticPath}img/intro/case1.png"); 
-            }                
+            }        
+            
+            .ratio.value {                      
+                display:block;
+                width:175px;
+                text-align:center;  
+            }        
         }
         
         &.case-2 {
@@ -315,16 +326,15 @@ body {
             }   
             
             .value {
-                float:left;
                 padding-right:10px;
-            }         
-            
-            .trend {                
-                width:300px;                
-            }
+            }                     
 
             .lt-ie8 & .trend {                
                 width:150px;                
+            }
+
+            .indicator {                
+                text-align:center;                                                
             }
         } 
 

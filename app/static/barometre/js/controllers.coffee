@@ -159,13 +159,29 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 $(".point-tips").each (key, tip)-> 
                     $tip  = $(tip) 
                     index = $tip.data("point")
-                    # Activate the tip
-                    $tip.addClass("active")
-                    # Remove the inative point
-                    $tip.remove() unless $scope.activePoints[index]
+                    # Find its dot
+                    dots = chartSvg.selectAll(".data-point")    
+                    dot  = d3.select dots[0][index]                     
+                    # The point isn active
+                    unless $scope.activePoints[index]
+                        # Remove the inative point
+                        $tip.remove()
+                        # Change it dot color
+                        dot.attr "fill", $filter("colors")($scope.question)
+                    else
+                        # Activate the tip
+                        $tip.addClass("active")
+                        # Change it dot color
+                        dot.attr "fill", "#323c45"
+
                 # For each activepoint,
                 # look for the missing tips                
                 _.each $scope.activePoints, point.tips.add
+
+            empty:->
+                $scope.activePoints = {}
+                point.tips.clean()
+                $scope.$apply()
 
             add: (d, index)->
                 $tips = $(".point-tips[data-point=" + index + "]")
@@ -362,6 +378,18 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 .attr("class", "area bg")
                 .attr("fill", "url(#sequence-gradient)")
                 .attr("d", area($scope.answers.rows))
+
+
+        # Add an overlay to catch click on the entire graph but not on the svg
+        chartSvg.append("svg:rect")
+                    .attr("x", 0)            
+                    .attr("y", 0)
+                    .attr("width", w)
+                    .attr("height", h)
+                    .attr("fill", "transparent")
+                    .on "click", -> 
+                        point.tips.empty() if _.keys($scope.activePoints).length > 1
+
 
         # Add line dots
         chartSvg.selectAll(".data-point")

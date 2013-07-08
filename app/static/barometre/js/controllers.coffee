@@ -135,9 +135,10 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 val -= fst.ratio
                 # Sets the trend attribute into the scope
                 $scope.trend = val
+                $scope.trendClass = if val >= 0 then "increase" else "decrease"                
             else
                 # Sets the trend to false to disable it
-                $scope.trend = false
+                $scope.trend = $scope.trendClass = false
         tips:
             update: ()->                
                 # Update the existing activePoint

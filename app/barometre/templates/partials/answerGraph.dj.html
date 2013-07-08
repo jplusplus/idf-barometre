@@ -119,16 +119,17 @@
             <span ng:bind-html="profil | alias"></span> 
             <span ng:bind-html="question | alias"></span> 
         </h2>
-        <div class="manual">
+        <div class="manual" ng-class="trendClass">
             <span ng-if="trend === false">
                 Cliquez deux points pour afficher la variation
             </span>
-            <span ng-if="trend !== false" ng-pluralize count="trend" when="{
-                '0' : '0 point',
-                '1' : '1 point',
-                '-1' : '-1 point',
-                'other' : '{} points'
-            }"></span>
+            <span ng-if="trend !== false">            
+                <span ng-if="trend > 1">+[[trend]] points</span>
+                <span ng-if="trend < -1">[[trend]] points</span>
+                <span ng-if="trend == 0">[[trend]] point</span>
+                <span ng-if="trend == 1">+[[trend]] point</span>
+                <span ng-if="trend == -1">[[trend]] point</span>
+            </span>
         </div>
         <div class="yaxis"></div>
         <div class="border"></div>

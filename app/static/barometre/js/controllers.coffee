@@ -150,7 +150,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 # Update the existing activePoint
                 _.each $scope.activePoints, (d, key)->
                     # Update the data within activePoints
-                    $scope.activePoints[key] = $scope.answers[key]
+                    $scope.activePoints[key] = $scope.answers.rows[key]
                 # Render the tips
                 point.tips.clean()
             clean:->
@@ -176,7 +176,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                     # add a class to the first point
                     $tips.addClass "js-first" if parseInt(index) == 0 
                     # add a class to the last point
-                    $tips.addClass "js-last" if parseInt(index) == $scope.answers.length - 1 
+                    $tips.addClass "js-last" if parseInt(index) == $scope.answers.rows.length - 1 
                     # Positionate the tips to under the mouse
                     $tips.css
                         left: offset.left
@@ -250,7 +250,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         return stops
         
 
-    render = ()->    
+    render = ()-> 
         loadShortcuts()    
         # Empty container
         chart.empty()
@@ -258,19 +258,19 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         # Update tips
         point.tips.update()        
         # Do we stop
-        return false if $scope.answers.length is 0                    
+        return false unless $scope.answers.rows? and $scope.answers.rows.length isnt 0                    
         # Parse dates and numbers. We assume $scope.answers is sorted by date.
-        _.each $scope.answers, (d) ->
+        _.each $scope.answers.rows, (d) ->
             try 
                 return d.date = parse(d.date)  
             # Some parsings fail          
             catch error
                 return null
 
-        dotGap    = Math.max(minGap, wrapperWidth / ($scope.answers.length - 1))
-        w         = (dotGap * ($scope.answers.length - 1)) - padding[1] - padding[3]
+        dotGap    = Math.max(minGap, wrapperWidth / ($scope.answers.rows.length - 1))
+        w         = (dotGap * ($scope.answers.rows.length - 1)) - padding[1] - padding[3]
         h         = wrapperHeight - padding[0] - padding[2]        
-        stopWidth = (w / ($scope.answers.length-1))*2
+        stopWidth = (w / ($scope.answers.rows.length-1))*2
 
 
   
@@ -288,18 +288,23 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
             .y( (d) -> y(d.ratio))
 
         # Compute the minimum and maximum date, and the maximum price.
-        minDate  = d3.min $scope.answers, (d)-> d.date
-        maxDate  = d3.max $scope.answers, (d)-> d.date        
-        minValue = d3.min $scope.answers, (d)-> d.ratio
-        maxValue = d3.max $scope.answers, (d)-> d.ratio        
-        offset   = (maxValue - minValue) * 0.3
+        minDate  = d3.min $scope.answers.rows, (d)-> d.date
+        maxDate  = d3.max $scope.answers.rows, (d)-> d.date        
+        minRatio = $scope.answers.question_min
+        maxRatio = $scope.answers.question_max        
+        offset   = (maxRatio - minRatio) * 0.3
+        # Edits min and max according the offset;
+        # takes care to not overlap 0 and 100
+        minRatio = Math.max(0, minRatio-offset)
+        maxRatio = Math.max(100, maxRatio+offset)
+        # Extend x/y domains according the max values
         x.domain([minDate, maxDate])
-        y.domain([0, 100]).nice()
+        y.domain([minRatio, maxRatio]).nice()
         # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
         x.range [0, w]
         y.range [h, 0]
         # Only tick for the received values
-        dates = _.pluck($scope.answers, "date")        
+        dates = _.pluck($scope.answers.rows, "date")        
         xAxis = d3.svg.axis().scale(x).tickSize(tickSize).tickPadding(10).tickFormat(dateFormat).tickValues(dates)
         yAxis = d3.svg.axis().scale(y).tickSize(tickSize).tickPadding(5).tickFormat((d)->d+"%").orient("left")
 
@@ -326,7 +331,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                     .attr("class", "area bg")
                     .attr("stroke-width", "0")
                     .attr("fill", $filter("colors")($scope.question))
-                    .attr("d", area($scope.answers))
+                    .attr("d", area($scope.answers.rows))
         # Add stripes
         else           
             # Gradient spreadMethod bug on Safari 
@@ -353,11 +358,11 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
             chartSvg.append("svg:path")
                 .attr("class", "area bg")
                 .attr("fill", "url(#sequence-gradient)")
-                .attr("d", area($scope.answers))
+                .attr("d", area($scope.answers.rows))
 
         # Add line dots
         chartSvg.selectAll(".data-point")
-            .data($scope.answers)
+            .data($scope.answers.rows)
             .enter()
             .append("svg:circle")
                 .attr("class", "data-point")

@@ -6,6 +6,7 @@ from django.template.loader import get_template
 from django.shortcuts       import render_to_response, redirect
 from django.http            import Http404, HttpResponse
 from django.core            import serializers
+from django.db.models       import Max, Min
 from random                 import random, shuffle
 from app.barometre.models   import Answer, Introduction
 
@@ -59,9 +60,26 @@ def answers(request, format='json'):
         del row["created_at"]
 
     # JSON request
-    if format == 'json':                
+    if format == 'json':   
+        # Maximun and minimun ratios to calculate the graph scale
+        minRatio = 0
+        maxRatio = 100
+        # Change them only if we received a question filter
+        if "question" in request.GET:
+            # Get all answers for this question
+            answers  = Answer.objects.filter(question__slug=request.GET["question"])
+            # Aggregates the minimun and maximum ratios
+            question_min = answers.aggregate(Min('ratio'))["ratio__min"]
+            question_max = answers.aggregate(Max('ratio'))["ratio__max"]
+
+        # Create rows subset to embed min and max values   
+        data = { 
+            "rows": actual_data,
+            "question_min" : question_min,
+            "question_max" : question_max
+        }
         # and now dump to JSON
-        output = json.dumps(actual_data, default=dthandler)    
+        output = json.dumps(data, default=dthandler)    
         # Returns the data as JSON type
         return HttpResponse(output, mimetype="application/json")
     # CSV request

@@ -31,9 +31,9 @@ Ajouter d'abord les dépôts EPEL (depuis *root*) :
 
 Désormais, vous pouvez installer les packages suivants (toujours en *root*) :
 
+    $ yum groupinstall "Development Tools"
     $ yum install python python-pip
     $ python-pip virtualenv
-    $ exit # Pour ne plus être root
     
 
 ### Initialiser Virtualenv
@@ -55,7 +55,7 @@ Sur Ubuntu/Debian :
 
 Sur CentOS :
 
-    $ python-pip install -r requirements.txt
+    $ ./venv/bin/pip install -r requirements.txt
 
 
 ### Configuration

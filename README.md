@@ -14,7 +14,7 @@ Pour fonctionner l'application a besoin de :
 #### Ubuntu/Debian
 Installez les packages suivants pour utiliser MySQL :
 
-    $ sudo apt-get install build-essential python python-pip python-dev mysql 
+    $ sudo apt-get install build-essential python python-pip python-dev mysql nodejs npm
     
 Installer Virtualenv en root avec pip
 
@@ -32,12 +32,22 @@ Ajouter d'abord les dépôts EPEL (depuis *root*) :
 Désormais, vous pouvez installer les packages suivants (toujours en *root*) :
 
     $ yum groupinstall "Development Tools"
-    $ yum install python python-pip
+    $ yum install python python-pip python-devel mysql-devel mysql zlib zlib-devel openssl nodejs npm
     $ python-pip virtualenv
     
+    
+### Installer ```lessc``` et ```coffee```
+
+Revenez à la racine du projet :
+    
+    $ cd <CHEMIN_VERS_LE_PROJECT>
+
+Puis compiler les assets (feuilles de style et javascript), installez les dépendances *node* suivantes :
+
+    $ cat npm_requirements.txt | xargs npm -g install
 
 ### Initialiser Virtualenv
-À la racine du projet lancez cette commande pour initialiser l'environement virtuel dans ce dossier :
+Toujours depuis la racine du projet, lancez cette commande pour initialiser l'environement virtuel dans ce dossier :
 
     $ virtualenv venv --distribute
 

@@ -11,24 +11,52 @@ Pour fonctionner l'application a besoin de :
 * **Pip** (package manager)
 * **Virtualenv** 1.8.4
 
-Sur Ubuntu/Debian, installez les packages suivants pour utiliser MySQL :
+#### Ubuntu/Debian
+Installez les packages suivants pour utiliser MySQL :
 
-    $ sudo apt-get install build-essential python-pip python-dev libjpeg-dev mysql 
+    $ sudo apt-get install build-essential python python-pip python-dev mysql 
+    
+Installer Virtualenv en root avec pip
+
+    $ sudo pip install virtualenv
+    
+#### CentOS
+Ajouter d'abord les dépôts EPEL (depuis *root*) :
+
+    $ su -
+    $ cd /opt
+    $ wget http://mirrors.nl.eu.kernel.org/fedora-epel/6/i386/epel-release-6-8.noarch.rpm
+    $ rpm -Uvh epel-release-6-8.noarch.rpm
+    $ rm epel-release-6-8.noarch.rpm -f
+
+Désormais, vous pouvez installer les packages suivants (toujours en *root*) :
+
+    $ yum install python python-pip
+    $ python-pip virtualenv
+    $ exit # Pour ne plus être root
+    
 
 ### Initialiser Virtualenv
 À la racine du projet lancez cette commande pour initialiser l'environement virtuel dans ce dossier :
 
     $ virtualenv venv --distribute
 
-Puis activer le :
+Puis activez le :
     
     $ source venv/bin/activate
 
 
 ### Package python
-Pour télécharger et installer les dépendances du projet dans l'environement virtuel, lancez depuis ça racine:
+Pour télécharger et installer les dépendances du projet dans l'environement virtuel, lancez depuis ça racine...
+
+Sur Ubuntu/Debian :
 
     $ pip install -r requirements.txt
+
+Sur CentOS :
+
+    $ python-pip install -r requirements.txt
+
 
 ### Configuration
 La configuration du projet se fait en deux étapes

@@ -4,20 +4,20 @@
 
 Ce manuel d'installation détaille la procédure pour les distributions Ubuntu et CentOS en 8 étapes :
 
-1. [Installation des dépédances logiciels](#1-installation-des-dpdances-logiciels)
+1. [Installation des dépendances logicielles](#1-installation-des-dpndances-logicielles)
 1. [Installation des compilateurs *Less* et *CoffeeScript*](#2-installation-des-compilateurs-less-et-coffeescript)
 1. [Initialisation de Virtualenv](#3-initialisation-de-virtualenv)
 1. [Installation des packages python](#4-installation-des-packages-python)
 1. [Configuration du projet](#5-configuration-du-projet)
 1. [Synchronisation de la base de données](#6-synchronisation-de-la-base-de-donnes)
-1. [Lancement](#7-lancement)
+1. [Lancement](#7-lancement-en-dveloppement-facultatif)
 1. [Configuration d'Apache](#8-configuration-dapache)
 
 
-### 1. Installation des dépédances logiciels
+### 1. Installation des dépendances logicielles
 
 #### Ubuntu/Debian
-Installez les packages suivants pour :
+Installez les packages suivants :
 
     $ sudo apt-get install build-essential python python-pip python-dev mysql nodejs npm libapache2-mod-wsgi
     
@@ -26,7 +26,7 @@ Installer Virtualenv en root avec pip
     $ sudo pip install virtualenv
     
 #### CentOS
-Ajouter d'abord les dépôts EPEL (depuis *root*) :
+Ajoutez d'abord les dépôts EPEL (depuis *root*) :
 
     $ su -
     $ cd /opt
@@ -47,12 +47,12 @@ Revenez à la racine du projet :
     
     $ cd <CHEMIN_VERS_LE_PROJECT>
 
-Puis compiler les assets (feuilles de style et javascript), installez les dépendances *node* suivantes :
+Puis compilez les assets (feuilles de style et javascript), installez les dépendances *node* suivantes :
 
     $ cat npm_requirements.txt | xargs npm -g install
 
 ### 3. Initialisation de Virtualenv
-Toujours depuis la racine du projet, lancez cette commande pour initialiser l'environement virtuel dans ce dossier :
+Toujours depuis la racine du projet, lancez cette commande pour initialiser l'environnement virtuel dans ce dossier :
 
     $ virtualenv venv --distribute
 
@@ -62,7 +62,7 @@ Puis activez le :
 
 
 ### 4. Installation des packages python
-Pour télécharger et installer les dépendances du projet dans l'environement virtuel, lancez depuis ça racine...
+Pour télécharger et installer les dépendances du projet dans l'environement virtuel, lancez depuis sa racine...
 
 Sur Ubuntu/Debian :
 
@@ -74,18 +74,18 @@ Sur CentOS :
 
 
 ### 5. Configuration du projet
-La configuration du projet se fait en deux manières :
+La configuration du projet se fait de deux manières :
 
 #### 5.1. Utiliser des variables d'environement 
-Utilisez des variables d'environement pour configurer le projet :
+Utilisez des variables d'environnement pour configurer le projet :
 
-* **DATABASE_URL** définie le `Universal Resource Locator` qui permet d'accéder à la base de données (ex: *mysql://user:psswd@localhost/barometre*)
-* **DJANGO\_SETTINGS\_MODULE** définie le fichier de configuration alternatif à utiliser (ex: *settings_heroku.py*)
+* **DATABASE_URL** définit le `Universal Resource Locator` qui permet d'accéder à la base de données (ex: *mysql://user:psswd@localhost/barometre*)
+* **DJANGO\_SETTINGS\_MODULE** définit le fichier de configuration alternatif à utiliser (ex: *settings_heroku.py*)
 
-*Astuce: vous pouvez égualement utiliser [autoenv](https://github.com/kennethreitz/autoenv) pour charger virtualenv et ces variables d'environement automatiquement lorsque vous atteignez le dossier avec `cd`.*
+*Astuce: vous pouvez égualement utiliser [autoenv](https://github.com/kennethreitz/autoenv) pour charger virtualenv et ces variables d'environnement automatiquement lorsque vous atteignez le dossier avec `cd`.*
 
 #### 5.2. Modifier le fichier de configuration
-À l'aide de la variable **DJANGO\_SETTINGS\_MODULE**, vous pouvez éditer les réglages par défaut du projet dans un nouveau fichier. Un exemple d'utilisation de Amazon S3 pour la gestion des fichiers statiques et disponible dans `/app/settings_heroku.py`.
+À l'aide de la variable **DJANGO\_SETTINGS\_MODULE**, vous pouvez éditer les réglages par défaut du projet dans un nouveau fichier. Un exemple d'utilisation de Amazon S3 pour la gestion des fichiers statiques est disponible dans `/app/settings_heroku.py`.
 
 ### 6. Synchronisation de la base de données
 Une fois que vous avez configuré la variable **DATABASE_URL**, lancez la commande suivante pour synchroniser la base de données avec le projet :
@@ -106,7 +106,7 @@ Vous devriez voir un résultat proche du suivant :
     Development server is running at http://127.0.0.1:8000/
     Quit the server with CONTROL-C.
 
-Votre application est désormais accéssible sur [http://127.0.0.1:8000](http://127.0.0.1:8000) !
+Votre application est désormais accessible sur [http://127.0.0.1:8000](http://127.0.0.1:8000) !
 
 ### 8. Configuration d'Apache
 
@@ -126,7 +126,7 @@ Utilisez la configuration suivante dans vos virutal hosts (en remplaçant les va
         </Directory>
     </VirtualHost>
 
-Enfin, redémarez Apache pour accéder à l'application.
+Enfin, redémarrez Apache pour accéder à l'application.
 
 
 ## Format de fichier pour upload
@@ -140,5 +140,5 @@ date | question | profil |ratio
 01/02/2011 | Transport | Femme | 58
 ... |
 
-## License
+## Licence
 Copryright © Region île-de-France

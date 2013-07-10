@@ -140,6 +140,8 @@ INSTALLED_APPS = (
     'compressor', 
     # Rich text editor for admin forms
     'redactor',
+    # Migration helper
+    'south',
     # Internal added   
     'app.barometre'
 )

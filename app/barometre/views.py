@@ -112,47 +112,33 @@ def answers(request, format='json'):
 
 
 def introductions(request):  
-    # Index of the set with 3 simple blocks
-    rand = int(random()*2.9)
-    # Determines the length of each set
-    transport_len     = 3 if rand == 0 else 2 
-    economique_len    = 3 if rand == 1 else 2 
-    environnement_len = 3 if rand == 2 else 2 
-    # First get all small introductions
-    smalls = Introduction.objects.exclude(format="trend").order_by("?")
-    # Get the introductions ordering by date.
-    # Pick 2 elements for two of the sets,
-    # 3 elements for the third one
-    # (according the previous numbers)
-    transport     = smalls.filter(question__slug="transport")[:transport_len]
-    economique    = smalls.filter(question__slug="economique")[:economique_len]
-    environnement = smalls.filter(question__slug="environnement")[:environnement_len]
-    # Merge and the 3 data sets
-    introductions = merge(transport, merge(economique, environnement))
-    # Shuffle the dataset
-    shuffle(introductions)
-    # Now pick 2 bigs introductions for the datasets with only 2 elements  
-    bigs = Introduction.objects.filter(format='trend').order_by("?")    
-    big_intros = list()
 
-    if transport_len == 2:
-        transport = bigs.filter(question__slug="transport")        
-        if transport : big_intros.append(transport[0]) 
+    introductions = list()
+    alls = Introduction.objects.order_by("?")
 
-    if economique_len == 2:
-        economique = bigs.filter(question__slug="economique")        
-        if economique : big_intros.append(economique[0]) 
+    questions = ['transport', 'economique', 'environnement']
+    formats   = ['simple', 'proportion', 'number']
+    # Randomize the data set
+    shuffle(questions)
+    shuffle(formats)
 
-    if environnement_len == 2:
-        environnement = bigs.filter(question__slug="environnement")        
-        if environnement : big_intros.append(environnement[0]) 
-    
-    # Shuffle big rows
-    shuffle(big_intros)
-    bigs_len = len(big_intros);
-    # Then append the big intro to right position
-    if bigs_len > 0: introductions.insert(0, big_intros[0])
-    if bigs_len > 1: introductions.insert(8, big_intros[1])
+    # Get introductions for each question and type
+    for q in questions:
+        for f in formats:
+            filters = dict(question__slug=q, format=f)
+            dataset = alls.filter(**filters)
+            if dataset:
+                introductions.append( dataset[0] )
+
+    # First and last element of the list must be in trend format
+    indexes = (0, len(introductions)-1)
+    for idx in indexes:
+        # Get the introduction
+        q = introductions[idx].question.slug
+        # And choose a trend one, for the same question
+        intro = alls.filter(question__slug=q, format="trend")
+        if intro:
+            introductions[idx] = intro[0]
 
     # Serialize data
     raw_data = serializers.serialize('python', introductions, relations=('profil','question'), extras=("indicator",))

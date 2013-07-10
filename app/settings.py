@@ -19,7 +19,6 @@ DATABASES = {
     'default' : dj_database_url.config()
 }
 
-
 # Preload data
 FIXTURE_DIRS = (
     here('barometre/fixtures'),

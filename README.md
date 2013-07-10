@@ -17,7 +17,7 @@ Ce manuel d'installation détaille la procédure pour les distributions Ubuntu e
 ### 1. Installation des dépendances logicielles
 
 #### Ubuntu/Debian
-Installez les packages suivants pour :
+Installez les packages suivants :
 
     $ sudo apt-get install build-essential python python-pip python-dev mysql nodejs npm libapache2-mod-wsgi
     

@@ -25,12 +25,12 @@ IMPORT_DELIMITERS = (
 )
 
 IMPORT_DATEFORMATS = (
-    ('jj/mm/yy',   'jj/mm/yy',),
-    ('jj/mm/yyyy', 'jj/mm/yyyy',),
-    ('yy/mm/jj',   'yy/mm/jj',),
-    ('yyyy/mm/jj', 'yyyy/mm/jj',),    
-    ('mm/yy',      'mm/yy',),
-    ('mm/yyyy',    'mm/yyyy',),
+    ('%d/%m/%y', 'jj/mm/yy',),
+    ('%d/%m/%Y', 'jj/mm/yyyy',),
+    ('%y/%m/%d', 'yy/mm/jj',),
+    ('%Y/%m/%d', 'yyyy/mm/jj',),    
+    ('%m/%y',    'mm/yy',),
+    ('%m/%Y',    'mm/yyyy',),
 )
 
 
@@ -194,7 +194,7 @@ class Import(models.Model):
     model_name  = models.CharField(max_length=255, blank=False, choices=IMPORT_MODELS, default='barometre.Answer')
     upload_file = models.FileField(upload_to='csv', storage=fs, help_text="Fichier utilisé pour importer des données.", verbose_name="Fichier à uploader")
     delimiter   = models.CharField(max_length=56, blank=False, choices=IMPORT_DELIMITERS, default=';', help_text="Délimiteur dans le fichier CSV.", verbose_name="Délimiteur")
-    dateformat  = models.CharField(max_length=56, blank=False, choices=IMPORT_DATEFORMATS, default='jj/mm/yy', help_text="Format des dates dans le fichier.", verbose_name="Format des dates")
+    dateformat  = models.CharField(max_length=56, blank=False, choices=IMPORT_DATEFORMATS, default='%d/%m/%y', help_text="Format des dates dans le fichier.", verbose_name="Format des dates")
     file_name   = models.CharField(max_length=255, blank=True)
     encoding    = models.CharField(max_length=32, blank=True)  
     error_log   = models.TextField(help_text='Each line is an import error')

@@ -4,7 +4,7 @@
 
 Ce manuel d'installation détaille la procédure pour les distributions Ubuntu et CentOS en 8 étapes :
 
-1. [Installation des dépédances logiciels](#1-installation-des-dpdances-logiciels)
+1. [Installation des dépendances logicielles](#1-installation-des-dpndances-logicielles)
 1. [Installation des compilateurs *Less* et *CoffeeScript*](#2-installation-des-compilateurs-less-et-coffeescript)
 1. [Initialisation de Virtualenv](#3-initialisation-de-virtualenv)
 1. [Installation des packages python](#4-installation-des-packages-python)
@@ -14,7 +14,7 @@ Ce manuel d'installation détaille la procédure pour les distributions Ubuntu e
 1. [Configuration d'Apache](#8-configuration-dapache)
 
 
-### 1. Installation des dépédances logiciels
+### 1. Installation des dépendances logicielles
 
 #### Ubuntu/Debian
 Installez les packages suivants pour :
@@ -62,7 +62,7 @@ Puis activez le :
 
 
 ### 4. Installation des packages python
-Pour télécharger et installer les dépendances du projet dans l'environement virtuel, lancez depuis ça racine...
+Pour télécharger et installer les dépendances du projet dans l'environement virtuel, lancez depuis sa racine...
 
 Sur Ubuntu/Debian :
 
@@ -74,15 +74,15 @@ Sur CentOS :
 
 
 ### 5. Configuration du projet
-La configuration du projet se fait en deux manières :
+La configuration du projet se fait de deux manières :
 
 #### 5.1. Utiliser des variables d'environement 
-Utilisez des variables d'environement pour configurer le projet :
+Utilisez des variables d'environnement pour configurer le projet :
 
-* **DATABASE_URL** définie le `Universal Resource Locator` qui permet d'accéder à la base de données (ex: *mysql://user:psswd@localhost/barometre*)
-* **DJANGO\_SETTINGS\_MODULE** définie le fichier de configuration alternatif à utiliser (ex: *settings_heroku.py*)
+* **DATABASE_URL** définit le `Universal Resource Locator` qui permet d'accéder à la base de données (ex: *mysql://user:psswd@localhost/barometre*)
+* **DJANGO\_SETTINGS\_MODULE** définit le fichier de configuration alternatif à utiliser (ex: *settings_heroku.py*)
 
-*Astuce: vous pouvez égualement utiliser [autoenv](https://github.com/kennethreitz/autoenv) pour charger virtualenv et ces variables d'environement automatiquement lorsque vous atteignez le dossier avec `cd`.*
+*Astuce: vous pouvez égualement utiliser [autoenv](https://github.com/kennethreitz/autoenv) pour charger virtualenv et ces variables d'environnement automatiquement lorsque vous atteignez le dossier avec `cd`.*
 
 #### 5.2. Modifier le fichier de configuration
 À l'aide de la variable **DJANGO\_SETTINGS\_MODULE**, vous pouvez éditer les réglages par défaut du projet dans un nouveau fichier. Un exemple d'utilisation de Amazon S3 pour la gestion des fichiers statiques et disponible dans `/app/settings_heroku.py`.
@@ -106,7 +106,7 @@ Vous devriez voir un résultat proche du suivant :
     Development server is running at http://127.0.0.1:8000/
     Quit the server with CONTROL-C.
 
-Votre application est désormais accéssible sur [http://127.0.0.1:8000](http://127.0.0.1:8000) !
+Votre application est désormais accessible sur [http://127.0.0.1:8000](http://127.0.0.1:8000) !
 
 ### 8. Configuration d'Apache
 
@@ -140,5 +140,5 @@ date | question | profil |ratio
 01/02/2011 | Transport | Femme | 58
 ... |
 
-## License
+## Licence
 Copryright © Region île-de-France

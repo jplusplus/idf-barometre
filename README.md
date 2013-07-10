@@ -10,7 +10,7 @@ Ce manuel d'installation détaille la procédure pour les distributions Ubuntu e
 1. [Installation des packages python](#4-installation-des-packages-python)
 1. [Configuration du projet](#5-configuration-du-projet)
 1. [Synchronisation de la base de données](#6-synchronisation-de-la-base-de-donnes)
-1. [Lancement](#7-lancement)
+1. [Lancement](#7-lancement-en-dveloppement-facultatif)
 1. [Configuration d'Apache](#8-configuration-dapache)
 
 

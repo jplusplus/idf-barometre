@@ -53,7 +53,7 @@ class IntroductionAdmin(admin.ModelAdmin):
 
 
 class ImportAdmin(ModelAdmin):
-    fields = ('upload_file',)
+    fields = ('upload_file', 'delimiter', 'dateformat')
     list_display = ('upload_file', 'model_name', 'created_at')
 
     formfield_overrides = {
@@ -72,9 +72,11 @@ class ImportAdmin(ModelAdmin):
         if obj.upload_file:
             obj.file_name = obj.upload_file.name
             obj.encoding = ''
-            defaults = self.filename_defaults(obj.file_name)
+            defaults = self.filename_defaults(obj.file_name)            
             cmd.setup(mappings=None,
                         modelname=obj.model_name, 
+                        delimiter=obj.delimiter[0],
+                        dateformat=obj.dateformat[0],
                         charset=obj.encoding,
                         uploaded=obj.upload_file,
                         defaults=defaults)

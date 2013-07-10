@@ -74,7 +74,8 @@ class Command(LabelCommand):
         super(Command, self).__init__()
         self.props = {}
         self.debug = False
-        self.dateformat = "%d/%m/%Y"
+        self.delimiter = ";"
+        self.dateformat = "%d/%m/%y"
         self.errors = []
         self.loglist = []
         self.mappings = []
@@ -110,7 +111,7 @@ class Command(LabelCommand):
         self.loglist.extend(errors)
         return
 
-    def setup(self, mappings, modelname, charset, csvfile='', defaults='',
+    def setup(self, mappings, modelname, charset, csvfile='', defaults='', delimiter=False,
               uploaded=None, nameindexes=False, deduplicate=True, dateformat=False):
         """ Setup up the attributes for running the import """
         self.defaults = self.__mappings(defaults)
@@ -124,10 +125,13 @@ class Command(LabelCommand):
         self.nameindexes = bool(nameindexes) 
         self.file_name = csvfile
         self.deduplicate = deduplicate
+        self.dateformat = dateformat
         if uploaded:
             self.csvfile = self.__csvfile(uploaded.path)
         else:    
             self.check_filesystem(csvfile)
+        if delimiter:
+            self.delimiter = delimiter
         if dateformat:
             self.dateformat = dateformat
 
@@ -213,7 +217,7 @@ class Command(LabelCommand):
                     pass
                 
                 if foreignkey:
-                    row[column] = self.insert_fkey(foreignkey, row[column])
+                    row[column] = self.insert_fkey(foreignkey, row[column]) 
 
                 if self.debug:
                     loglist.append('%s.%s = "%s"' % (self.model.__name__, 
@@ -308,15 +312,22 @@ class Command(LabelCommand):
         fk_key, fk_field = foreignkey
         if fk_key and fk_field:
             fk_model = models.get_model(self.app_label, fk_key)
-            matches = fk_model.objects.filter(**{fk_field+'__exact': 
-                                                 rowcol})
 
-            if not matches:
-                key = fk_model()
-                key.__setattr__(fk_field, rowcol)
-                key.save()
+            # Relation using id
+            if rowcol.isnumeric():
+                matches = fk_model.objects.filter(id=rowcol)
+                rowcol  = matches[0] 
+            else:
+                matches = fk_model.objects.filter(**{fk_field+'__exact': rowcol})
 
-            rowcol = fk_model.objects.filter(**{fk_field+'__exact': rowcol})[0]
+                # Add missing foreign key only for not numeric row                
+                if not matches:
+                    key = fk_model()
+                    key.__setattr__(fk_field, rowcol)
+                    key.save()
+
+                rowcol = fk_model.objects.filter(**{fk_field+'__exact': rowcol})[0]
+
         return rowcol
         
     def error(self, message, type=1):
@@ -358,8 +369,9 @@ class Command(LabelCommand):
 
     def charset_csv_reader(self, csv_data, dialect=csv.excel, 
                            charset='utf-8', **kwargs):
+
         csv_reader = csv.reader(self.charset_encoder(csv_data, charset),
-                                dialect=dialect, **kwargs)
+                                delimiter=self.delimiter, **kwargs)
         for row in csv_reader:
             # decode charset back to Unicode, cell by cell:
             yield [unicode(cell, charset) for cell in row]

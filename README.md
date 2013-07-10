@@ -2,14 +2,15 @@
 
 ## Installation
 
-Ce manuel d'installation détaille la procédure pour les distributions Ubuntu et CentOS en 6 étapes :
-1. Installation des dépédances logiciels
-1. Installation des compilateurs *Less* et *CoffeeScript*
-1. Initialisation de Virtualenv
-1. Installation des packages python
-1. Configuration du projet
-1. Synchronisation de la base de données
-1. Lancement
+Ce manuel d'installation détaille la procédure pour les distributions Ubuntu et CentOS en 7 étapes :
+
+1. [Installation des dépédances logiciels](#1-installation-des-dpdances-logiciels)
+1. [Installation des compilateurs *Less* et *CoffeeScript*](#2-installation-des-compilateurs-less-et-coffeescript)
+1. [Initialisation de Virtualenv](#3-initialisation-de-virtualenv)
+1. [Installation des packages python](#4-installation-des-packages-python)
+1. [Configuration du projet](#5-configuration-du-projet)
+1. [Synchronisation de la base de données](#6-synchronisation-de-la-base-de-donnes)
+1. [Lancement](#7-lancement)
 
 
 ### 1. Installation des dépédances logiciels

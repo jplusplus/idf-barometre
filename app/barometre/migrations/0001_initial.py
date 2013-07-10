@@ -62,7 +62,6 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('barometre', ['Import'])
 
-
     def backwards(self, orm):
         # Deleting model 'Profil'
         db.delete_table('barometre_profil')

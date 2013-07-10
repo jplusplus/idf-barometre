@@ -8,6 +8,11 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+
+        # Load fixtures
+        from django.core.management import call_command
+        call_command("loaddata", "../fixtures/migration_initial_data.json")
+
         # Adding field 'Import.delimiter'
         db.add_column('barometre_import', 'delimiter',
                       self.gf('django.db.models.fields.CharField')(default=';', max_length=56),

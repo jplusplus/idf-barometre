@@ -26,7 +26,7 @@ Installer Virtualenv en root avec pip
     $ sudo pip install virtualenv
     
 #### CentOS
-Ajouter d'abord les dépôts EPEL (depuis *root*) :
+Ajoutez d'abord les dépôts EPEL (depuis *root*) :
 
     $ su -
     $ cd /opt
@@ -47,12 +47,12 @@ Revenez à la racine du projet :
     
     $ cd <CHEMIN_VERS_LE_PROJECT>
 
-Puis compiler les assets (feuilles de style et javascript), installez les dépendances *node* suivantes :
+Puis compilez les assets (feuilles de style et javascript), installez les dépendances *node* suivantes :
 
     $ cat npm_requirements.txt | xargs npm -g install
 
 ### 3. Initialisation de Virtualenv
-Toujours depuis la racine du projet, lancez cette commande pour initialiser l'environement virtuel dans ce dossier :
+Toujours depuis la racine du projet, lancez cette commande pour initialiser l'environnement virtuel dans ce dossier :
 
     $ virtualenv venv --distribute
 
@@ -85,7 +85,7 @@ Utilisez des variables d'environnement pour configurer le projet :
 *Astuce: vous pouvez égualement utiliser [autoenv](https://github.com/kennethreitz/autoenv) pour charger virtualenv et ces variables d'environnement automatiquement lorsque vous atteignez le dossier avec `cd`.*
 
 #### 5.2. Modifier le fichier de configuration
-À l'aide de la variable **DJANGO\_SETTINGS\_MODULE**, vous pouvez éditer les réglages par défaut du projet dans un nouveau fichier. Un exemple d'utilisation de Amazon S3 pour la gestion des fichiers statiques et disponible dans `/app/settings_heroku.py`.
+À l'aide de la variable **DJANGO\_SETTINGS\_MODULE**, vous pouvez éditer les réglages par défaut du projet dans un nouveau fichier. Un exemple d'utilisation de Amazon S3 pour la gestion des fichiers statiques est disponible dans `/app/settings_heroku.py`.
 
 ### 6. Synchronisation de la base de données
 Une fois que vous avez configuré la variable **DATABASE_URL**, lancez la commande suivante pour synchroniser la base de données avec le projet :
@@ -126,7 +126,7 @@ Utilisez la configuration suivante dans vos virutal hosts (en remplaçant les va
         </Directory>
     </VirtualHost>
 
-Enfin, redémarez Apache pour accéder à l'application.
+Enfin, redémarrez Apache pour accéder à l'application.
 
 
 ## Format de fichier pour upload

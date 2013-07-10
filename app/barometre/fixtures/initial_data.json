@@ -226,81 +226,26 @@
             "sentence": "des ouvriers s'estiment satisfait des transports en commun."
         }
     }, 
-    {
-        "pk": 2, 
+        {
+        "pk": 12, 
         "model": "barometre.introduction", 
         "fields": {
-            "profil": 1, 
-            "format": "number", 
-            "question": 2, 
-            "variation": "", 
-            "sentence": "millions de Franciliens estiment que la situation \u00e9conomique est dynamique."
-        }
-    }, 
-    {
-        "pk": 3, 
-        "model": "barometre.introduction", 
-        "fields": {
-            "profil": 9, 
-            "format": "simple", 
-            "question": 2, 
-            "variation": "", 
-            "sentence": "Que pensent les cadres de la situation \u00e9conomique ?"
-        }
-    }, 
-    {
-        "pk": 4, 
-        "model": "barometre.introduction", 
-        "fields": {
-            "profil": 3, 
-            "format": "trend", 
-            "question": 3, 
-            "variation": "last_year", 
-            "sentence": "Qualit\u00e9 de l'environnement\r\nEvolution du taux de satisfaction chez les femmes depuis un an."
-        }
-    }, 
-    {
-        "pk": 5, 
-        "model": "barometre.introduction", 
-        "fields": {
-            "profil": 21, 
-            "format": "simple", 
+            "profil": 4, 
+            "sentence": "Que pensent <b>les jeunes</b> de 18-24 ans de la<b> qualit\u00e9 de l'environnement</b> ?", 
             "question": 3, 
             "variation": "", 
-            "sentence": "Que pense-t-on de la qualit\u00e9 de l'environnement dans le Val-d'Oise ?"
+            "format": "simple"
         }
     }, 
     {
-        "pk": 6, 
+        "pk": 11, 
         "model": "barometre.introduction", 
         "fields": {
-            "profil": 14, 
-            "format": "proportion", 
-            "question": 3, 
-            "variation": "", 
-            "sentence": "des Parisiens s'estiment satisfaits de la qualit\u00e9 de l'environnement."
-        }
-    }, 
-    {
-        "pk": 7, 
-        "model": "barometre.introduction", 
-        "fields": {
-            "profil": 2, 
-            "format": "proportion", 
-            "question": 1, 
-            "variation": "", 
-            "sentence": "des hommes s'estiment satisfaits par les transports en commun."
-        }
-    }, 
-    {
-        "pk": 8, 
-        "model": "barometre.introduction", 
-        "fields": {
-            "profil": 1, 
-            "format": "trend", 
+            "profil": 13, 
+            "sentence": "des <b>retrait\u00e9s</b> s'estiment satisfaits de la <b>situation \u00e9conomique</b>.", 
             "question": 2, 
             "variation": "", 
-            "sentence": "Dynamisme de la situation \u00e9conomique\r\n\u00c9volution du taux de satisfaction chez les franciliens depuis 2 mois."
+            "format": "proportion"
         }
     }, 
     {
@@ -308,10 +253,131 @@
         "model": "barometre.introduction", 
         "fields": {
             "profil": 8, 
-            "format": "simple", 
+            "sentence": "Que pensent les <b>plus de 65 ans</b> des<b> transports en commun</b> ?", 
             "question": 1, 
             "variation": "", 
-            "sentence": "Que pensent les plus de 65 ans des transports en commun ?"
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 2, 
+            "sentence": "des <b>hommes</b> s'estiment satisfaits par les<b> transports en commun</b>.", 
+            "question": 1, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 14, 
+            "sentence": "des <b>Parisiens</b> s'estiment satisfaits de la <b>qualit\u00e9 de l'environnement</b>.", 
+            "question": 3, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 21, 
+            "sentence": "Que pense-t-on de la<b> qualit\u00e9 de l'environnement</b> dans le <b>Val-d'Oise </b>?", 
+            "question": 3, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 9, 
+            "sentence": "Que pensent les <b>cadres</b> de la <b>situation \u00e9conomique</b> ?", 
+            "question": 2, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 1, 
+            "sentence": "millions de <b>Franciliens</b> estiment que la <b>situation \u00e9conomique</b> est dynamique.", 
+            "question": 2, 
+            "variation": "", 
+            "format": "number"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 12, 
+            "sentence": "des <b>ouvriers</b> s'estiment satisfait des <b>transports en commun</b>.", 
+            "question": 1, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 1, 
+            "sentence": "millions de <b>franciliens</b> estiment que la <b>qualit\u00e9 de l'environnement</b> est satisfaisante.", 
+            "question": 3, 
+            "variation": "", 
+            "format": "number"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 1, 
+            "sentence": "<span style=\"background-color: rgb(255, 255, 255);\">millions de Franciliens pensent que les transports en commun sont satisfaisants</span>", 
+            "question": 1, 
+            "variation": "", 
+            "format": "number"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 14, 
+            "sentence": "Evolution du taux de satisfaction chez les <b>parisiens</b> depuis un an.", 
+            "question": 1, 
+            "variation": "last_year", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 1, 
+            "sentence": "\u00c9volution du taux de satisfaction chez les <b>franciliens</b> depuis 2 mois.", 
+            "question": 2, 
+            "variation": "last_2_month", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 3, 
+            "sentence": "Evolution du taux de satisfaction chez les <b>femmes</b> depuis un an.", 
+            "question": 3, 
+            "variation": "last_year", 
+            "format": "trend"
         }
     },
     {

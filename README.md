@@ -91,6 +91,7 @@ Utilisez des variables d'environnement pour configurer le projet :
 Une fois que vous avez configuré la variable **DATABASE_URL**, lancez la commande suivante pour synchroniser la base de données avec le projet :
 
     $ python manage.py syncdb
+    $ python manage.py migrate
 
 ### 7. Lancement en développement (facultatif)
 Pour lancer le projet sur le port 8000 et vérifier que tout fonctionne, entrez :

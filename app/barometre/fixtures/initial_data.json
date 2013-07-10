@@ -215,18 +215,403 @@
             "slug": "environnement"
         }
     }, 
-        {
-        "pk": 1, 
+    {
+        "pk": 34, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 2, 
+            "sentence": "\u00c9volution du taux de satisfaction chez les&nbsp;<b>hommes</b>&nbsp;depuis les 2 derniers mois", 
+            "question": 2, 
+            "variation": "last_2_month", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 9, 
+            "sentence": "<span style=\"background-color: rgb(255, 255, 255);\">Que pensent les&nbsp;<b>cadres </b></span><span style=\"background-color: rgb(255, 255, 255);\">de&nbsp;</span>la<b>&nbsp;qualit\u00e9 de l'environnement&nbsp;</b><span style=\"background-color: rgb(255, 255, 255);\">en \u00eele-de-France ?</span>", 
+            "question": 3, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 2, 
+            "sentence": "<span style=\"background-color: rgb(255, 255, 255);\">Que pensent les <b>hommes&nbsp;</b></span><span style=\"background-color: rgb(255, 255, 255);\">de&nbsp;</span>la<b>&nbsp;qualit\u00e9 de l'environnement&nbsp;</b><span style=\"background-color: rgb(255, 255, 255);\">en \u00eele-de-France ?</span>", 
+            "question": 3, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 2, 
+            "sentence": "Que pensent les&nbsp;<b>hommes</b>&nbsp;de la&nbsp;<b>situation \u00e9conomique</b>&nbsp;<span style=\"background-color: rgb(255, 255, 255);\">en \u00cele-de-France ?</span>", 
+            "question": 2, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 4, 
+            "sentence": "Que pensent les&nbsp;<b>18-24 ans</b>&nbsp;de la&nbsp;<b>situation \u00e9conomique</b>&nbsp;<span style=\"background-color: rgb(255, 255, 255);\">en \u00cele-de-France ?</span>", 
+            "question": 2, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 7, 
+            "sentence": "Que pensent les&nbsp;<b>50-64 ans</b>&nbsp;de la&nbsp;<b>situation \u00e9conomique</b>&nbsp;<span style=\"background-color: rgb(255, 255, 255);\">en \u00cele-de-France ?</span>", 
+            "question": 2, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 2, 
+            "sentence": "<span style=\"background-color: rgb(255, 255, 255);\">Que pensent les <b>hommes</b> de la qualit\u00e9 des<b> transports en commun</b> en Ile-de-France ?</span><br>\r\n", 
+            "question": 1, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 15, 
+            "sentence": "Que pensent les<b>&nbsp;habitants de Seine-et-Marne</b>&nbsp;de la qualit\u00e9 des<b>&nbsp;transports en commun</b>&nbsp;en Ile-de-France ?", 
+            "question": 1, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 10, 
+            "sentence": "Que pensent les<b>&nbsp;professions interm\u00e9diaires</b>&nbsp;de la qualit\u00e9 des<b>&nbsp;transports en commun</b>&nbsp;en Ile-de-France ?", 
+            "question": 1, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 3, 
+            "sentence": "Que pensent les<b>&nbsp;femmes&nbsp;</b>de la qualit\u00e9 des<b>&nbsp;transports en commun</b>&nbsp;en Ile-de-France ?<br>\r\n", 
+            "question": 1, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 17, 
+            "sentence": "Que pensent les&nbsp;<b>habitants de l'Essonne</b>&nbsp;de la&nbsp;<b>situation \u00e9conomique</b>&nbsp;<span style=\"background-color: rgb(255, 255, 255);\">en \u00cele-de-France ?</span>", 
+            "question": 2, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 30, 
         "model": "barometre.introduction", 
         "fields": {
             "profil": 12, 
-            "format": "proportion", 
-            "question": 1, 
+            "sentence": "des&nbsp;<b>ouvriers qualifi\u00e9s et non qualifi\u00e9s</b>&nbsp;consid\u00e8rent que la&nbsp;<b>situation \u00e9conomique&nbsp;</b>est dynamique.", 
+            "question": 2, 
             "variation": "", 
-            "sentence": "des ouvriers s'estiment satisfait des transports en commun."
+            "format": "proportion"
         }
     }, 
-        {
+    {
+        "pk": 31, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 3, 
+            "sentence": "des&nbsp;<b>femmes</b>&nbsp;consid\u00e8rent que la&nbsp;<b>situation \u00e9conomique&nbsp;</b>est dynamique.", 
+            "question": 2, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 8, 
+            "sentence": "des&nbsp;<b>65 ans et plus</b>&nbsp;consid\u00e8rent que la&nbsp;<b>situation \u00e9conomique&nbsp;</b>est dynamique.", 
+            "question": 2, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 14, 
+            "sentence": "des&nbsp;<b>habitants de Paris</b>&nbsp;consid\u00e8rent que la&nbsp;<b>situation \u00e9conomique&nbsp;</b>est dynamique.", 
+            "question": 2, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 6, 
+            "sentence": "des&nbsp;<b>35-49 ans</b>&nbsp;s'estiment satisfait des&nbsp;<b>transports en commun&nbsp;</b>en \u00eele-de-France", 
+            "question": 1, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 18, 
+            "sentence": "des&nbsp;<b>habitant des Hauts-de-Seine&nbsp;</b>s'estiment satisfait des&nbsp;<b>transports en commun&nbsp;</b>en \u00eele-de-France", 
+            "question": 1, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 13, 
+            "sentence": "Evolution du taux de satisfaction chez les&nbsp;<b>retrait\u00e9s</b>&nbsp;depuis un an", 
+            "question": 1, 
+            "variation": "last_year", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 20, 
+            "sentence": "des&nbsp;<b>habitant du Val-de-Marne&nbsp;</b>s'estiment satisfait des&nbsp;<b>transports en commun&nbsp;</b>en \u00eele-de-France", 
+            "question": 1, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 14, 
+            "sentence": "\u00c9volution du taux de satisfaction chez les <b>Parisiens</b>&nbsp;depuis un an", 
+            "question": 2, 
+            "variation": "last_year", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 7, 
+            "sentence": "\u00c9volution du taux de satisfaction chez les&nbsp;<b>50-64 ans</b>&nbsp;depuis un an", 
+            "question": 2, 
+            "variation": "last_year", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 4, 
+            "sentence": "Evolution du taux de satisfaction chez les&nbsp;<b>18-24 ans</b>&nbsp;depuis les 2 derniers mois", 
+            "question": 1, 
+            "variation": "last_2_month", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 9, 
+            "sentence": "Evolution du taux de satisfaction chez les&nbsp;<b>cadres</b>&nbsp;depuis les 2 derniers mois", 
+            "question": 1, 
+            "variation": "last_2_month", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 20, 
+            "sentence": "\u00c9volution du taux de satisfaction chez les&nbsp;<b>habitants du Val-de-Marne</b>&nbsp;depuis les 2 derniers mois", 
+            "question": 2, 
+            "variation": "last_2_month", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 5, 
+            "sentence": "Evolution du taux de satisfaction chez les&nbsp;<b>25-34 ans</b>&nbsp;depuis un an", 
+            "question": 1, 
+            "variation": "last_year", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 40, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 12, 
+            "sentence": "<span style=\"background-color: rgb(255, 255, 255);\">Que pensent les&nbsp;<b>ouvriers qualifi\u00e9s et non qualifi\u00e9s&nbsp;</b></span><span style=\"background-color: rgb(255, 255, 255);\">de&nbsp;</span>la<b>&nbsp;qualit\u00e9 de l'environnement&nbsp;</b><span style=\"background-color: rgb(255, 255, 255);\">en \u00eele-de-France ?</span>", 
+            "question": 3, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 21, 
+            "sentence": "des&nbsp;<b>habitants du Val-d'Oise</b>&nbsp;<span style=\"background-color: rgb(255, 255, 255);\">estiment que la&nbsp;<b>qualit\u00e9 de l'environnement</b>&nbsp;est bonne</span>", 
+            "question": 3, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 2, 
+            "sentence": "des&nbsp;<b>hommes</b>&nbsp;<span style=\"background-color: rgb(255, 255, 255);\">estiment que la&nbsp;<b>qualit\u00e9 de l'environnement</b>&nbsp;est bonne</span>", 
+            "question": 3, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 1, 
+            "sentence": "des&nbsp;<b>Franciliens</b>&nbsp;<span style=\"background-color: rgb(255, 255, 255);\">estiment que la&nbsp;<b>qualit\u00e9 de l'environnement</b>&nbsp;est bonne</span>", 
+            "question": 3, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 4, 
+            "sentence": "des&nbsp;<b>18-24 ans</b>&nbsp;<span style=\"background-color: rgb(255, 255, 255);\">estiment que la&nbsp;<b>qualit\u00e9 de l'environnement</b>&nbsp;est bonne</span>", 
+            "question": 3, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 13, 
+            "sentence": "des&nbsp;<b>retrait\u00e9s</b>&nbsp;<span style=\"background-color: rgb(255, 255, 255);\">estiment que la&nbsp;<b>qualit\u00e9 de l'environnement</b>&nbsp;est bonne</span><br>\r\n", 
+            "question": 3, 
+            "variation": "", 
+            "format": "proportion"
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 8, 
+            "sentence": "Evolution du taux de satisfaction chez les&nbsp;<b>65 ans et plus</b>&nbsp;depuis un an", 
+            "question": 3, 
+            "variation": "last_year", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 16, 
+            "sentence": "Evolution du taux de satisfaction chez les&nbsp;<b>habitants des Yvelines</b>&nbsp;depuis les 2 derniers mois", 
+            "question": 3, 
+            "variation": "", 
+            "format": "simple"
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 16, 
+            "sentence": "Evolution du taux de satisfaction chez les&nbsp;<b>habitants des Yvelines</b>&nbsp;depuis les 2 derniers mois", 
+            "question": 3, 
+            "variation": "last_2_month", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 11, 
+            "sentence": "Evolution du taux de satisfaction chez les&nbsp;<b>employ\u00e9s et personnels de service</b>&nbsp;depuis les deux derniers mois", 
+            "question": 3, 
+            "variation": "last_2_month", 
+            "format": "trend"
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "barometre.introduction", 
+        "fields": {
+            "profil": 14, 
+            "sentence": "Evolution du taux de satisfaction chez les&nbsp;<b>Parisiens</b>&nbsp;depuis un an", 
+            "question": 3, 
+            "variation": "last_year", 
+            "format": "trend"
+        }
+    }, 
+    {
         "pk": 12, 
         "model": "barometre.introduction", 
         "fields": {
@@ -396,6 +781,34 @@
             "password": "pbkdf2_sha256$10000$CzO6L6EA15XB$7iowsIy9r/nbWIPEhVYcZ4hxAiLME+BSUORa2AiAvbY=", 
             "email": "hello@pirhoo.com", 
             "date_joined": "2013-06-14T10:10:16.025Z"
+        }
+    },
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "idf", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": true, 
+            "last_login": "2013-07-10T15:58:19.564Z", 
+            "groups": [], 
+            "user_permissions": [
+                25, 
+                43, 
+                26, 
+                44, 
+                27, 
+                45, 
+                37, 
+                38, 
+                39
+            ], 
+            "password": "pbkdf2_sha256$10000$SiSzS8t7R0pD$7+LEHuWvoWP/hA4EL9RlzyA8+pVx4sjnq8446txavS0=", 
+            "email": "", 
+            "date_joined": "2013-07-03T11:29:31Z"
         }
     }
 ]

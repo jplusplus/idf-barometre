@@ -2,7 +2,7 @@
 
 ## Installation
 
-Ce manuel d'installation détaille la procédure pour les distributions Ubuntu et CentOS en 7 étapes :
+Ce manuel d'installation détaille la procédure pour les distributions Ubuntu et CentOS en 8 étapes :
 
 1. [Installation des dépédances logiciels](#1-installation-des-dpdances-logiciels)
 1. [Installation des compilateurs *Less* et *CoffeeScript*](#2-installation-des-compilateurs-less-et-coffeescript)
@@ -11,6 +11,7 @@ Ce manuel d'installation détaille la procédure pour les distributions Ubuntu e
 1. [Configuration du projet](#5-configuration-du-projet)
 1. [Synchronisation de la base de données](#6-synchronisation-de-la-base-de-donnes)
 1. [Lancement](#7-lancement)
+1. [Configuration d'Apache](#8-configuration-dapache)
 
 
 ### 1. Installation des dépédances logiciels
@@ -18,7 +19,7 @@ Ce manuel d'installation détaille la procédure pour les distributions Ubuntu e
 #### Ubuntu/Debian
 Installez les packages suivants pour :
 
-    $ sudo apt-get install build-essential python python-pip python-dev mysql nodejs npm
+    $ sudo apt-get install build-essential python python-pip python-dev mysql nodejs npm libapache2-mod-wsgi
     
 Installer Virtualenv en root avec pip
 
@@ -36,7 +37,7 @@ Ajouter d'abord les dépôts EPEL (depuis *root*) :
 Désormais, vous pouvez installer les packages suivants (toujours en *root*) :
 
     $ yum groupinstall "Development Tools"
-    $ yum install python python-pip python-devel mysql-devel mysql zlib zlib-devel openssl nodejs npm
+    $ yum install python python-pip python-devel mysql-devel mysql zlib zlib-devel openssl nodejs npm mod_wsgi
     $ python-pip virtualenv
     
     
@@ -91,7 +92,7 @@ Une fois que vous avez configuré la variable **DATABASE_URL**, lancez la comman
 
     $ python manage.py syncdb
 
-### 7. Lancement
+### 7. Lancement en développement (facultatif)
 Pour lancer le projet sur le port 8000 et vérifier que tout fonctionne, entrez :
 
     $ python manage.py runserver 0.0.0.0:8000
@@ -106,6 +107,27 @@ Vous devriez voir un résultat proche du suivant :
     Quit the server with CONTROL-C.
 
 Votre application est désormais accéssible sur [http://127.0.0.1:8000](http://127.0.0.1:8000) !
+
+### 8. Configuration d'Apache
+
+Utilisez la configuration suivante dans vos virutal hosts (en remplaçant les valeurs ```<DOMAIN>``` et ```<CHEMIN_VERS_LE_PROJET>```) :
+
+    <VirtualHost *:80>
+        ServerName <DOMAIN>
+        ServerAlias www.<DOMAIN>
+        DocumentRoot <CHEMIN_VERS_LE_PROJET>
+        LogLevel warn
+        WSGIScriptAlias / <CHEMIN_VERS_LE_PROJET>/app/wsgi.py
+
+        Alias /static/ <CHEMIN_VERS_LE_PROJET>/app/static/
+        <Directory <CHEMIN_VERS_LE_PROJET>/app/static/>
+            Order deny,allow
+            Allow from all
+        </Directory>
+    </VirtualHost>
+
+Enfin, redémarez Apache pour accéder à l'application.
+
 
 ## Format de fichier pour upload
 

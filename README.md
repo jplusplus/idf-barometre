@@ -2,17 +2,20 @@
 
 ## Installation
 
-### Dépendance logiciels
-Pour fonctionner l'application a besoin de :
+Ce manuel d'installation détaille la procédure pour les distributions Ubuntu et CentOS en 6 étapes :
+1. Installation des dépédances logiciels
+1. Installation des compilateurs *Less* et *CoffeeScript*
+1. Initialisation de Virtualenv
+1. Installation des packages python
+1. Configuration du projet
+1. Synchronisation de la base de données
+1. Lancement
 
-* **Python** 2.7.+
-* **MySQL** 14.+
-* A database connector/interface for python (Ex: *python-mysqldb*)
-* **Pip** (package manager)
-* **Virtualenv** 1.8.4
+
+### 1. Installation des dépédances logiciels
 
 #### Ubuntu/Debian
-Installez les packages suivants pour utiliser MySQL :
+Installez les packages suivants pour :
 
     $ sudo apt-get install build-essential python python-pip python-dev mysql nodejs npm
     
@@ -36,7 +39,7 @@ Désormais, vous pouvez installer les packages suivants (toujours en *root*) :
     $ python-pip virtualenv
     
     
-### Installer ```lessc``` et ```coffee```
+### 2. Installation des compilateurs *Less* et *CoffeeScript*
 
 Revenez à la racine du projet :
     
@@ -46,7 +49,7 @@ Puis compiler les assets (feuilles de style et javascript), installez les dépen
 
     $ cat npm_requirements.txt | xargs npm -g install
 
-### Initialiser Virtualenv
+### 3. Initialisation de Virtualenv
 Toujours depuis la racine du projet, lancez cette commande pour initialiser l'environement virtuel dans ce dossier :
 
     $ virtualenv venv --distribute
@@ -56,7 +59,7 @@ Puis activez le :
     $ source venv/bin/activate
 
 
-### Package python
+### 4. Installation des packages python
 Pour télécharger et installer les dépendances du projet dans l'environement virtuel, lancez depuis ça racine...
 
 Sur Ubuntu/Debian :
@@ -68,30 +71,29 @@ Sur CentOS :
     $ ./venv/bin/pip install -r requirements.txt
 
 
-### Configuration
-La configuration du projet se fait en deux étapes
+### 5. Configuration du projet
+La configuration du projet se fait en deux manières :
 
-#### 1. Variables d'environement 
+#### 5.1. Utiliser des variables d'environement 
 Utilisez des variables d'environement pour configurer le projet :
 
 * **DATABASE_URL** définie le `Universal Resource Locator` qui permet d'accéder à la base de données (ex: *mysql://user:psswd@localhost/barometre*)
-* **DJANGO\_SETTINGS\_MODULE** définie le fichier de configuration alternatif à utiliser (ex: *settings_prod.py*)
-
+* **DJANGO\_SETTINGS\_MODULE** définie le fichier de configuration alternatif à utiliser (ex: *settings_heroku.py*)
 
 *Astuce: vous pouvez égualement utiliser [autoenv](https://github.com/kennethreitz/autoenv) pour charger virtualenv et ces variables d'environement automatiquement lorsque vous atteignez le dossier avec `cd`.*
 
-#### 2. Modifier le fichier de configuration
+#### 5.2. Modifier le fichier de configuration
 À l'aide de la variable **DJANGO\_SETTINGS\_MODULE**, vous pouvez éditer les réglages par défaut du projet dans un nouveau fichier. Un exemple d'utilisation de Amazon S3 pour la gestion des fichiers statiques et disponible dans `/app/settings_heroku.py`.
 
-### Synchroniser la base de données
+### 6. Synchronisation de la base de données
 Une fois que vous avez configuré la variable **DATABASE_URL**, lancez la commande suivante pour synchroniser la base de données avec le projet :
 
     $ python manage.py syncdb
 
-### Lancement
+### 7. Lancement
 Pour lancer le projet sur le port 8000 et vérifier que tout fonctionne, entrez :
 
-    $ python manage.py runserver 8000
+    $ python manage.py runserver 0.0.0.0:8000
 
 Vous devriez voir un résultat proche du suivant :
 

@@ -8,7 +8,7 @@ from django.http            import Http404, HttpResponse
 from django.core            import serializers
 from django.db.models       import Max, Min
 from random                 import random, shuffle
-from app.barometre.models   import Answer, Introduction
+from app.barometre.models   import Answer, Introduction, Profil
 
 
 import csv
@@ -112,23 +112,30 @@ def answers(request, format='json'):
 
 
 def introductions(request):  
-
     introductions = list()
     alls = Introduction.objects.order_by("?")
 
     questions = ['transport', 'economique', 'environnement']
     formats   = ['simple', 'proportion', 'number']
+    profils   = Profil.objects.all().order_by("?")
     # Randomize the data set
     shuffle(questions)
     shuffle(formats)
 
-    # Get introductions for each question and type
-    for q in questions:
-        for f in formats:
-            filters = dict(question__slug=q, format=f)
-            dataset = alls.filter(**filters)
-            if dataset:
-                introductions.append( dataset[0] )
+    # Get introductions for each profil and type
+    for p in profils:
+        count = 0        
+        for q in questions:
+            for f in formats:
+                if count < 1:            
+                    filters = dict(question__slug=q, profil=p, format=f)
+                    dataset = alls.filter(**filters)
+                    if dataset:
+                        introductions.append( dataset[0] )
+                        count = count+1
+
+    # Do not take more than 9 rows
+    introductions = introductions[0:9]    
 
     # First and last element of the list must be in trend format
     indexes = (0, len(introductions)-1)

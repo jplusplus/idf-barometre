@@ -131,7 +131,8 @@ def introductions(request):
                 shuffle(formats)
                 # Look for an intro for this question in each format
                 for f in formats:
-                    if count < 1:            
+                    # Only 3 by question
+                    if count < 1:       
                         filters = dict(question__slug=q, profil=p, format=f)
                         dataset = alls.filter(**filters)
                         if dataset:

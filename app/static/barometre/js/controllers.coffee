@@ -61,7 +61,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
     wrapperHeight = 330
     tickSize      = 5
     padding       = [10, 18, 60, 18]
-    minGap        = 40
+    minGap        = 30
 
     # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
     x = d3.time.scale()
@@ -244,18 +244,17 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
             tspan.attr("x", 0).attr "dy", "12"  if i > 0
             i++
 
-    getGradientStops = (width, stopWidth)->        
+    getGradientStops = (dotCount, dotGap)->        
         stops = []
-        # Size of each step
-        stopsCount = (width/stopWidth)
+        width = dotGap*(dotCount-1)
         # Position in percentage of the given pixels
         pos = (px)-> px/width*100 + "%"
         # For each steps
-        for i in [0..stopsCount-1]  
+        for i in [0..dotCount-1]  
             # Calculate the step start          
-            start = (i*stopWidth)
+            start = (i*dotGap)
             # And the end
-            end   = start + stopWidth
+            end   = start + dotGap
             # Then add to stop by step
             stops.push offset: pos(start), color: $filter("colors")($scope.question, if i%2 then "0" else "51")
             stops.push offset: pos(end),   color: $filter("colors")($scope.question, if i%2 then "50" else "100")
@@ -352,7 +351,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
             # Gradient spreadMethod bug on Safari 
             # cf: http://stackoverflow.com/questions/11434971/svg-lineargradiend-spreadmethod-ignored-by-safari-osx-and-ios            
             # So we repeat the gradientStop instead of use the repeat method
-            stops = getGradientStops(x(maxDate), stopWidth/2)
+            stops = getGradientStops($scope.answers.rows.length, dotGap)
 
             chartSvg.append("linearGradient")
                     .attr("id", "sequence-gradient")

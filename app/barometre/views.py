@@ -127,6 +127,8 @@ def introductions(request):
         for q in questions:
             # Only 3 by question
             if len([i for i in introductions if i.question.slug == q]) < 3:
+                # Random formats order
+                shuffle(formats)
                 # Look for an intro for this question in each format
                 for f in formats:
                     if count < 1:            

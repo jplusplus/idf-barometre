@@ -120,19 +120,24 @@ def introductions(request):
     profils   = Profil.objects.all().order_by("?")
     # Randomize the data set
     shuffle(questions)
-    shuffle(formats)
 
     # Get introductions for each profil and type
     for p in profils:
         count = 0        
         for q in questions:
-            for f in formats:
-                if count < 1:            
-                    filters = dict(question__slug=q, profil=p, format=f)
-                    dataset = alls.filter(**filters)
-                    if dataset:
-                        introductions.append( dataset[0] )
-                        count = count+1
+            # Only 3 by question
+            if len([i for i in introductions if i.question.slug == q]) < 3:
+                # Look for an intro for this question in each format
+                for f in formats:
+                    if count < 1:            
+                        filters = dict(question__slug=q, profil=p, format=f)
+                        dataset = alls.filter(**filters)
+                        if dataset:
+                            introductions.append( dataset[0] )
+                            count = count+1
+        # Break upside 9 introductions
+        if len(introductions) >= 9:
+            break
 
     # Do not take more than 9 rows
     introductions = introductions[0:9]    

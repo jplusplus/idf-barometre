@@ -318,7 +318,8 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         y.range [h, 0]
         # Only tick for the received values
         dates = _.pluck($scope.answers.rows, "date")        
-        perc  = 
+        # Only tick 10's multiple values on y axe
+        perc  = (i*10 for i in [~~(minRatio/10)..~~(maxRatio/10)] )
         xAxis = d3.svg.axis().scale(x).tickSize(tickSize).tickPadding(10).tickFormat(dateFormat).tickValues(dates)
         yAxis = d3.svg.axis().scale(y).tickSize(tickSize).tickPadding(5).tickFormat((d)->d+"%").orient("left").tickValues(perc)
 

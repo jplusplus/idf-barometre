@@ -645,18 +645,21 @@ body {
             height:40px;
             text-align:center;
             position:absolute;
-            right:45px;
+            right:0;
+            margin-right:45px;
             top:80px;
             font-style:italic;            
             .border-radius(8px);
-            .transition(background 0.8s);
+            .transition(~"background 0.8s, right 0.8s, margin 0.8s");
             
             &.increase,
             &.decrease {
                 font-style:normal;     
                 font-weight:bold;
                 color:white;              
-                font-size:16px;             
+                font-size:16px;            
+                margin-right:-220px/2px; 
+                right:50%;
             }
 
             &.increase { background-color: #7cbe25; }

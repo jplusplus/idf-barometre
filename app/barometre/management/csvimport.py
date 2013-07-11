@@ -1,5 +1,3 @@
-# Run sql files via django#
-# www.heliosfoundation.org
 import os, csv, re
 from datetime import datetime
 import codecs
@@ -11,7 +9,7 @@ from optparse import make_option
 from django.db import models
 
 from django.conf import settings
-CSVIMPORT_LOG = getattr(settings, 'CSVIMPORT_LOG', 'screen')
+CSVIMPORT_LOG = getattr(settings, 'CSVIMPORT_LOG', 'logger')
 if CSVIMPORT_LOG == 'logger':
     import logging
     logger = logging.getLogger(__name__)
@@ -126,12 +124,12 @@ class Command(LabelCommand):
         self.file_name = csvfile
         self.deduplicate = deduplicate
         self.dateformat = dateformat
+        if delimiter:
+            self.delimiter = str(delimiter)
         if uploaded:
             self.csvfile = self.__csvfile(uploaded.path)
         else:    
             self.check_filesystem(csvfile)
-        if delimiter:
-            self.delimiter = delimiter
         if dateformat:
             self.dateformat = dateformat
 
@@ -216,8 +214,15 @@ class Command(LabelCommand):
                 except AttributeError:
                     pass
                 
-                if foreignkey:
-                    row[column] = self.insert_fkey(foreignkey, row[column]) 
+                loglist.append('Unkown foreign key')                        
+                pass
+                if foreignkey:                    
+                    pass
+                    try:
+                        row[column] = self.insert_fkey(foreignkey, row[column]) 
+                    except:
+                        loglist.append('Unkown foreign key')                        
+
 
                 if self.debug:
                     loglist.append('%s.%s = "%s"' % (self.model.__name__, 
@@ -273,24 +278,35 @@ class Command(LabelCommand):
                     if not done:
                         if foreignkey:
                             value = self.insert_fkey(foreignkey, value)
-                        model_instance.__setattr__(field, value)
+                        model_instance.__setattr__(field, value)        
             if self.deduplicate:
                 matchdict = {}
-                for (column, field, foreignkey) in self.mappings:
-                    matchdict[field + '__exact'] = getattr(model_instance, 
-                                                           field, None)
+
                 try:
-                    self.model.objects.get(**matchdict)
-                    continue
-                except ObjectDoesNotExist:
+                    for (column, field, foreignkey) in self.mappings:                                        
+                        matchdict[field + '__exact'] = getattr(model_instance, field, None)
+
+                    objs = self.model.objects.filter(**matchdict)
+                    # Do not save an element twice
+                    if not objs:
+                        try:
+                            model_instance.save()
+                        except Exception, err:
+                            loglist.append('Exception found... %s Instance %s not saved.' % (err, counter))
+
+                except ObjectDoesNotExist:                            
                     pass
-            try:
-                model_instance.save()
-            except Exception, err:
-                loglist.append('Exception found... %s Instance %s not saved.' % (err, counter))
+            else:
+                try:
+                    model_instance.save()
+                except Exception, err:
+                    loglist.append('Exception found... %s Instance %s not saved.' % (err, counter))
+
+           
             if CSVIMPORT_LOG == 'logger':
                 for line in loglist:
                     logger.info(line)
+
             self.loglist.extend(loglist)
             loglist = []
         if self.loglist:
@@ -311,22 +327,18 @@ class Command(LabelCommand):
         """
         fk_key, fk_field = foreignkey
         if fk_key and fk_field:
-            fk_model = models.get_model(self.app_label, fk_key)
-
+            fk_model = models.get_model(self.app_label, fk_key)            
             # Relation using id
             if rowcol.isnumeric():
                 matches = fk_model.objects.filter(id=rowcol)
-                rowcol  = matches[0] 
             else:
                 matches = fk_model.objects.filter(**{fk_field+'__exact': rowcol})
 
-                # Add missing foreign key only for not numeric row                
-                if not matches:
-                    key = fk_model()
-                    key.__setattr__(fk_field, rowcol)
-                    key.save()
-
-                rowcol = fk_model.objects.filter(**{fk_field+'__exact': rowcol})[0]
+            # Add missing foreign key only for not numeric row                
+            if not matches:                
+                raise Exception("Unkown")                
+            else:
+                rowcol = matches[0]
 
         return rowcol
         
@@ -367,11 +379,9 @@ class Command(LabelCommand):
             return list(self.charset_csv_reader(csv_data=csvfile, 
                                                 charset=self.charset))
 
-    def charset_csv_reader(self, csv_data, dialect=csv.excel, 
-                           charset='utf-8', **kwargs):
+    def charset_csv_reader(self, csv_data, charset='utf-8', **kwargs):
 
-        csv_reader = csv.reader(self.charset_encoder(csv_data, charset),
-                                delimiter=self.delimiter, **kwargs)
+        csv_reader = csv.reader(self.charset_encoder(csv_data, charset), delimiter=self.delimiter, **kwargs)
         for row in csv_reader:
             # decode charset back to Unicode, cell by cell:
             yield [unicode(cell, charset) for cell in row]

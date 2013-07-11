@@ -72,16 +72,17 @@ class ImportAdmin(ModelAdmin):
         if obj.upload_file:
             obj.file_name = obj.upload_file.name
             obj.encoding = ''
-            defaults = self.filename_defaults(obj.file_name)            
+            defaults = self.filename_defaults(obj.file_name)   
             cmd.setup(mappings=None,
                         modelname=obj.model_name, 
-                        delimiter=obj.delimiter[0],
-                        dateformat=obj.dateformat[0],
+                        delimiter=obj.delimiter,
+                        dateformat=obj.dateformat,
                         charset=obj.encoding,
                         uploaded=obj.upload_file,
                         defaults=defaults)
-
+        
         errors = cmd.run(logid=obj.id)
+
         if errors:
             obj.error_log = '\n'.join(errors)
 

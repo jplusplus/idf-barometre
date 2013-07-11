@@ -25,12 +25,12 @@ IMPORT_DELIMITERS = (
 )
 
 IMPORT_DATEFORMATS = (
-    ('%d/%m/%y', 'jj/mm/yy',),
-    ('%d/%m/%Y', 'jj/mm/yyyy',),
-    ('%y/%m/%d', 'yy/mm/jj',),
-    ('%Y/%m/%d', 'yyyy/mm/jj',),    
-    ('%m/%y',    'mm/yy',),
-    ('%m/%Y',    'mm/yyyy',),
+    ('%d/%m/%y', 'jj/mm/aa',),
+    ('%d/%m/%Y', 'jj/mm/aaaa',),
+    ('%y/%m/%d', 'aa/mm/jj',),
+    ('%Y/%m/%d', 'aaaa/mm/jj',),    
+    ('%m/%y',    'mm/aa',),
+    ('%m/%Y',    'mm/aaaa',),
 )
 
 

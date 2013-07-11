@@ -8,7 +8,6 @@ angular
                 # Avoid a conflict with Django Template's tags
                 $interpolateProvider.startSymbol '[['
                 $interpolateProvider.endSymbol   ']]'
-
                 # Bind routes to the controllers
                 $routeProvider
                     .when('/', {

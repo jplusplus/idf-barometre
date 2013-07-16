@@ -160,7 +160,8 @@ def introductions(request):
     # now extract the inner 'fields' and 'extras' dicts
     actual_data = [dict(d['fields'].items() + d['extras'].items()) for d in raw_data]
     # and simplify some field
-    for index, row in enumerate(actual_data):                   
+    for index, row in enumerate(actual_data): 
+        row["sentence"]  = row["sentence"].replace(" ans", "&nbsp;ans")                 
         row["profil"]    = row["profil"]["fields"]
         row["question"]  = row["question"]["fields"]     
         row["indicator"] = eval(row["indicator"])   

@@ -128,6 +128,7 @@ COMPRESS_CSS_FILTERS = (
 
 COMPRESS_ENABLED = True
 
+INTERNAL_IPS = ('127.0.0.1',)
 
 INSTALLED_APPS = (    
     'django.contrib.auth',

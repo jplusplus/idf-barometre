@@ -16,7 +16,7 @@ angular
                 "ouvrier"       : "les <strong>ouvriers</strong>"
                 "technicien"    : "les <strong>techniciens</strong>"
                 "retraite"      : "les <strong>retraités</strong>"
-                "economique"    : "de la <strong>situation économique</strong>"
+                "economique"    : "de <strong>la situation économique</strong>"
                 "transport"     : "des <strong>transports en commun</strong>"
                 "environnement" : "de <strong>la qualité de l'environnement</strong>"
                 "75"            : "les <strong>habitants du 75</strong>"

@@ -47,7 +47,7 @@ Revenez à la racine du projet :
     
     $ cd <CHEMIN_VERS_LE_PROJECT>
 
-Puis compilez les assets (feuilles de style et javascript), installez les dépendances *node* suivantes :
+Pour compilez les assets (feuilles de style et javascript), installez les dépendances *node* suivantes :
 
     $ cat npm_requirements.txt | xargs npm -g install
 

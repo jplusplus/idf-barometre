@@ -3,7 +3,7 @@ angular
     .filter('alias', -> 
         return (key)->            
             aliases =
-                "all"           : "les <strong>franciliens</strong>"
+                "all"           : "les <strong>Franciliens</strong>"
                 "femme"         : "les <strong>femmes</strong>"
                 "homme"         : "les <strong>hommes</strong>"
                 "18_24"         : "les <strong>18-24 ans</strong>"

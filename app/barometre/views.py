@@ -96,6 +96,9 @@ def answers(request, format='json'):
         writer = csv.writer(response)
         # Only if there is data
         if len(actual_data) > 0:
+            # Add a label line 
+            label = u'Sondage réalisé pour la région Île-de-France par l\'institut Viavoice sur un échantillon de 1039 personnes, représentatif de la population francilienne de 18 ans et plus'
+            writer.writerow([unicode(label).encode("utf-8")])
             # Take the first row keys as header
             writer.writerow( actual_data[0].keys() )
             # Take every row values

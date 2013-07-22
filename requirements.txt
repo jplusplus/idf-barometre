@@ -12,6 +12,7 @@ django-csvimport==1.0
 git+git://github.com/mazelife/django-redactor.git
 django-storages==1.1.8
 gunicorn==0.17.4
+lxml==3.2.1
 mimeparse==0.1.3
 mysql-connector-python==1.0.10
 python-dateutil==2.1

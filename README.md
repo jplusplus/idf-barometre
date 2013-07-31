@@ -4,14 +4,14 @@
 
 Ce manuel d'installation détaille la procédure pour les distributions Ubuntu et CentOS en 8 étapes :
 
-1. [Installation des dépendances logicielles](#1-installation-des-dpndances-logicielles)
-1. [Téléchargement du projet](#2-telechargement-du-projet)
+1. [Installation des dépendances logicielles](#1-installation-des-dépendances-logicielles)
+1. [Téléchargement du projet](#2-téléchargement-du-projet)
 1. [Installation des compilateurs *Less* et *CoffeeScript*](#3-installation-des-compilateurs-less-et-coffeescript)
 1. [Initialisation de Virtualenv](#4-initialisation-de-virtualenv)
 1. [Installation des packages python](#5-installation-des-packages-python)
 1. [Configuration du projet](#6-configuration-du-projet)
-1. [Synchronisation de la base de données](#7-synchronisation-de-la-base-de-donnes)
-1. [Lancement](#8-lancement-en-dveloppement-facultatif)
+1. [Synchronisation de la base de données](#7-synchronisation-de-la-base-de-données)
+1. [Lancement](#8-lancement-en-développement-facultatif)
 1. [Configuration d'Apache](#9-configuration-dapache)
 
 

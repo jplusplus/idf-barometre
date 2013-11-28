@@ -13,5 +13,6 @@ virtualenv:
 	. $(VIRTUALENV)bin/activate; pip install -r requirements.txt
 
 staticfiles:
-	. python ./manage.py collectstatic --noinput
-	. python ./manage.py compress --force
+	. $(VIRTUALENV)bin/activate; python ./manage.py collectstatic --noinput
+	. $(VIRTUALENV)bin/activate; python ./manage.py compress --force
+

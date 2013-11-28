@@ -23,4 +23,4 @@ staticfiles:
 
 distribute:
 	mkdir dist -p
-	zip -x ./dist -r dist/idf-barometre-$(TIME).zip .
+	tar -czvf dist/idf-barometre-$(TIME).tar.gz * --exclude=dist --exclude=.git --exclude=*.db

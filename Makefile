@@ -12,6 +12,10 @@ virtualenv:
 	# Install pip packages
 	. $(VIRTUALENV)bin/activate; pip install -r requirements.txt
 
+database:
+	. $(VIRTUALENV)bin/activate; python ./manage.py syncdb --noinput
+	. $(VIRTUALENV)bin/activate; python ./manage.py migrate
+
 staticfiles:
 	. $(VIRTUALENV)bin/activate; python ./manage.py collectstatic --noinput
 	. $(VIRTUALENV)bin/activate; python ./manage.py compress --force

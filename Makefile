@@ -1,4 +1,4 @@
-# Makefile -- Detective.io
+# Makefile
 
 VIRTUALENV = venv/
 
@@ -12,3 +12,6 @@ virtualenv:
 	# Install pip packages
 	. $(VIRTUALENV)bin/activate; pip install -r requirements.txt
 
+staticfiles:
+	. python ./manage.py collectstatic --noinput
+	. python ./manage.py compress --force

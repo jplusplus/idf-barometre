@@ -1,6 +1,7 @@
 # Makefile
 
 VIRTUALENV = venv/
+TIME = `date +%s`
 
 centos-packages:
 	yum groupinstall -y "Development Tools"
@@ -20,3 +21,6 @@ staticfiles:
 	. $(VIRTUALENV)bin/activate; python ./manage.py collectstatic --noinput
 	. $(VIRTUALENV)bin/activate; python ./manage.py compress --force
 
+distribute:
+	mkdir dist -p
+	zip -x ./dist -r dist/idf-barometre-$(TIME).zip .

@@ -1,6 +1,6 @@
 from .settings import *
 
-DEBUG = True
+DEBUG = False
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
 
@@ -9,3 +9,6 @@ COMPRESS_CSS_FILTERS = (
     # Activate CSS minifier
     "compressor.filters.cssmin.CSSMinFilter",
 )
+
+
+ALLOWED_HOSTS = [".iledefrance.fr"]

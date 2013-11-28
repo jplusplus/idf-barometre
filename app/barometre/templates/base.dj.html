@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load compress %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html xmlns:ng="http://angularjs.org" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html xmlns:ng="http://angularjs.org" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -13,18 +14,15 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Abril+Fatface&amp;subset=latin,latin-ext">
-        {% load compress %}
-        {% compress css %}
-            {% block extracss %}{% endblock %}   
-        {% endcompress %}
+        {% block extracss %}{% endblock %}
     </head>
-    <body>        
-        {% block content %}{% endblock %}           
+    <body>
+        {% block content %}{% endblock %}
 
-        {% compress js %}    
+        {% compress js %}
             <script src="{% static 'barometre/js/vendor/jquery-1.10.0.js' %}"></script>
-            {% block extrajs %}{% endblock %}   
         {% endcompress %}
+        {% block extrajs %}{% endblock %}
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

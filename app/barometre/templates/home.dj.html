@@ -1,36 +1,40 @@
 {% extends "base.dj.html" %}
 {% load staticfiles %}
+{% load compress %}
 
 {% block title %}Accueil{% endblock %}
 
-
 {% block extracss %}
-    <link rel="stylesheet" type="text/less" href="{% static 'barometre/css/base.less' %}">
+    {% compress css %}
+        <link rel="stylesheet" type="text/less" href="{% static 'barometre/css/base.less' %}">
+    {% endcompress %}
 {% endblock %}
 
 {% block extrajs %}
-    <!--[if lte IE 8]>
-        <script src="{% static 'barometre/js/vendor/json2.js' %}"></script>
-    <![endif-->
-    <script type="text/javascript"   src="{% static 'barometre/js/vendor/modernizr.custom.js' %}"></script>
-    <script type="text/javascript"   src="{% static 'barometre/js/vendor/angular/angular.js' %}"></script>
-    <script type="text/javascript"   src="{% static 'barometre/js/vendor/angular/angular-sanitize.js' %}"></script>
-    <script type="text/javascript"   src="{% static 'barometre/js/vendor/angular/angular-resource.js' %}"></script>
-    <script type="text/javascript"   src="{% static 'barometre/js/vendor/jquery.isotope.js' %}"></script>
-    <script type="text/javascript"   src="{% static 'barometre/js/vendor/jquery.animate-enhanced.min.js' %}"></script>
-    <script type="text/javascript"   src="{% static 'barometre/js/vendor/jquery.transform2d.js' %}"></script>
-    <script type="text/javascript"   src="{% static 'barometre/js/vendor/jquery.jscrollpane.min.js' %}"></script>
-    <script type="text/javascript"   src="{% static 'barometre/js/vendor/underscore-min.js' %}"></script>    
-    <script type="text/javascript"   src="{% static 'barometre/js/vendor/ui-bootstrap-custom-0.3.0.js' %}"></script>    
-    <script type="text/coffeescript" src="{% static 'barometre/js/controllers.coffee' %}"></script>
-    <script type="text/coffeescript" src="{% static 'barometre/js/filters.coffee' %}"></script>
-    <script type="text/coffeescript" src="{% static 'barometre/js/services.coffee' %}"></script>
-    <script type="text/coffeescript" src="{% static 'barometre/js/app.coffee' %}"></script>    
-    <script type="text/coffeescript" src="{% static 'barometre/js/directives.coffee' %}"></script>
+    {% compress js %}
+        <!--[if lte IE 8]>
+            <script src="{% static 'barometre/js/vendor/json2.js' %}"></script>
+        <![endif-->
+        <script type="text/javascript"   src="{% static 'barometre/js/vendor/modernizr.custom.js' %}"></script>
+        <script type="text/javascript"   src="{% static 'barometre/js/vendor/angular/angular.js' %}"></script>
+        <script type="text/javascript"   src="{% static 'barometre/js/vendor/angular/angular-sanitize.js' %}"></script>
+        <script type="text/javascript"   src="{% static 'barometre/js/vendor/angular/angular-resource.js' %}"></script>
+        <script type="text/javascript"   src="{% static 'barometre/js/vendor/jquery.isotope.js' %}"></script>
+        <script type="text/javascript"   src="{% static 'barometre/js/vendor/jquery.animate-enhanced.min.js' %}"></script>
+        <script type="text/javascript"   src="{% static 'barometre/js/vendor/jquery.transform2d.js' %}"></script>
+        <script type="text/javascript"   src="{% static 'barometre/js/vendor/jquery.jscrollpane.min.js' %}"></script>
+        <script type="text/javascript"   src="{% static 'barometre/js/vendor/underscore-min.js' %}"></script>
+        <script type="text/javascript"   src="{% static 'barometre/js/vendor/ui-bootstrap-custom-0.3.0.js' %}"></script>
+        <script type="text/coffeescript" src="{% static 'barometre/js/controllers.coffee' %}"></script>
+        <script type="text/coffeescript" src="{% static 'barometre/js/filters.coffee' %}"></script>
+        <script type="text/coffeescript" src="{% static 'barometre/js/services.coffee' %}"></script>
+        <script type="text/coffeescript" src="{% static 'barometre/js/app.coffee' %}"></script>
+        <script type="text/coffeescript" src="{% static 'barometre/js/directives.coffee' %}"></script>
+    {% endcompress %}
 {% endblock %}
 
 {% block content %}
-    <div ng-app="barometre" id="ng-app">        
+    <div ng-app="barometre" id="ng-app">
         <div class="container relative logo-container" ng-controller="ActiveColorCtrl" ng-class="getClass()">
             <a href="#/" class="logo">
                 Baromètre Ile-de-France
@@ -40,11 +44,11 @@
         <div id="content" ng-view  ng-animate="'slide'"></div>
     </div>
 
-    <!--[if lte IE 8]>    
+    <!--[if lte IE 8]>
         <script type="text/javascript"   src="{% static 'barometre/js/vendor/r2d3.min.js' %}"></script>
         <script type="text/javascript"   src="{% static 'barometre/js/vendor/raphael-min.js' %}"></script>
     <![endif]-->
-    <!--[if gte IE 9]><!-->    
+    <!--[if gte IE 9]><!-->
         <script src="{% static 'barometre/js/vendor/d3.v3.min.js' %}"></script>
         <script src="{% static 'barometre/js/vendor/d3-compat.js' %}"></script>
     <!--<![endif]-->

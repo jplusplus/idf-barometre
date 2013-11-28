@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-import sys
-import dj_database_url  
+import dj_database_url
 # for relative paths
 here = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
 gettext = lambda s: s
@@ -77,7 +76,7 @@ STATICFILES_DIRS = (
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',  
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
 
@@ -120,31 +119,30 @@ COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
 
-# Activate CSS minifier
 COMPRESS_CSS_FILTERS = (
-    "compressor.filters.css_default.CssAbsoluteFilter",
-    "compressor.filters.cssmin.CSSMinFilter",
+    "app.barometre.compress_filter.CustomCssAbsoluteFilter",
 )
 
 COMPRESS_ENABLED = True
 
+
 INTERNAL_IPS = ('127.0.0.1',)
 
-INSTALLED_APPS = (    
+INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    # Compresses linked and inline JavaScript or CSS into a single cached file.    
-    'compressor', 
+    # Compresses linked and inline JavaScript or CSS into a single cached file.
+    'compressor',
     # Rich text editor for admin forms
     'redactor',
     # Migration helper
     'south',
-    # Internal added   
-    'app.barometre'
+    # Internal added
+    'app.barometre',
 )
 
 SERIALIZATION_MODULES = {

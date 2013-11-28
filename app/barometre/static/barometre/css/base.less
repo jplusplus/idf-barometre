@@ -24,7 +24,7 @@ body {
     z-index:@zIndexContext;
 
     .axis {
-      shape-rendering: crispEdges;      
+      shape-rendering: crispEdges;
     }
 
     a:hover {
@@ -37,13 +37,13 @@ body {
 /* LOGO */
 
 .logo-container {
-    position:relative;   
+    position:relative;
     z-index:@zIndexLogo;
 }
- 
+
 .logo {
     .hide-text();
-    display:block;        
+    display:block;
     background:url("@{staticPath}img/common/logo.png") no-repeat;
     width:242px;
     height:151px;
@@ -53,7 +53,7 @@ body {
     top:0;
     left:0;
     z-index:@zIndexLogo;
-    
+
     .arrow {
         display:block;
         height:54px;
@@ -65,13 +65,13 @@ body {
         .rotate(40deg);
         .transition(0.4s);
         .transform-origin(50% 50%);
-     
-        .question-economique & {            
+
+        .question-economique & {
             .rotate(140deg);
             .transform-origin(50% 50%);
             background-image:url("@{staticPath}img/common/logo_aiguille_orange.png");
         }
-     
+
         .question-transport & {
             .rotate(240deg);
             .transform-origin(50% 50%);
@@ -99,23 +99,23 @@ body {
 
 .introductions {
     .box-shadow(0 0 20px 0 fade(black, 20) );
-    .translate3d(0,0,0);    
+    .translate3d(0,0,0);
     height:582px;
     top:58px;
     position:relative;
     z-index:@zIndexPage;
     background:url("@{staticPath}img/intro/pointilles.png") #edeef0 0 0 no-repeat;
-    
+
     li.what {
         padding-top:110px;
         width:226px;
         height:83px;
-        background:#F5F6F8;       
+        background:#F5F6F8;
         text-align:center;
         text-transform:uppercase;
         font-size:13px;
     }
-    
+
     .introduction {
         width:225px-2px;
         height:194px-2px;
@@ -125,11 +125,11 @@ body {
         position:absolute;
         top:0;
         left:0;
-        
-        
-        .wrapper {         
-            display:block;   
-            
+
+
+        .wrapper {
+            display:block;
+
             position:absolute;
             top:0; bottom:0;
             left:0; right:0;
@@ -137,18 +137,18 @@ body {
             font-size:13px;
             line-height:16px;
 
-            background:white;            
+            background:white;
             z-index:@zIndexPage;
             color:@textColor;
             .transition(0.2s);
             &:hover {
                 color:@textColor;
                 text-decoration:none;
-            }                        
+            }
         }
 
-        .indicator {            
-            font-family:@serifFontFamily;            
+        .indicator {
+            font-family:@serifFontFamily;
             font-size: 76px;
             display:block;
             line-height:60px;
@@ -174,46 +174,46 @@ body {
             h3 {
                 text-align:left;
                 font-size:20px;
-                line-height:25px;            
-                font-family:@serifFontFamily;     
+                line-height:25px;
+                font-family:@serifFontFamily;
             }
 
             .trend {
                 font-size:25px;
                 line-height:25px;
                 white-space:nowrap;
-                margin-top:5px;       
-                height:70px;         
-                width:175px;                
+                margin-top:5px;
+                height:70px;
+                width:175px;
                 display:inline-block !important;
                 display:block;
-                text-align:center;                                
-                
+                text-align:center;
+
                 .ratio {
                     display:inline-block !important;
                     display:block;
                     *float:left;
                     margin:0;
-                    padding:0;                    
+                    padding:0;
                 }
 
                 &.increase .current,
                 &.decrease .previous {
-                    position:relative;                 
+                    position:relative;
                     top:-40px;
                 }
-                
-                .picto {    
+
+                .picto {
                     height:53px;
                     width:53px;
-                    margin:5px;                                        
+                    margin:5px;
                     background:0 0 no-repeat transparent;
                     display:inline-block !important;
                     display:block;
                     *float:left;
                 }
 
-                &.decrease .picto {                        
+                &.decrease .picto {
                     background-position:-53px 0;
                 }
             }
@@ -227,8 +227,8 @@ body {
             }
 
             &.transport .picto {
-                background-image:url("@{staticPath}img/intro/tendance-transports.png"); 
-            } 
+                background-image:url("@{staticPath}img/intro/tendance-transports.png");
+            }
 
         }
 
@@ -238,7 +238,7 @@ body {
             height:75px;
             &.environnement { background-image:url("@{staticPath}img/common/pictos/picto_environnement.png"); }
             &.economique    { background-image:url("@{staticPath}img/common/pictos/picto_situation_economique.png"); }
-            &.transport     { background-image:url("@{staticPath}img/common/pictos/picto_transports.png"); }            
+            &.transport     { background-image:url("@{staticPath}img/common/pictos/picto_transports.png"); }
         }
 
         .caption {
@@ -246,7 +246,7 @@ body {
         }
 
 
-        &:hover .wrapper {   
+        &:hover .wrapper {
             z-index:@zIndexPage+10;
             .scale(1.05);
             .box-shadow(0 0 20px 0 fade(black, 20) );
@@ -257,105 +257,105 @@ body {
             left:225px*1px;
             top:194px*0px;
             height:194px*2px-2px;
-            
-            .wrapper { 
-                background-image:url("@{staticPath}img/intro/case1.png"); 
-            }        
-            
+
+            .wrapper {
+                background-image:url("@{staticPath}img/intro/case1.png");
+            }
+
             .trend {
                 margin-top:15px;
             }
-            
-            .ratio.value {                      
+
+            .ratio.value {
                 display:block;
                 width:175px;
-                text-align:center;  
-            }        
+                text-align:center;
+            }
         }
-        
+
         &.case-2 {
             left:225px*0px;
             top:194px*1px;
-            .wrapper { 
+            .wrapper {
                 background-image:url("@{staticPath}img/intro/case2.png");
             }
         }
-        
+
         &.case-3 {
             left:225px*0px;
             top:194px*2px;
-            .wrapper { 
+            .wrapper {
                 background-image:url("@{staticPath}img/intro/case3.png");
             }
         }
-        
+
         &.case-4 {
             left:225px*1px;
             top:194px*2px;
-            .wrapper { 
+            .wrapper {
                 background-image:url("@{staticPath}img/intro/case4.png");
             }
         }
-        
+
         &.case-5 {
             left:225px*2px;
             top:194px*0px;
-            .wrapper { 
+            .wrapper {
                 background-image:url("@{staticPath}img/intro/case5.png");
             }
         }
-        
+
         &.case-6 {
             left:225px*2px;
             top:194px*1px;
-            .wrapper { 
+            .wrapper {
                 background-image:url("@{staticPath}img/intro/case6.png");
             }
         }
-        
+
         &.case-7 {
             left:225px*3px;
             top:194px*0px;
-            .wrapper { 
+            .wrapper {
                 background-image:url("@{staticPath}img/intro/case7.png");
             }
         }
-        
+
         &.case-8 {
             left:225px*3px;
             top:194px*1px;
-            .wrapper { 
+            .wrapper {
                 background-image:url("@{staticPath}img/intro/case8.png");
             }
         }
-        
+
         &.case-9 {
             left:225px*2px;
             top:194px*2px;
             width:225px*2px-2px;
-            .wrapper { 
-                background-image:url("@{staticPath}img/intro/case9.png");  
-            }   
-            
+            .wrapper {
+                background-image:url("@{staticPath}img/intro/case9.png");
+            }
+
             .value {
                 padding-right:10px;
-            }                     
-
-            .lt-ie8 & .trend {                
-                width:150px;                
             }
 
-            .indicator {                
-                text-align:center;    
+            .lt-ie8 & .trend {
+                width:150px;
+            }
+
+            .indicator {
+                text-align:center;
                 max-height:130px;
-                margin-top:-15px;                                            
+                margin-top:-15px;
             }
-        } 
+        }
 
     }
 }
 
-    
+
 /* ---------------------------------------------------------- */
 /* GENERAL HEADER BAR */
 .header {
@@ -363,7 +363,7 @@ body {
     right:0;
     top:0;
     z-index:@zIndexHeader;
-    
+
     li {
         height:26px;
         width:28px;
@@ -373,41 +373,41 @@ body {
         padding:0;
         .box-shadow(0 2px 6px 0 fade(#000, 30));
         float:left;
-        
+
         a, span {
             display:block;
             height:26px;
             width:28px;
             cursor:pointer;
-            .hide-text();                                
-        }            
+            .hide-text();
+        }
 
         &:hover {
             background-position:-28px 0;
         }
 
-        &.active {                
+        &.active {
             background-position:-28px*2px 0;
         }
-        
+
         &.info {
             background-image:url("@{staticPath}img/common/tools_info.png");
         }
 
         &.dl {
             background-image:url("@{staticPath}img/common/tools_dwl_sprite.png");
-            
+
             .question-transport & {
                 background-position:-84px*0px 0;
-            }            
+            }
             .question-environnement & {
                 background-position:-84px*1px 0;
-            }            
+            }
             .question-economique & {
                 background-position:-84px*2px 0;
             }
         }
-    }    
+    }
 }
 
 
@@ -437,7 +437,7 @@ body {
             position:relative;
             cursor:pointer;
             color:inherit;
-            
+
             .icon {
                 display:block;
                 width:150px;
@@ -448,21 +448,21 @@ body {
                 left:50%;
                 margin-left:150px/-2px;
             }
-            
-            &.radio-environnement .icon { 
-                background-image:url("@{staticPath}img/common/pictos/picto_environnement.png"); 
+
+            &.radio-environnement .icon {
+                background-image:url("@{staticPath}img/common/pictos/picto_environnement.png");
             }
 
-            &.radio-economique  .icon { 
-                background-image:url("@{staticPath}img/common/pictos/picto_situation_economique.png"); 
+            &.radio-economique  .icon {
+                background-image:url("@{staticPath}img/common/pictos/picto_situation_economique.png");
             }
 
-            &.radio-transport  .icon { 
-                background-image:url("@{staticPath}img/common/pictos/picto_transports.png"); 
+            &.radio-transport  .icon {
+                background-image:url("@{staticPath}img/common/pictos/picto_transports.png");
             }
 
-            &.vr { 
-                background:url("@{staticPath}img/graph/pointilles_horizontal.png") repeat-y right 0;       
+            &.vr {
+                background:url("@{staticPath}img/graph/pointilles_horizontal.png") repeat-y right 0;
             }
         }
     }
@@ -475,7 +475,7 @@ body {
         top:155px;
         bottom:0;
         left:0;
-        
+
         .select {
 
             .clearfix();
@@ -486,43 +486,43 @@ body {
             text-align:center;
             position:relative;
             white-space:nowrap;
-            
+
             &.hr {
-                background:url("@{staticPath}img/graph/pointilles_vertical.png") repeat-x bottom;         
+                background:url("@{staticPath}img/graph/pointilles_vertical.png") repeat-x bottom;
             }
         }
 
         .select a {
-            padding-top:45px;            
+            padding-top:45px;
             padding-bottom:5px;
             line-height:10px;
             height:10px;
             width:41px;
             margin:0;
-            margin-right:4px;  
+            margin-right:4px;
             position:relative;
-            left:-5px;  
+            left:-5px;
             color:inherit;
-            
+
             /* inline-block hack for ie */
             float:none !important;
             float:left;
             display:inline-block !important;
             display:inline;
-            
-            background:no-repeat 0 0;            
+
+            background:no-repeat 0 0;
         }
-            
+
         a.radio-all {
             padding-top:55px;
             width:76px;
             background-image:url("@{staticPath}img/common/pictos/picto_all.png");
         }
 
-        .select-age a {                  
+        .select-age a {
 
             &.radio-18_24 {
-                background-image:url("@{staticPath}img/common/pictos/picto_age_18_24.png");                
+                background-image:url("@{staticPath}img/common/pictos/picto_age_18_24.png");
             }
             &.radio-25_34 {
                 background-image:url("@{staticPath}img/common/pictos/picto_age_25_34.png");
@@ -535,22 +535,22 @@ body {
             }
             &.radio-65_plus {
                 background-image:url("@{staticPath}img/common/pictos/picto_age_65_plus.png");
-            }                                                
+            }
         }
 
 
-        .select-sex a {    
-            margin:0 8px;        
+        .select-sex a {
+            margin:0 8px;
             &.radio-femme {
-                background-image:url("@{staticPath}img/common/pictos/picto_femme.png");                
+                background-image:url("@{staticPath}img/common/pictos/picto_femme.png");
             }
             &.radio-homme {
-                background-image:url("@{staticPath}img/common/pictos/picto_homme.png");                
+                background-image:url("@{staticPath}img/common/pictos/picto_homme.png");
             }
         }
 
 
-        .select-job a {  
+        .select-job a {
             font-size:9px;
             &.radio-cadre {
                 background-image:url("@{staticPath}img/common/pictos/picto_cadre.png");
@@ -567,10 +567,10 @@ body {
             &.radio-technicien {
                 background-image:url("@{staticPath}img/common/pictos/picto_technicien.png");
             }
-        }    
-        
+        }
+
         .select-dept a {
-            
+
             display:block;
             clear:left;
             text-align:left;
@@ -578,7 +578,7 @@ body {
             line-height:27px;
             height:27px;
             white-space:nowrap;
-            
+
             i {
                 font-style:normal;
                 display:block;
@@ -589,25 +589,25 @@ body {
                 background:url("@{staticPath}img/common/pictos/picto_blank.png") 2px 0 no-repeat;
                 line-height:28px;
                 font-size: 15px;
-                text-align:center;                
+                text-align:center;
             }
         }
     }
 
     .render {
-        
-        width:619px;        
+
+        width:619px;
         height:478px;
-        
+
         background:url("@{staticPath}img/graph/fond.png") no-repeat;
-        position:absolute;        
+        position:absolute;
         z-index:@zIndexGraph;
         bottom:-20px;
-        right:-15px;   
-        
-        padding-right:30px;  
-        padding-bottom:30px;  
-        
+        right:-15px;
+
+        padding-right:30px;
+        padding-bottom:30px;
+
         .border-top, .border-left {
             position:absolute;
             z-index:-1;
@@ -617,7 +617,7 @@ body {
             width:668px;
             height:30px;
             bottom:100%;
-            left:-24px; 
+            left:-24px;
             background:url("@{staticPath}img/graph/fond_haut_sprite.png") 0 0;
         }
 
@@ -625,7 +625,7 @@ body {
             width:34px;
             height:504px;
             top:0;
-            right:100%; 
+            right:100%;
             background:url("@{staticPath}img/graph/fond_gauche_sprite.png") 0 0;
         }
 
@@ -643,7 +643,7 @@ body {
             background:#e9e9eb;
             color:#909090;
             padding:0 10px;
-            min-width: 200px;                   
+            min-width: 200px;
             font-size:14px;
             line-height:40px;
             height:40px;
@@ -652,17 +652,17 @@ body {
             right:0;
             margin-right:45px;
             top:80px;
-            font-style:italic;            
+            font-style:italic;
             .border-radius(8px);
             .transition(~"background 0.8s, right 0.8s, margin 0.8s");
-            
+
             &.increase,
             &.decrease {
-                font-style:normal;     
+                font-style:normal;
                 font-weight:bold;
-                color:white;              
-                font-size:16px;            
-                margin-right:-220px/2px; 
+                color:white;
+                font-size:16px;
+                margin-right:-220px/2px;
                 right:50%;
             }
 
@@ -674,7 +674,7 @@ body {
             position:absolute;
             z-index:@zIndexGraph;
             top:65px;
-            left:19px; 
+            left:19px;
             width:594px;
             height:386px;
             background:url("@{staticPath}img/graph/graph_frame.png") no-repeat 0 0;
@@ -684,7 +684,7 @@ body {
             position:absolute;
             z-index:@zIndexGraph+10;
             top:145px;
-            left:50px;            
+            left:50px;
             right:50px;
             height:340px;
             overflow:hidden;
@@ -692,7 +692,7 @@ body {
 
         .chart {
             height:340px;
-            position:relative;              
+            position:relative;
             z-index:@zIndexGraph+20;
         }
 
@@ -705,7 +705,7 @@ body {
             height:340px;
         }
 
-        .jspHorizontalBar {            
+        .jspHorizontalBar {
             z-index:@zIndexGraph+30;
         }
     }
@@ -715,33 +715,33 @@ body {
         font-size: 13px;
         color:#545454;
         display:block;
-        text-align:center;        
+        text-align:center;
     }
 
     /* Hover states */
-    .select-question a:hover i {        
+    .select-question a:hover i {
         background-position:-150px*1px 0;
     }
-    .select-all a:hover {        
+    .select-all a:hover {
         background-position:-76px*1px 0;
     }
-    .select-age a:hover,        
-    .select-sex a:hover,        
-    .select-job a:hover {        
+    .select-age a:hover,
+    .select-sex a:hover,
+    .select-job a:hover {
         background-position:-50px*1px 0;
     }
     .select-dept a:hover i {
-        color:#6E8EA0;  
+        color:#6E8EA0;
     }
 
 
     &.question-environnement {
-        
+
         @activeColor:@environnementColor;
         .active, h2 strong { color:@activeColor; }
         .jspDrag { background:@activeColor; }
 
-        
+
         .radio-environnement .icon {
             background-position:-150px*2px 0;
         }
@@ -765,12 +765,12 @@ body {
         &.profil-92 .radio-92 i,
         &.profil-93 .radio-93 i,
         &.profil-94 .radio-94 i,
-        &.profil-95 .radio-95 i { 
-            color:@activeColor;  
-            background-position:-28px 0;           
+        &.profil-95 .radio-95 i {
+            color:@activeColor;
+            background-position:-28px 0;
         }
 
-        .border-top { 
+        .border-top {
             background-position:0 -80px;
         }
     }
@@ -783,7 +783,7 @@ body {
 
         .radio-transport .icon  {
             background-position:-150px*2px 0;
-        }        
+        }
 
         &.profil-18_24      .radio-18_24      { background-position:-150px 0; }
         &.profil-25_34      .radio-25_34      { background-position:-150px 0; }
@@ -804,12 +804,12 @@ body {
         &.profil-92 .radio-92 i,
         &.profil-93 .radio-93 i,
         &.profil-94 .radio-94 i,
-        &.profil-95 .radio-95 i { 
-            color:@activeColor;  
-            background-position:-28px 0;           
+        &.profil-95 .radio-95 i {
+            color:@activeColor;
+            background-position:-28px 0;
         }
 
-        .border-top { 
+        .border-top {
             background-position:0 -40px;
         }
     }
@@ -844,17 +844,17 @@ body {
         &.profil-92 .radio-92 i,
         &.profil-93 .radio-93 i,
         &.profil-94 .radio-94 i,
-        &.profil-95 .radio-95 i { 
-            color:@activeColor;  
-            background-position:-28px 0;           
+        &.profil-95 .radio-95 i {
+            color:@activeColor;
+            background-position:-28px 0;
         }
 
-        .border-top { 
+        .border-top {
             background-position:0 0;
         }
     }
 
-    &.profil-all {    
+    &.profil-all {
 
         &.question-environnement .radio-all {
             background-position:-76px*2px 0;
@@ -868,31 +868,31 @@ body {
             background-position:-76px*4px 0;
         }
         .border-left {
-            background-position:0px 0*-514px;            
+            background-position:0px 0*-514px;
         }
     }
 
-    &.profil-18_24, &.profil-25_34, &.profil-35_49, &.profil-50_64, &.profil-65_plus {        
+    &.profil-18_24, &.profil-25_34, &.profil-35_49, &.profil-50_64, &.profil-65_plus {
         .border-left {
-            background-position:0px 1*-514px;            
+            background-position:0px 1*-514px;
         }
     }
 
-    &.profil-femme, &.profil-homme{        
+    &.profil-femme, &.profil-homme{
         .border-left {
-            background-position:0px 2*-514px;            
+            background-position:0px 2*-514px;
         }
     }
 
-    &.profil-cadre, &.profil-employe, &.profil-ouvrier, &.profil-retraite, &.profil-technicien {        
+    &.profil-cadre, &.profil-employe, &.profil-ouvrier, &.profil-retraite, &.profil-technicien {
         .border-left {
-            background-position:0px 3*-514px;            
+            background-position:0px 3*-514px;
         }
     }
 
-    &.profil-75, &.profil-77, &.profil-78, &.profil-91, &.profil-92, &.profil-93, &.profil-94, &.profil-95 {        
+    &.profil-75, &.profil-77, &.profil-78, &.profil-91, &.profil-92, &.profil-93, &.profil-94, &.profil-95 {
         .border-left {
-            background-position:0px 4*-514px;            
+            background-position:0px 4*-514px;
         }
     }
 
@@ -909,8 +909,8 @@ body {
     height:0px;
     /*  Center of the point */
     margin-top:0;
-      
-    
+
+
     &.hidden {
         display:none;
     }
@@ -929,23 +929,23 @@ body {
         font-size:16px;
         text-align:center;
         width:63px;
-        height:50px-10px;        
+        height:50px-10px;
         padding-top:10px;
         margin-left:-63px/2px;
-        background:url("@{staticPath}img/graph/bulle_all.png") no-repeat -64px 0;           
-        .transition(transform opacity 0.6s);            
+        background:url("@{staticPath}img/graph/bulle_all.png") no-repeat -64px 0;
+        .transition(transform opacity 0.6s);
         .translate(0, 0);
     }
 
     &.active .content {
         color:@white;
-        .question-economique & { 
+        .question-economique & {
             background-position:-64px -51px;
         }
-        .question-transport & { 
+        .question-transport & {
             background-position:-64px -51px*2px;
         }
-        .question-environnement & { 
+        .question-environnement & {
             background-position:-64px -51px*3px;
         }
     }
@@ -955,15 +955,15 @@ body {
         .content {
             background-position:0 0;
         }
-        
-        &.active .content {            
-            .question-economique & { 
+
+        &.active .content {
+            .question-economique & {
                 background-position:0 -51px;
             }
-            .question-transport & { 
+            .question-transport & {
                 background-position:0 -51px*2px;
             }
-            .question-environnement & { 
+            .question-environnement & {
                 background-position:0 -51px*3px;
             }
         }
@@ -972,17 +972,17 @@ body {
     &.js-last {
         margin-left:-10px;
         .content {
-            background-position:-64px*2px 0;            
+            background-position:-64px*2px 0;
         }
 
-        &.active .content {                
-            .question-economique & { 
+        &.active .content {
+            .question-economique & {
                 background-position:-64px*2px -51px;
             }
-            .question-transport & { 
+            .question-transport & {
                 background-position:-64px*2px -51px*2px;
             }
-            .question-environnement & { 
+            .question-environnement & {
                 background-position:-64px*2px -51px*3px;
             }
         }

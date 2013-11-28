@@ -24,7 +24,7 @@ angular
 
         ]
     #you can inject stuff!
-    ).animation("explode-enter", ()->
+    ).animation("slide", ()->
         setup: (element) ->        
             # Random number between -1000 and 1000
             distX = ~~(500+Math.random()*1000)-1000 + "px"  

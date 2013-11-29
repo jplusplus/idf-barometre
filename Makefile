@@ -3,6 +3,12 @@
 VIRTUALENV = venv/
 TIME = `date +%s`
 
+
+centos-install:
+	make centos-packages
+	make virtualenv
+	make database
+
 centos-packages:
 	# Activate EPEL respositiory
 	cd /opt
@@ -32,4 +38,4 @@ run:
 distribute:
 	mkdir dist -p
 	virtualenv --relocatable $(VIRTUALENV)
-	tar -czvf dist/idf-barometre-$(TIME).tar.gz * --exclude=dist --exclude=.git --exclude=*.db
+	tar -czvf dist/idf-barometre-$(TIME).tar.gz * --exclude=dist --exclude=.git --exclude=*.db --exclude=venv

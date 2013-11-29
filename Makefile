@@ -26,6 +26,9 @@ staticfiles:
 	. $(VIRTUALENV)bin/activate; python ./manage.py collectstatic --noinput
 	. $(VIRTUALENV)bin/activate; python ./manage.py compress --force
 
+run:
+	. $(VIRTUALENV)bin/activate; python ./manage.py runserver
+
 distribute:
 	mkdir dist -p
 	tar -czvf dist/idf-barometre-$(TIME).tar.gz * --exclude=dist --exclude=.git --exclude=*.db

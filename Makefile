@@ -31,4 +31,5 @@ run:
 
 distribute:
 	mkdir dist -p
+	virtualenv --relocatable $(VIRTUALENV)
 	tar -czvf dist/idf-barometre-$(TIME).tar.gz * --exclude=dist --exclude=.git --exclude=*.db

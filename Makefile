@@ -15,9 +15,8 @@ centos-packages:
 	rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm || true
 	# Install python dependencies
 	yum groupinstall -y "Development Tools"
-	yum install -y python python-pip python-devel mysql-devel mysql zlib zlib-devel openssl mod_wsgi libxml2 libxml2-devel python-lxml  libxslt-python  libxslt-devel
-	# Install virtual env
-	python-pip install virtualenv
+	yum install -y python python-pip python-devel mysql-devel mysql zlib zlib-devel openssl mod_wsgi libxml2 libxml2-de python-lxml  libxslt-python  libxslt-devel
+	python-pip virtualenv
 
 virtualenv:
 	virtualenv venv --no-site-packages --distribute

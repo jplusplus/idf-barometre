@@ -14,8 +14,15 @@ framework.
 
 """
 import os
+import sys
+import site
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings_prod")
+VEND_DIR = "venv"
+
+# for relative paths
+here   = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
+parent = lambda x: os.path.abspath(os.path.join(x, os.pardir))
+
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
@@ -23,6 +30,15 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings_prod")
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
-# Apply WSGI middleware here.
-# from helloworld.wsgi import HelloWorldApplication
-# application = HelloWorldApplication(application)
+# Virtualenv directory
+venv = os.path.join( parent( here("") ), VEND_DIR)
+# Add the site-packages of the chosen virtualenv to work with
+site.addsitedir('%s/local/lib/python2.7/site-packages' % venv)
+# Add the app's directory to the PYTHONPATH
+sys.path.append( here("") )
+sys.path.append( parent( here("") ) )
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings_prod")
+# Activate your virtual env
+activate_env=os.path.expanduser("%s/bin/activate_this.py" % venv)
+execfile(activate_env, dict(__file__=activate_env))

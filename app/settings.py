@@ -15,7 +15,10 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default' : dj_database_url.config()
+    'default' : {
+        'ENGINE':'django.db.backends.sqlite3',
+        'NAME': 'dev.db'
+    }
 }
 
 # Preload data
@@ -123,6 +126,7 @@ COMPRESS_CSS_FILTERS = (
     "app.barometre.compress_filter.CustomCssAbsoluteFilter",
 )
 
+COMPRESS_PARSER  = 'compressor.parser.HtmlParser'
 COMPRESS_ENABLED = True
 
 

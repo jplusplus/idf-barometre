@@ -1,6 +1,20 @@
 from .settings import *
 
-DEBUG = False
+# Edit here the configuration of you're database
+DATABASES = {
+    'default' : {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': ''
+    }
+}
+
+ALLOWED_HOSTS = ["localhost", ".iledefrance.fr"]
+
+DEBUG 			 = False
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
 
@@ -9,6 +23,3 @@ COMPRESS_CSS_FILTERS = (
     # Activate CSS minifier
     "compressor.filters.cssmin.CSSMinFilter",
 )
-
-
-ALLOWED_HOSTS = [".iledefrance.fr"]

@@ -15,7 +15,7 @@ centos-packages:
 	rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm || true
 	# Install python dependencies
 	yum groupinstall -y "Development Tools"
-	yum install -y python python-pip python-devel mysql-devel mysql zlib zlib-devel openssl mod_wsgi libxml2 libxml2-de python-lxml  libxslt-python  libxslt-devel
+	yum install -y python python-pip python-devel mysql-devel mysql zlib zlib-devel openssl mod_wsgi libxml2 libxml2-de python-lxml libxslt-python  libxslt-devel
 	python-pip virtualenv
 
 virtualenv:
@@ -29,12 +29,15 @@ database:
 
 staticfiles:
 	. $(VIRTUALENV)bin/activate; python ./manage.py collectstatic --noinput
-	. $(VIRTUALENV)bin/activate; python ./manage.py compress --force
+	. $(VIRTUALENV)bin/activate; python ./manage.py compress --force --settings=app.settings_prod
 
 run:
 	. $(VIRTUALENV)bin/activate; python ./manage.py runserver
 
+simulate-prod:
+	. $(VIRTUALENV)bin/activate; python ./manage.py runserver  --insecure --settings=app.settings_prod
+
 distribute:
 	mkdir dist -p
-	virtualenv --relocatable $(VIRTUALENV)
+	make staticfiles
 	tar -czvf dist/idf-barometre-$(TIME).tar.gz * --exclude=dist --exclude=.git --exclude=*.db --exclude=venv

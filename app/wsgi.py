@@ -24,13 +24,14 @@ application = get_wsgi_application()
 
 # Virtualenv directory
 venv = os.path.join( parent( here("") ), VEND_DIR)
-# Add the site-packages of the chosen virtualenv to work with
-site.addsitedir('%s/local/lib/python2.7/site-packages' % venv)
 # Add the app's directory to the PYTHONPATH
 sys.path.append( here("") )
 sys.path.append( parent( here("") ) )
+# Add the site-packages of the chosen virtualenv to work with
+if os.path.isfile('%s/local/lib/python2.7/site-packages' % venv):
+	site.addsitedir('%s/local/lib/python2.7/site-packages' % venv)
+	# Activate your virtual env
+	activate_env=os.path.expanduser("%s/bin/activate_this.py" % venv)
+	execfile(activate_env, dict(__file__=activate_env))
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings_prod")
-# Activate your virtual env
-activate_env=os.path.expanduser("%s/bin/activate_this.py" % venv)
-execfile(activate_env, dict(__file__=activate_env))

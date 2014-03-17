@@ -21,7 +21,7 @@ centos-packages:
 virtualenv:
 	virtualenv venv --no-site-packages --distribute
 	# Install pip packages
-	. $(VIRTUALENV)bin/activate; pip install -r requirements.txt --allow-all-external --allow-unverified wadofstuff-django-serializers
+	. $(VIRTUALENV)bin/activate; pip install -r requirements.txt --allow-all-external --allow-unverified wadofstuff-django-serializers || . venv/bin/activate; pip install -r requirements.txt
 
 database:
 	. $(VIRTUALENV)bin/activate; python ./manage.py syncdb --noinput

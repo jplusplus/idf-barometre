@@ -7,7 +7,7 @@ TIME = `date +%s`
 centos-install:
 	make centos-packages
 	make virtualenv
-	make database
+	make database-prod
 
 centos-packages:
 	# Activate EPEL respositiory
@@ -26,6 +26,10 @@ virtualenv:
 database:
 	. $(VIRTUALENV)bin/activate; python ./manage.py syncdb --noinput
 	. $(VIRTUALENV)bin/activate; python ./manage.py migrate
+	
+database-prod:
+	. $(VIRTUALENV)bin/activate; python ./manage.py syncdb --noinput --settings=app.settings_prod
+	. $(VIRTUALENV)bin/activate; python ./manage.py migrate --settings=app.settings_prod
 
 staticfiles:
 	. $(VIRTUALENV)bin/activate; python ./manage.py collectstatic --noinput

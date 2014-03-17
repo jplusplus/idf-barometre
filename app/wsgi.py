@@ -28,11 +28,11 @@ venv = os.path.join( parent( here("") ), VEND_DIR)
 sys.path.append( here("") )
 sys.path.append( parent( here("") ) )
 # Determine python packages
-version      = sys.version_info
+major, minor = sys.version_info[0:2]
 sitepackages = '{venv}/local/lib/python{major}.{minor}/site-packages'.format(
 	venv=venv,
-	major=version.major,
-	minor=version.minor
+	major=major,
+	minor=minor
 )
 # Add the site-packages of the chosen virtualenv to work with
 if os.path.isfile(sitepackages):

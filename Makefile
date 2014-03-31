@@ -43,19 +43,19 @@ virtualenv:
 	virtualenv venv --system-site-packages --distribute
 
 database:
-	. $(VIRTUALENV)bin/activate; python ./manage.py syncdb --noinput
-	. $(VIRTUALENV)bin/activate; python ./manage.py migrate
+	python ./manage.py syncdb --noinput
+	python ./manage.py migrate
 	
 database-prod:
-	. $(VIRTUALENV)bin/activate; python ./manage.py syncdb --noinput --settings=app.settings_prod
-	. $(VIRTUALENV)bin/activate; python ./manage.py migrate --settings=app.settings_prod
+	python ./manage.py syncdb --noinput --settings=app.settings_prod
+	python ./manage.py migrate --settings=app.settings_prod
 
 staticfiles:
 	. $(VIRTUALENV)bin/activate; python ./manage.py collectstatic --noinput --settings=app.settings_prod
 	. $(VIRTUALENV)bin/activate; python ./manage.py compress --force --settings=app.settings_prod
 
 run:
-	. $(VIRTUALENV)bin/activate; python ./manage.py runserver
+	python ./manage.py runserver
 
 simulate-prod: 
 	. $(VIRTUALENV)bin/activate; python ./manage.py runserver --insecure --settings=app.settings_prod

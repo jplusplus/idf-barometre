@@ -1,16 +1,5 @@
 # -*- coding: utf-8 -*-
-import os, sys
-# for relative paths
-here    = lambda x="": os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
-parent  = lambda x: os.path.abspath(os.path.join(x, os.pardir))
-gettext = lambda s: s
-# Add the app's directory to the PYTHONPATH
-sys.path.append(here())
-sys.path.append(parent(here()))
-# Vendor directory
-path = "%s/vendor/" % ( parent(here()) ) 
-# Load all librairies in the vendor directory
-for directory in os.listdir(path): sys.path.append(path + directory) 
+from app.env import here
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

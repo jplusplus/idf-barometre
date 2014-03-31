@@ -24,9 +24,6 @@ application = get_wsgi_application()
 
 # Virtualenv directory
 venv = os.path.join( parent( here("") ), VEND_DIR)
-# Add the app's directory to the PYTHONPATH
-sys.path.append( here("") )
-sys.path.append( parent( here("") ) )
 # Determine python packages
 major, minor = sys.version_info[0:2]
 sitepackages = '{venv}/local/lib/python{major}.{minor}/site-packages'.format(

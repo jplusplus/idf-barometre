@@ -7,7 +7,7 @@
 Depuis le dossier qui contiendra votre projet :
 
 ```bash
-wget https://www.dropbox.com/s/u0f9g2acv3uah9v/idf-barometre-1395080875.tar.gz?dl=1 -O idf-barometre.tar.gz
+wget https://www.dropbox.com/s/72jmplf1n8ji3nl/idf-barometre-latest.tar.gz?dl=1 -O idf-barometre.tar.gz
 mkdir -p idf-barometre && tar -xzvf idf-barometre.tar.gz -C idf-barometre
 ```
 

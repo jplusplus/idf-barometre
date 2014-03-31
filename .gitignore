@@ -8,6 +8,7 @@ Icon?
 ehthumbs.db
 Thumbs.db
 *.pyc
+*.log
 
 # Users media
 app/media/*
@@ -23,3 +24,4 @@ venv
 app/media/*
 app/static/*
 dist
+vendor

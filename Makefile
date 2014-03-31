@@ -55,7 +55,7 @@ staticfiles:
 	. $(VIRTUALENV)bin/activate; python ./manage.py compress --force --settings=app.settings_prod
 
 run:
-	python ./manage.py runserver
+	. $(VIRTUALENV)bin/activate;  python ./manage.py runserver
 
 simulate-prod: 
 	. $(VIRTUALENV)bin/activate; python ./manage.py runserver --insecure --settings=app.settings_prod

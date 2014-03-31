@@ -19,7 +19,6 @@ centos-install-nopip:
 
 centos-packages:
 	# Activate EPEL respositiory
-	cd /opt
 	rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm || true
 	# Install python dependencies
 	yum groupinstall -y "Development Tools"

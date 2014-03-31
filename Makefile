@@ -2,12 +2,23 @@
 
 VIRTUALENV = venv/
 TIME = `date +%s`
+PWD = `pwd`
 
+install:
+	make virtualenv
+	make database-prod
 
 centos-install:
 	make centos-packages
+	python-pip install virtualenv
 	make virtualenv
 	make database-prod
+
+centos-install-nopip:
+	make centos-packages
+	# Package usually manage with PIP
+	yum install -y python-argparse python-boto python-chardet Django14 python-django-appconf python-django-compressor python-gunicorn pytjon-mimeparse mysql-connector-python MySQL-python python-dateutil pytz python-six python-django-south	
+	make database-prod	
 
 centos-packages:
 	# Activate EPEL respositiory
@@ -16,9 +27,10 @@ centos-packages:
 	# Install python dependencies
 	yum groupinstall -y "Development Tools"
 	yum install -y python python-pip python-devel mysql-devel mysql zlib zlib-devel openssl mod_wsgi python-lxml libxslt-python libxslt-devel
-	python-pip install virtualenv
+		
 
 virtualenv:
+	python-pip install virtualenv
 	virtualenv venv --no-site-packages --distribute
 	# Install pip packages
 	. $(VIRTUALENV)bin/activate; pip install -r requirements.txt --allow-all-external --allow-unverified wadofstuff-django-serializers || . venv/bin/activate; pip install -r requirements.txt
@@ -32,17 +44,18 @@ database-prod:
 	. $(VIRTUALENV)bin/activate; python ./manage.py migrate --settings=app.settings_prod
 
 staticfiles:
-	. $(VIRTUALENV)bin/activate; python ./manage.py collectstatic --noinput
+	. $(VIRTUALENV)bin/activate; python ./manage.py collectstatic --noinput --settings=app.settings_prod
 	. $(VIRTUALENV)bin/activate; python ./manage.py compress --force --settings=app.settings_prod
 
 run:
 	. $(VIRTUALENV)bin/activate; python ./manage.py runserver
 
-simulate-prod:
+simulate-prod: 
 	. $(VIRTUALENV)bin/activate; python ./manage.py runserver  --insecure --settings=app.settings_prod
 
 distribute:
 	mkdir dist -p
 	make staticfiles
 	tar -czvf dist/idf-barometre-$(TIME).tar.gz * --exclude=dist --exclude=.git --exclude=*.db --exclude=venv
+	cp dist/idf-barometre-$(TIME).tar.gz dist/idf-barometre-latest.tar.gz	
 

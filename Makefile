@@ -27,7 +27,7 @@ centos-packages:
 		
 centos-nopip:
 	# Package usually manage with PIP
-	yum install -y python-argparse python-boto python-chardet Django14 python-django-appconf python-django-compressor python-gunicorn pytjon-mimeparse mysql-connector-python MySQL-python python-dateutil pytz python-six python-django-south	
+	yum install -y python-argparse python-boto python-chardet Django14 python-django-appconf python-django-compressor python-gunicorn python-mimeparse mysql-connector-python MySQL-python python-dateutil pytz python-six python-django-south	
 
 load-vendor:
 	# Create a vendor directory with dependancies outside EPEL

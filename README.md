@@ -36,7 +36,7 @@ DATABASES = {
 **En root** et depuis le dossier **idf-barometre**  :
 
 ```bash
-make centos-install
+make centos-install-nopip
 ```
 
 ### 4. Configuration d'Apache

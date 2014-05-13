@@ -158,12 +158,13 @@ class Introduction(models.Model):
 
 
 class Answer(models.Model):
-    date       = models.DateTimeField()
+    date              = models.DateTimeField()
     # related_name='+' disable backward relation
-    question   = models.ForeignKey(Question, related_name='+')    
-    profil     = models.ForeignKey(Profil, related_name='+')
-    ratio      = models.FloatField()
-    created_at = models.DateTimeField(null=True, auto_now_add=True, db_column='created_at', blank=True)
+    question          = models.ForeignKey(Question, related_name='+')    
+    profil            = models.ForeignKey(Profil, related_name='+')
+    ratio             = models.FloatField(help_text="Ratio assez satisfait et très satisfait", blank=True, null=True)
+    ratio_unsatisfied = models.FloatField(help_text="Ratio pas vraiment satisfaite et pas du tout satisfait", blank=True, null=True)
+    created_at        = models.DateTimeField(null=True, auto_now_add=True, db_column='created_at', blank=True)
 
     class Meta:
         verbose_name        = u"réponse"

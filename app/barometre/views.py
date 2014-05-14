@@ -61,7 +61,7 @@ def answers(request, format='json'):
             row["ratio"]    = row["ratio_satisfied"]
         # Populate this field when empty
         if not row["ratio_unsatisfied"]:
-            row["ratio_unsatisfied"] = 1 - row["ratio_satisfied"]
+            row["ratio_unsatisfied"] = 100 - row["ratio_satisfied"]
         # Useless value
         del row["created_at"]
 

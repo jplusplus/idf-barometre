@@ -123,7 +123,7 @@ COMPRESS_CSS_FILTERS = (
 )
 
 COMPRESS_PARSER  = 'compressor.parser.HtmlParser'
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 
 
 INTERNAL_IPS = ('127.0.0.1',)

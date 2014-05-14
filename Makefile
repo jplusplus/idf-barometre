@@ -54,6 +54,9 @@ staticfiles:
 	. $(VIRTUALENV)bin/activate; python ./manage.py collectstatic --noinput --settings=app.settings_prod
 	. $(VIRTUALENV)bin/activate; python ./manage.py compress --force --settings=app.settings_prod
 
+setup_staticfiles:
+	ln -sfT `pwd`/app/barometre/static/barometre/img/ ./app/static/CACHE/img
+
 run:
 	. $(VIRTUALENV)bin/activate;  python ./manage.py runserver
 

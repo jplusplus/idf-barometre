@@ -46,7 +46,6 @@ AWS_S3_FILE_OVERWRITE      = os.getenv('AWS_S3_FILE_OVERWRITE') == "True" and Tr
 
 COMPRESS_JS_FILTERS = (
     "compressor.filters.jsmin.JSMinFilter",
-    "compressor.filters.template.TemplateFilter",
 )
 
 COMPRESS_OFFLINE_CONTEXT = {

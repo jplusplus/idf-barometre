@@ -69,5 +69,6 @@ distribute:
 
 staging:
 	git push heroku master
-	heroku run python ./manage.py compress --force --settings=app.settings_staging
+	heroku run python ./manage.py migrate --settings=app.settings_staging
 	heroku run python ./manage.py collectstatic --noinput -i admin --settings=app.settings_staging
+	heroku run python ./manage.py compress --force --settings=app.settings_staging

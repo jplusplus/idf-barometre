@@ -1,4 +1,4 @@
---allow-all-external
+--allow-all-external --allow-unverified wadofstuff-django-serializers
 argparse>=1.0.1
 boto==2.9.6
 chardet==2.1.1

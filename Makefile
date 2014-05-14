@@ -67,3 +67,7 @@ distribute:
 	tar -czvf dist/idf-barometre-$(TIME).tar.gz * --exclude=dist --exclude=.git --exclude=*.db --exclude=venv
 	cp dist/idf-barometre-$(TIME).tar.gz dist/idf-barometre-latest.tar.gz	
 
+release:
+	git push heroku master
+	heroku run python ./manage.py compress --force
+	heroku run python ./manage.py collectstatic -i admin

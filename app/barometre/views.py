@@ -43,7 +43,7 @@ def answers(request, format='json'):
         filters["profil__slug"] = request.GET["profil"]
 
     # Get the answers ordering by date
-    answers = Answer.objects.exclude(ratio__lte=0).filter(**filters).order_by("date")
+    answers = Answer.objects.exclude(ratio_satisfied__lte=0).filter(**filters).order_by("date")
     # this gives you a list of dicts
     raw_data = serializers.serialize('python', answers, relations=('profil','question',))
     # now extract the inner `fields` dicts
@@ -56,6 +56,12 @@ def answers(request, format='json'):
         row["date"]     = paris_tz.normalize(row["date"]).strftime("%m/%Y")
         row["profil"]   = row["profil"]["fields"]["display"]
         row["question"] = row["question"]["fields"]["display"]
+        # Backward compatibily for json format
+        if format == 'json':
+            row["ratio"]    = row["ratio_satisfied"]
+        # Populate this field when empty
+        if not row["ratio_unsatisfied"]:
+            row["ratio_unsatisfied"] = 1 - row["ratio_satisfied"]
         # Useless value
         del row["created_at"]
 
@@ -64,13 +70,14 @@ def answers(request, format='json'):
         # Maximun and minimun ratios to calculate the graph scale
         minRatio = 0
         maxRatio = 100
+        question_min = question_max = 0
         # Change them only if we received a question filter
         if "question" in request.GET:
             # Get all answers for this question
             answers  = Answer.objects.filter(question__slug=request.GET["question"])
             # Aggregates the minimun and maximum ratios
-            question_min = answers.aggregate(Min('ratio'))["ratio__min"]
-            question_max = answers.aggregate(Max('ratio'))["ratio__max"]
+            question_min = answers.aggregate(Min('ratio_satisfied'))["ratio_satisfied__min"]
+            question_max = answers.aggregate(Max('ratio_satisfied'))["ratio_satisfied__max"]
 
         # Create rows subset to embed min and max values   
         data = { 
@@ -84,7 +91,7 @@ def answers(request, format='json'):
         return HttpResponse(output, mimetype="application/json")
     # CSV request
     elif format == 'csv':        
-        filename = "answers"
+        filename = "reponses"
         if "question" in request.GET:
             filename += "-" + request.GET["question"]
         if "profil" in request.GET:
@@ -94,6 +101,7 @@ def answers(request, format='json'):
         response['Content-Disposition'] = 'attachment; filename="%s.csv"' % (filename,)
         # Frist the answer
         writer = csv.writer(response)
+        print len(actual_data)
         # Only if there is data
         if len(actual_data) > 0:
             # Add a label line 

@@ -13,7 +13,7 @@ class TaxonomyAdmin(admin.ModelAdmin):
 
 class AnswerAdmin(admin.ModelAdmin):
     list_filter = ('question', 'profil', 'date')
-    list_display = ('__unicode__', 'ratio', 'date', )
+    list_display = ('__unicode__', 'ratio_satisfied', 'date', )
 
 class IntroductionAdminForm(forms.ModelForm):    
 

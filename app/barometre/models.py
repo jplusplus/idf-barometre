@@ -119,7 +119,7 @@ class Introduction(models.Model):
             # Do we found an answer ?
             if answer:
                 # Aake the first row and add a percentage 
-                indicator["value"] = Answer.float( answer[0].ratio, "%")
+                indicator["value"] = Answer.float( answer[0].ratio_satisfied, "%")
         # Find the quantity
         elif self.format == 'number':
             # Get the answer
@@ -127,7 +127,7 @@ class Introduction(models.Model):
             # Do we found an answer ?
             if answer:
                 # Aake the first row and add a percentage 
-                indicator["value"] = Answer.float( NB_FRANCILIENS_M*answer[0].ratio/100 )
+                indicator["value"] = Answer.float( NB_FRANCILIENS_M*answer[0].ratio_satisfied/100 )
         # Find a trend
         elif self.format == 'trend':
             # Current answer
@@ -149,10 +149,10 @@ class Introduction(models.Model):
 
                 # The revious answer exists
                 if previousAnswer:
-                    indicator["value"]    = Answer.float( currentAnswer[0].ratio - previousAnswer[0].ratio, "pt", "pts")
-                    indicator["current"]  = Answer.float( currentAnswer[0].ratio, "%")
-                    indicator["previous"] = Answer.float( previousAnswer[0].ratio, "%")
-                    indicator["class"]    = "increase" if currentAnswer[0].ratio >= previousAnswer[0].ratio else "decrease" 
+                    indicator["value"]    = Answer.float( currentAnswer[0].ratio_satisfied - previousAnswer[0].ratio_satisfied, "pt", "pts")
+                    indicator["current"]  = Answer.float( currentAnswer[0].ratio_satisfied, "%")
+                    indicator["previous"] = Answer.float( previousAnswer[0].ratio_satisfied, "%")
+                    indicator["class"]    = "increase" if currentAnswer[0].ratio_satisfied >= previousAnswer[0].ratio_satisfied else "decrease" 
                 
         return indicator
 
@@ -162,8 +162,8 @@ class Answer(models.Model):
     # related_name='+' disable backward relation
     question          = models.ForeignKey(Question, related_name='+')    
     profil            = models.ForeignKey(Profil, related_name='+')
-    ratio             = models.FloatField(help_text="Ratio assez satisfait et très satisfait", blank=True, null=True)
-    ratio_unsatisfied = models.FloatField(help_text="Ratio pas vraiment satisfaite et pas du tout satisfait", blank=True, null=True)
+    ratio_satisfied   = models.FloatField(help_text="Ratio assez satisfait et très satisfait", blank=True, null=True)
+    ratio_unsatisfied = models.FloatField(help_text="Ratio pas vraiment satisfait et pas du tout satisfait", blank=True, null=True)
     created_at        = models.DateTimeField(null=True, auto_now_add=True, db_column='created_at', blank=True)
 
     class Meta:

@@ -3,7 +3,7 @@
 angular
     .module('barometreServices', ['ngResource'])
     .factory 'Answer', ($resource)->   
-        $resource './answers.json', {}, {
+        $resource './reponses.json', {}, {
         	query: {
         		method:'GET', 
         		isArray:false

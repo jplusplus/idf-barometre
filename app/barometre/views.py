@@ -9,7 +9,7 @@ from django.core            import serializers
 from django.db.models       import Max, Min
 from random                 import random, shuffle
 from app.barometre.models   import Answer, Introduction, Profil
-
+from collections            import OrderedDict
 
 import csv
 import json
@@ -111,15 +111,16 @@ def answers(request, format='json'):
             label = u'Sondage réalisé pour la région Île-de-France par l\'institut Viavoice sur un échantillon de 1039 personnes, représentatif de la population francilienne de 18 ans et plus'
             writer.writerow([unicode(label).encode("utf-8")])
             # Get key's fields
-            fields = [ get_model_field(Answer, key) for key in actual_data[0].keys() ]
+            keys   = sorted( actual_data[0].keys() )
+            fields = [ get_model_field(Answer, key) for key in keys ]            
             # Get key's names from field
-            keys = [ key.verbose_name for key in fields ]
+            heads = [ key.verbose_name for key in fields ]
             # Take the first row keys as header
-            writer.writerow(keys)
+            writer.writerow(heads)
             # Take every row values
             for row in actual_data:
                 # UT8 encode the string
-                values = [unicode(s).encode("utf-8") for s in row.values()]
+                values = [ unicode(row[key]).encode("utf-8") for key in keys ]
                 # Add the encoded values to the CSV
                 writer.writerow( values )
 

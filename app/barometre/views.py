@@ -22,6 +22,10 @@ merge = lambda l1, l2: list(chain(l1, l2))
 # Date handler for serialization
 dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
 
+def get_model_field(model, field):
+    fields = dict( (f.name, f) for f in model._meta.fields )
+    return fields[field]
+
 def home(request):
     locales = {}
     return render_to_response('home.dj.html', locales, context_instance=RequestContext(request))
@@ -101,14 +105,17 @@ def answers(request, format='json'):
         response['Content-Disposition'] = 'attachment; filename="%s.csv"' % (filename,)
         # Frist the answer
         writer = csv.writer(response)
-        print len(actual_data)
         # Only if there is data
         if len(actual_data) > 0:
             # Add a label line 
             label = u'Sondage réalisé pour la région Île-de-France par l\'institut Viavoice sur un échantillon de 1039 personnes, représentatif de la population francilienne de 18 ans et plus'
             writer.writerow([unicode(label).encode("utf-8")])
+            # Get key's fields
+            fields = [ get_model_field(Answer, key) for key in actual_data[0].keys() ]
+            # Get key's names from field
+            keys = [ key.verbose_name for key in fields ]
             # Take the first row keys as header
-            writer.writerow( actual_data[0].keys() )
+            writer.writerow(keys)
             # Take every row values
             for row in actual_data:
                 # UT8 encode the string

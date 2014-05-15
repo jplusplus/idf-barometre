@@ -335,13 +335,13 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
 
         # Add an another svg presenting the y axis
         yAxisSvg = d3.select( axis[0] )
-                        .append("svg:svg")                        
+                        .append("svg:svg")            
                             .attr("width",  axis.width())
                             .attr("height", h + padding[0] + padding[2])
 
         unless Modernizr.svg    
             # Add the area path.
-            chartSvg.append("svg:path")
+            chartSvg.append("svg:path")       
                     .attr("class", "area bg")
                     .attr("stroke-width", "0")
                     .attr("fill", $filter("colors")($scope.question))
@@ -382,9 +382,9 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                     .attr("width", w)
                     .attr("height", h)
                     .attr("fill", "transparent")
+                    .attr("opacity", 0)
                     .on "click", -> 
                         point.tips.empty() if _.keys($scope.activePoints).length > 1
-
 
         # Add line dots
         chartSvg.selectAll(".data-point")

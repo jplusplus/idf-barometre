@@ -120,7 +120,7 @@ def answers(request, format='json'):
             # Take every row values
             for row in actual_data:
                 # UT8 encode the string
-                values = [ unicode(row[key]).encode("utf-8") for key in keys ]
+                values = [ unicode( row[key] ).encode("utf-8") for key in keys ]
                 # Add the encoded values to the CSV
                 writer.writerow( values )
 

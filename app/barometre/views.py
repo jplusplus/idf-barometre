@@ -178,8 +178,7 @@ def introductions(request):
         intros = alls.filter(question__slug=q, format="trend")
         for intro in intros:
             # Check that the trend has value
-            if intro.indicator().get("current",  False) and \
-               intro.indicator().get("previous", False):
+            if intro.indicator().get("value",  False):
                 introductions[idx] = intro
                 # Just one!
                 break

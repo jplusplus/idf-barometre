@@ -153,10 +153,15 @@ def introductions(request):
                     # Only 3 by question
                     if count < 1:       
                         filters = dict(question__slug=q, profil=p, format=f)
-                        dataset = alls.filter(**filters)
-                        if dataset:
-                            introductions.append( dataset[0] )
-                            count = count+1
+                        try:
+                            intro = alls.get(**filters)
+                            # Only intro with a value
+                            if intro.indicator().get("value", False): 
+                                introductions.append(intro)
+                                count = count+1
+                        except Introduction.DoesNotExist:
+                            pass
+                        
         # Break upside 9 introductions
         if len(introductions) >= 9:
             break
@@ -168,11 +173,16 @@ def introductions(request):
     indexes = (0, len(introductions)-1)
     for idx in indexes:
         # Get the introduction
-        q = introductions[idx].question.slug
+        q = introductions[idx].question.slug        
         # And choose a trend one, for the same question
-        intro = alls.filter(question__slug=q, format="trend")
-        if intro:
-            introductions[idx] = intro[0]
+        intros = alls.filter(question__slug=q, format="trend")
+        for intro in intros:
+            # Check that the trend has value
+            if intro.indicator().get("current",  False) and \
+               intro.indicator().get("previous", False):
+                introductions[idx] = intro
+                # Just one!
+                break
 
     # Serialize data
     raw_data = serializers.serialize('python', introductions, relations=('profil','question'), extras=("indicator",))

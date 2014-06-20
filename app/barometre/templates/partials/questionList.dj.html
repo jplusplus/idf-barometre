@@ -1,5 +1,5 @@
 <div class="container centered">
-    <ul class="header unstyled" ng-controller="HeaderCtrl">        
+    <ul class="header unstyled" ng-controller="HeaderCtrl">
         <li class="info">
             <span ng-click="openDialog()" title="Plus d'info sur ce sondage">
                 Information
@@ -12,18 +12,18 @@
             2 mois auprès d'un panel<br />
             de plus de 1000 personnes
         </li>
-        <li ng-repeat="intro in introductions" class="introduction case-[[$index+1]]" ng-class="'type-' + intro.format">            
-            <a class="wrapper" href="#/answers/?q=[[intro.question.slug]]&amp;p=[[intro.profil.slug]]">                
+        <li ng-repeat="intro in introductions" class="introduction case-[[$index+1]]" ng-class="'type-' + intro.format">
+            <a class="wrapper" href="#/answers/?q=[[intro.question.slug]]&amp;p=[[intro.profil.slug]]">
                 <div class="indicator" ng-class="intro.question.slug">
                     <span ng-bind-html="intro.indicator.value | supPercent:true:intro.format" class="ratio value"></span>
-                    <div class="trend" ng-if="intro.format == 'trend'"  ng-class="intro.indicator.class">                    
-                        <span class="previous ratio" ng-bind-html="intro.indicator.previous | supPercent"></span>
+                    <div class="trend" ng-if="intro.format == 'trend'"  ng-class="intro.indicator.class">
+                        <span class="previous min-ratio" ng-bind-html="intro.indicator.previous | supPercent"></span>
                         <span class="picto"><!-- Trend pictogram --></span>
-                        <span class="current ratio" ng-bind-html="intro.indicator.current | supPercent"></span>
+                        <span class="current min-ratio" ng-bind-html="intro.indicator.current | supPercent"></span>
                     </div>
                     <h3 ng-if="intro.format == 'trend'">[[intro.question | sentence]]</h3>
                 </div>
-                <div class="caption" ng-bind-html="intro.sentence"></div>                
+                <div class="caption" ng-bind-html="intro.sentence"></div>
             </a>
         </li>
     </ul>

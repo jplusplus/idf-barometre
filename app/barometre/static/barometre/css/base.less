@@ -183,35 +183,49 @@ body {
                 font-size:25px;
                 line-height:25px;
                 white-space:nowrap;
-                margin-top:5px;
-                height:70px;
-                width:175px;
+                height:53px;
+                width:53px;
                 display:inline-block !important;
                 display:block;
                 text-align:center;
 
-                .ratio {
-                    display:inline-block !important;
-                    display:block;
-                    *float:left;
-                    margin:0;
-                    padding:0;
+                &.increase {
+
+                    .previous {
+                        position:absolute;
+                        bottom:0;
+                        right:100%;
+                    }
+
+                    .current {
+                        position:absolute;
+                        top:0;
+                        left:100%;
+                    }
+
                 }
 
-                &.increase .current,
-                &.decrease .previous {
-                    position:relative;
-                    top:-40px;
+                &.decrease {
+
+                    .previous {
+                        position:absolute;
+                        top:0;
+                        right:100%;
+                    }
+
+                    .current {
+                        position:absolute;
+                        bottom:0;
+                        left:100%;
+                    }
                 }
 
                 .picto {
                     height:53px;
                     width:53px;
-                    margin:5px;
                     background:0 0 no-repeat transparent;
                     display:inline-block !important;
                     display:block;
-                    *float:left;
                 }
 
                 &.decrease .picto {
@@ -242,6 +256,48 @@ body {
             &.transport     { background-image:url("@{staticPath}img/common/pictos/picto_transports.png"); }
         }
 
+        &.type-trend {
+
+            .trend, .ratio {
+                position:absolute;
+                right:20px;
+                top:20px;
+                text-align: center;
+            }
+
+            &.case-1 {
+
+                .ratio {
+                    left:20px;
+                }
+
+                .trend {
+                    top: 95px;
+                    left: (250px - 53px)/2px;
+                }
+
+                h3 {
+                    margin-top:150px;
+                }
+            }
+
+            &.case-9 {
+                .ratio {
+                    left:20px;
+                    right:auto;
+                }
+
+                .trend {
+                    right:60px;
+                }
+
+                h3 {
+                    margin-top:80px;
+                }
+            }
+
+        }
+
         .caption {
             clear:left;
         }
@@ -261,16 +317,6 @@ body {
 
             .wrapper {
                 background-image:url("@{staticPath}img/intro/case1.png");
-            }
-
-            .trend {
-                margin-top:15px;
-            }
-
-            .ratio.value {
-                display:block;
-                width:175px;
-                text-align:center;
             }
         }
 
@@ -340,10 +386,6 @@ body {
 
             .value {
                 padding-right:10px;
-            }
-
-            .lt-ie8 & .trend {
-                width:150px;
             }
 
             .indicator {

@@ -1,5 +1,5 @@
 
-QuestionListCtrl = ($scope, $rootElement, Introduction, ArrowColor)->    
+QuestionListCtrl = ($scope, $rootElement, Introduction, ArrowColor)->
     $scope.introductions = Introduction.query()
     # Unable the arrow color service
     ArrowColor.active = false
@@ -9,10 +9,10 @@ QuestionListCtrl.$inject = ['$scope', '$rootElement', 'Introduction', 'ArrowColo
 # the dialog is injected in the specified controller
 DialogCtrl = ($scope, dialog)->
   $scope.close = -> dialog.close();
-  
+
 DialogCtrl.$inject = ['$scope', 'dialog'];
 
-HeaderCtrl = ($scope, $dialog)->        
+HeaderCtrl = ($scope, $dialog)->
     $scope.opts =
         backdrop: true
         keyboard: true
@@ -21,8 +21,8 @@ HeaderCtrl = ($scope, $dialog)->
         backdropFade: true
         templateUrl:  './partial/dialog.html'
         controller: 'DialogCtrl'
-    
-    $scope.openDialog = ->      
+
+    $scope.openDialog = ->
         d = $dialog.dialog($scope.opts)
         d.open()
 
@@ -34,7 +34,7 @@ ActiveColorCtrl = ($scope, ArrowColor)->
         return if $scope.state.active then "question-" + $scope.state.question else ""
 
 ActiveColorCtrl.$inject = ['$scope', 'ArrowColor'];
-    
+
 AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answer, ArrowColor)->
     # Models attributes
     $scope.question = $routeParams.q or "economique"
@@ -47,28 +47,28 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
 
     # Graph attributes
     chartSvg   = {}
-    yAxisSvg   = {}    
+    yAxisSvg   = {}
     parse      = d3.time.format("%m/%Y").parse
     dateFormat = (d)-> getMonth(d) + " " + (d.getFullYear()-2000)
     # Empty shortcuts
-    wrapper = chart = axis = $(null)    
+    wrapper = chart = axis = $(null)
     # This dead IE required that we create jscrollpane here
-    unless Modernizr.svg 
+    unless Modernizr.svg
         # Add customise scrollbar
-        $rootElement.find(".wrapper").jScrollPane hideFocus: true    
+        $rootElement.find(".wrapper").jScrollPane hideFocus: true
     # Saves wrap
     wrapperWidth  = 549
     wrapperHeight = 330
     tickSize      = 5
     padding       = [10, 18, 60, 18]
-    minGap        = 30
+    minGap        = 60
 
     # Scales and axes. Note the inverted domain for the y-scale: bigger is up!
     x = d3.time.scale()
     y = d3.scale.linear()
 
-    
-    update = -> 
+
+    update = ->
         params = profil: $scope.profil, question: $scope.question
         $scope.answers = Answer.query params, render
         # Update the ArrowColor service
@@ -102,7 +102,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         # Get all keys
         keys = _.keys($scope.activePoints)
         # Take the first key by default
-        closest = keys[0] 
+        closest = keys[0]
         # Look every key
         _.each keys, (k)->
             # Distance to the reference index
@@ -112,16 +112,16 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 closestDist = dist
                 # Take the key as closest key
                 closest = k
-            
+
         # Return the closest key
         return parseInt(closest)
 
-    point =      
-        offset: (d)-> 
+    point =
+        offset: (d)->
             wrapper = $rootElement.find(".wrapper")
             return {
                 left : x(d.date) + padding[3]
-                top  : y(d.ratio) 
+                top  : y(d.ratio)
             }
         setTrend: (d)->
             # Keys list sortted by key
@@ -135,12 +135,12 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 val -= fst.ratio
                 # Sets the trend attribute into the scope
                 $scope.trend = val
-                $scope.trendClass = if val >= 0 then "increase" else "decrease"                
+                $scope.trendClass = if val >= 0 then "increase" else "decrease"
             else
                 # Sets the trend to false to disable it
                 $scope.trend = $scope.trendClass = false
         tips:
-            update: ()->                
+            update: ()->
                 # Update the existing activePoint
                 _.each $scope.activePoints, (d, key)->
                     # Update the data within activePoints
@@ -150,12 +150,12 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
             clean:->
                 # For each point's tips
                 # look for the useless ones
-                $(".point-tips").each (key, tip)-> 
-                    $tip  = $(tip) 
+                $(".point-tips").each (key, tip)->
+                    $tip  = $(tip)
                     index = $tip.data("point")
                     # Find its dot
-                    dots = chartSvg.selectAll(".data-point")    
-                    dot  = d3.select dots[0][index]                     
+                    dots = chartSvg.selectAll(".data-point")
+                    dot  = d3.select dots[0][index]
                     # The point isn active
                     unless $scope.activePoints[index]
                         # Remove the inative point
@@ -169,7 +169,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                         dot.attr "fill", "#323c45"
 
                 # For each activepoint,
-                # look for the missing tips                
+                # look for the missing tips
                 _.each $scope.activePoints, point.tips.add
 
             empty:->
@@ -179,17 +179,17 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
 
             add: (d, index)->
                 $tips = $(".point-tips[data-point=" + index + "]")
-                $point = $(chartSvg.selectAll(".data-point")[0][index]) 
+                $point = $(chartSvg.selectAll(".data-point")[0][index])
                 # tips doenst exist yet
                 if $tips.length is 0
                     # Create the tips
-                    $tips = $("<div class='point-tips' data-point='" + index + "' />") 
+                    $tips = $("<div class='point-tips' data-point='" + index + "' />")
                     # offset of the point according its data
-                    offset = point.offset(d);     
+                    offset = point.offset(d);
                     # add a class to the first point
-                    $tips.addClass "js-first" if parseInt(index) == 0 
+                    $tips.addClass "js-first" if parseInt(index) == 0
                     # add a class to the last point
-                    $tips.addClass "js-last" if parseInt(index) == $scope.answers.rows.length - 1 
+                    $tips.addClass "js-last" if parseInt(index) == $scope.answers.rows.length - 1
                     # Positionate the tips to under the mouse
                     $tips.css
                         left: offset.left
@@ -197,9 +197,9 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                     # Appends the tips to the bodu
                     $tips.appendTo wrapper.find(".jspPane")
                 # tips exists
-                else        
+                else
                     # offset of the point according its data
-                    offset = point.offset(d);      
+                    offset = point.offset(d);
                     # Positionate the tips to under the mouse
                     $tips.css
                         left: offset.left
@@ -207,11 +207,11 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 # In any case, change the content of the tip
                 $tips.html "<div class='content'>" + ~~d.ratio + "%</div>"
 
-        toggle: (d, index)->              
+        toggle: (d, index)->
             p = d3.select this
             if not d.selected? or d.selected isnt true
                 d.selected = true
-                p.attr "fill", "#323c45"                
+                p.attr "fill", "#323c45"
                 $scope.activePoints[index] = d
                 # if there is more than 2 points
                 if $scope.activePointsCount() > 2
@@ -230,7 +230,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
                 d.selected = false
                 p.attr "fill", $filter("colors")($scope.question)
                 delete $scope.activePoints[index].selected
-                delete $scope.activePoints[index]             
+                delete $scope.activePoints[index]
                 $scope.$apply()
 
     insertLinebreaks = (d) ->
@@ -244,14 +244,14 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
             tspan.attr("x", 0).attr "dy", "12"  if i > 0
             i++
 
-    getGradientStops = (dotCount, dotGap)->        
+    getGradientStops = (dotCount, dotGap)->
         stops = []
         width = dotGap*(dotCount-1)
         # Position in percentage of the given pixels
         pos = (px)-> px/width*100 + "%"
         # For each steps
-        for i in [0..dotCount-1]  
-            # Calculate the step start          
+        for i in [0..dotCount-1]
+            # Calculate the step start
             start = (i*dotGap)
             # And the end
             end   = start + dotGap
@@ -260,32 +260,32 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
             stops.push offset: pos(end),   color: $filter("colors")($scope.question, if i%2 then "50" else "100")
 
         return stops
-        
 
-    render = ()-> 
-        loadShortcuts()    
+
+    render = ()->
+        loadShortcuts()
         # Empty container
         chart.empty()
         axis.empty()
         # Update tips
-        point.tips.update()        
+        point.tips.update()
         # Do we stop
-        return false unless $scope.answers.rows? and $scope.answers.rows.length isnt 0                    
+        return false unless $scope.answers.rows? and $scope.answers.rows.length isnt 0
         # Parse dates and numbers. We assume $scope.answers is sorted by date.
         _.each $scope.answers.rows, (d) ->
-            try 
-                return d.date = parse(d.date)  
-            # Some parsings fail          
+            try
+                return d.date = parse(d.date)
+            # Some parsings fail
             catch error
                 return null
 
         dotGap    = Math.max(minGap, wrapperWidth / ($scope.answers.rows.length - 1))
         w         = (dotGap * ($scope.answers.rows.length - 1)) - padding[1] - padding[3]
-        h         = wrapperHeight - padding[0] - padding[2]        
+        h         = wrapperHeight - padding[0] - padding[2]
         stopWidth = (w / ($scope.answers.rows.length-1))*2
 
 
-  
+
         # An area generator, for the light fill.
         area = d3.svg.area()
             .interpolate("linear")
@@ -301,9 +301,9 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
 
         # Compute the minimum and maximum date, and the maximum price.
         minDate  = d3.min $scope.answers.rows, (d)-> d.date
-        maxDate  = d3.max $scope.answers.rows, (d)-> d.date        
+        maxDate  = d3.max $scope.answers.rows, (d)-> d.date
         minRatio = $scope.answers.question_min
-        maxRatio = $scope.answers.question_max        
+        maxRatio = $scope.answers.question_max
         offset   = (maxRatio - minRatio) * 0.10
         # Edits min and max according the offset;
         # takes care to not overlap 0 and 100
@@ -316,7 +316,7 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         x.range [0, w]
         y.range [h, 0]
         # Only tick for the received values
-        dates = _.pluck($scope.answers.rows, "date")        
+        dates = _.pluck($scope.answers.rows, "date")
         # Only tick 10's multiple values on y axe
         perc  = (i*10 for i in [~~(minRatio/10)..~~(maxRatio/10)] )
         xAxis = d3.svg.axis().scale(x).tickSize(tickSize).tickPadding(10).tickFormat(dateFormat).tickValues(dates)
@@ -335,21 +335,21 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
 
         # Add an another svg presenting the y axis
         yAxisSvg = d3.select( axis[0] )
-                        .append("svg:svg")            
+                        .append("svg:svg")
                             .attr("width",  axis.width())
                             .attr("height", h + padding[0] + padding[2])
 
-        unless Modernizr.svg    
+        unless Modernizr.svg
             # Add the area path.
-            chartSvg.append("svg:path")       
+            chartSvg.append("svg:path")
                     .attr("class", "area bg")
                     .attr("stroke-width", "0")
                     .attr("fill", $filter("colors")($scope.question))
                     .attr("d", area($scope.answers.rows))
         # Add stripes
-        else           
-            # Gradient spreadMethod bug on Safari 
-            # cf: http://stackoverflow.com/questions/11434971/svg-lineargradiend-spreadmethod-ignored-by-safari-osx-and-ios            
+        else
+            # Gradient spreadMethod bug on Safari
+            # cf: http://stackoverflow.com/questions/11434971/svg-lineargradiend-spreadmethod-ignored-by-safari-osx-and-ios
             # So we repeat the gradientStop instead of use the repeat method
             stops = getGradientStops($scope.answers.rows.length, dotGap)
 
@@ -377,13 +377,13 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
 
         # Add an overlay to catch click on the entire graph but not on the svg
         chartSvg.append("svg:rect")
-                    .attr("x", 0)            
+                    .attr("x", 0)
                     .attr("y", 0)
                     .attr("width", w)
                     .attr("height", h)
                     .attr("fill", "transparent")
                     .attr("opacity", 0)
-                    .on "click", -> 
+                    .on "click", ->
                         point.tips.empty() if _.keys($scope.activePoints).length > 1
 
         # Add line dots
@@ -405,14 +405,14 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         # Add the x-axis.
         chartSvg.append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate(0, #{h + 25-tickSize})")            
+            .attr("transform", "translate(0, #{h + 25-tickSize})")
             .call xAxis
 
         # Add the y-axis to an other svg
         yAxisSvg.append("g")
             .attr("class", "y axis")
             .attr("transform", "translate(#{30+tickSize}, #{padding[0]})")
-            .call yAxis    
+            .call yAxis
 
         # Add axis break line
         chartSvg.selectAll(".axis g text").each insertLinebreaks
@@ -421,18 +421,18 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
         yAxisSvg.selectAll(".axis path").remove()
         # Adjust text size
         chartSvg.selectAll(".axis g text").attr "font-size", 10
-        yAxisSvg.selectAll(".axis g text").attr "font-size", 10 
+        yAxisSvg.selectAll(".axis g text").attr "font-size", 10
         # Draw ticks
         chartSvg.selectAll(".axis g line").attr "stroke", "#aaa"
         chartSvg.selectAll(".axis g line").attr "stroke-width", 1
         yAxisSvg.selectAll(".axis g line").attr "stroke", "#aaa"
-        yAxisSvg.selectAll(".axis g line").attr "stroke-width", 1 
-        
+        yAxisSvg.selectAll(".axis g line").attr "stroke-width", 1
+
         # jscrollpane already exists
         if wrapper.data("jsp")?
             # Reinitialize jscrollpane
-            wrapper.data("jsp").reinitialise() 
-        else        
+            wrapper.data("jsp").reinitialise()
+        else
             # Add customise scrollbar
             wrapper.jScrollPane hideFocus: true
 
@@ -441,18 +441,18 @@ AnswerGraphCtrl = ($scope, $rootElement, $routeParams, $location, $filter, Answe
 
     # Watch for model change to update the graph
     $scope.$watch 'profil',       update
-    $scope.$watch 'question',     update    
+    $scope.$watch 'question',     update
     $scope.$watch 'activePoints', point.tips.clean, true
     $scope.$watch 'activePoints', point.setTrend, true
     # Watch the controller destruction
     $scope.$on '$destroy', ->
         $scope.activePoints = []
-        # Force active point removing     
+        # Force active point removing
         point.tips.clean()
 
     $scope.$on '$routeUpdate', ->
         $scope.question = $location.search().q
         $scope.profil   = $location.search().p
-            
+
 
 AnswerGraphCtrl.$inject = ['$scope', '$rootElement', '$routeParams', '$location', '$filter', 'Answer', 'ArrowColor'];

@@ -11,11 +11,11 @@ git+https://github.com/mazelife/django-redactor.git
 gunicorn==0.17.4
 mimeparse==0.1.3
 Pillow==2.2.1
-mysql-connector-python==1.1.6
+mysqlclient==1.3.6
 psycopg2==2.4.6
 python-dateutil==2.1
 pytz==2013b
 six==1.3.0
 South==0.8.1
-wadofstuff-django-serializers==1.1.0
+https://wadofstuff.googlecode.com/files/wadofstuff-django-serializers-1.1.0.tar.gz
 wsgiref==0.1.2
